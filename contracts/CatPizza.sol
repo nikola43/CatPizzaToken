@@ -16,16 +16,16 @@ contract CatPizza is ERC20 {
 
     // VALUES -----------------------------------------------------------------------------------------------
     uint256 public swapThreshold; // swap tokens limit
-    uint256 MAX_INT; // max solidity number
     uint256 masterTaxDivisor; // divisor | 0.0001 max presition fee
+    uint256 maxWalletAmount; // max balance amount (Anti-whale)
+    uint256 marketingAddressPercent;
+    uint256 autoLiquidityPercent;
 
     // BOOLEANS ---------------------------------------------------------------------------------------------
     bool inSwap; // used for dont take fee on swaps
-    bool public tradingActive; // enable or disable trading
 
     // MAPPINGS
     mapping(address => bool) private _isExcludedFromFee; // list of users excluded from fee
-    mapping(address => bool) public automatedMarketMakerPairs; // list of enabled LP pairs
 
     // EVENTS -----------------------------------------------------------------------------------------------
     event OwnershipTransferred(
@@ -82,24 +82,31 @@ contract CatPizza is ERC20 {
         _isExcludedFromFee[owner] = true;
         _isExcludedFromFee[address(this)] = true;
         _isExcludedFromFee[marketingAddress] = true;
-
-        // by default trading is active after add liquidity
-        tradingActive = true;
+        _isExcludedFromFee[swapTokenAddress] = true;
 
         // contract do swap when have 1M tokens balance
         swapThreshold = 1000000000000000000000000;
+
+        marketingAddressPercent = 7000;
+        autoLiquidityPercent = 3000;
 
         // Set Router Address (Pancake by default)
         address currentRouter = 0x9Ac64Cc6e4415144C455BD8E4837Fea55603e5c3;
         dexRouter = IUniswapV2Router02(currentRouter);
 
+        // Create a uniswap pair for this new token
+        lpPair = IUniswapV2Factory(dexRouter.factory()).createPair(
+            address(this),
+            dexRouter.WETH()
+        );
+
         // do approve to router from owner and contract
         _approve(msg.sender, currentRouter, type(uint256).max);
         _approve(address(this), currentRouter, type(uint256).max);
+        _approve(swapTokenAddress, currentRouter, type(uint256).max);
 
         // few values needed for contract works
         DEAD = 0x000000000000000000000000000000000000dEaD; // dead address for burn
-        MAX_INT = 0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff; // max solidiy number
         masterTaxDivisor = 10000;
     }
 
@@ -109,11 +116,6 @@ contract CatPizza is ERC20 {
     // get contract owner address
     function getOwner() external view virtual returns (address) {
         return owner;
-    }
-
-    // enable trading (swap) and set initial block
-    function enableTrading(bool value) public virtual onlyOwner {
-        tradingActive = value;
     }
 
     // Set fees
@@ -141,24 +143,46 @@ contract CatPizza is ERC20 {
         // check before each tx
         _beforeTransferCheck(from, to, amount);
 
-        // check if current tx is swap
+        // if transaction are internal transfer when contract is swapping
+        // transfer no fee
         if (inSwap) {
             super._transfer(from, to, amount);
             return;
         }
 
-        // check if contract should swap
+        // SWAP
         if (contractMustSwap(from, to)) {
             contractSwap();
         }
 
-        // do transfer and take fees
+        bool takeFee = true;
+        bool isTransfer = isTransferBetweenWallets(from, to);
+
+        if (_isExcludedFromFee[from] || _isExcludedFromFee[to]) {
+            takeFee = false;
+        }
+
+        // Transfer between wallets have 0% fee
+        // If takeFee is false there is 0% fee
+        if (isTransfer || !takeFee) {
+            super._transfer(from, to, amount);
+            return;
+        }
+
         _finalizeTransfer(from, to, amount);
     }
 
-    // function for enable or disable trading
-    function updateTradingEnable(bool newValue) external virtual onlyOwner {
-        tradingActive = newValue;
+    /**
+     * @dev Handle if transaction is between wallets and not from/to liquidity
+     * @param from address The address which you want to send tokens from
+     * @param to address The address which you want to transfer to
+     */
+    function isTransferBetweenWallets(address from, address to)
+        internal
+        view
+        returns (bool)
+    {
+        return from != lpPair && to != lpPair;
     }
 
     function _finalizeTransfer(
@@ -208,11 +232,11 @@ contract CatPizza is ERC20 {
         uint256 feeAmount = 0;
 
         // BUY -> FROM == LP ADDRESS
-        if (automatedMarketMakerPairs[from]) {
+        if (lpPair == from) {
             totalFeePercent += _feesRates.buyFee;
         }
         // SELL -> TO == LP ADDRESS
-        else if (automatedMarketMakerPairs[to]) {
+        else if (lpPair == to) {
             totalFeePercent += _feesRates.sellFee;
         }
         // TRANSFER
@@ -232,17 +256,18 @@ contract CatPizza is ERC20 {
         // Get contract tokens balance
         uint256 numTokensToSwap = balanceOf(address(this));
 
-        uint256 marketingAddressPercent = 7000;
-        uint256 autoLiquidityPercent = 3000;
-
         // swap tokens
-        swapTokensForTokens((numTokensToSwap * marketingAddressPercent) / masterTaxDivisor);
+        swapTokensForTokens(
+            (numTokensToSwap * marketingAddressPercent) / masterTaxDivisor
+        );
 
         // send
         // auto liquiidty
         // half token swap to bnb
         // 15% - tokens
-        autoLiquidity((numTokensToSwap * autoLiquidityPercent) / masterTaxDivisor);
+        autoLiquidity(
+            (numTokensToSwap * autoLiquidityPercent) / masterTaxDivisor
+        );
     }
 
     /// @notice return the route given the busd addresses and the token
@@ -257,23 +282,23 @@ contract CatPizza is ERC20 {
     }
 
     function swapTokensForTokens(uint256 tokenAmount) private {
-        // Generate router path
-        // Token -> swapTokenAddress (BNB, USDT, ETH, wBTC)
-        address[] memory tokensPath = getPathForTokensToTokens(
-            address(this),
-            swapTokenAddress
-        );
+        address[] memory path = new address[](3);
+        path[0] = address(this);
+        path[1] = dexRouter.WETH();
+        path[2] = swapTokenAddress;
 
         // Do approve for router spend swap token amount
-        IERC20(swapTokenAddress).approve(address(dexRouter), tokenAmount);
+        IERC20(swapTokenAddress).approve(address(dexRouter), type(uint256).max);
+        IERC20(dexRouter.WETH()).approve(address(dexRouter), type(uint256).max);
 
         // swap and transfer to contract
         dexRouter.swapExactTokensForTokensSupportingFeeOnTransferTokens(
             tokenAmount,
             0,
-            tokensPath,
+            path,
             marketingAddress,
-            block.timestamp + 10000);
+            block.timestamp + 1000
+        );
     }
 
     function swapTokensForBNB(uint256 tokenAmount) private {
@@ -290,14 +315,13 @@ contract CatPizza is ERC20 {
             0, // accept any amount of ETH
             path,
             address(this),
-            block.timestamp + 10000
+            block.timestamp + 1000
         );
     }
 
     function autoLiquidity(uint256 tokenAmount) public {
         // split the contract balance into halves
         uint256 half = tokenAmount / 2;
-        uint256 otherHalf = tokenAmount - half;
 
         // capture the contract's current ETH balance.
         // this is so that we can capture exactly the amount of ETH that the
@@ -312,12 +336,12 @@ contract CatPizza is ERC20 {
         uint256 newBalance = address(this).balance - initialBalance;
 
         // add liquidity to uniswap
-        addLiquidity(otherHalf, newBalance);
+        addLiquidity(half, newBalance);
     }
 
     function addLiquidity(uint256 tokenAmount, uint256 ethAmount) private {
         // approve token transfer to cover all possible scenarios
-        _approve(address(this), address(dexRouter), tokenAmount);
+        _approve(address(this), address(dexRouter), type(uint256).max);
 
         // add the liquidity
         dexRouter.addLiquidityETH{value: ethAmount}(
@@ -328,16 +352,6 @@ contract CatPizza is ERC20 {
             owner, // send lp tokens to owner
             block.timestamp + 10000
         );
-    }
-
-    function _hasLimits(address from, address to) private view returns (bool) {
-        return
-            from != owner &&
-            to != owner &&
-            tx.origin != owner &&
-            to != DEAD &&
-            to != address(0) &&
-            from != address(this);
     }
 
     function _beforeTransferCheck(
@@ -358,10 +372,12 @@ contract CatPizza is ERC20 {
             "Transfer amount must be greater than ZERO_ADDRESS"
         );
 
-        if (_hasLimits(from, to)) {
-            if (!tradingActive) {
-                revert("Trading not yet enabled!");
-            }
+        // BUY -> FROM == LP ADDRESS
+        if (lpPair == from) {
+            require(
+                amount < balanceOf(from) + maxWalletAmount,
+                "Max Wallet Amount"
+            );
         }
     }
 
@@ -381,26 +397,16 @@ contract CatPizza is ERC20 {
             !_isExcludedFromFee[from];
     }
 
-    function burn(address to, uint256 amount) public virtual {
+    function burn(uint256 amount) public virtual {
         require(amount >= 0, "Burn amount should be greater than ZERO_ADDRESS");
 
-        if (msg.sender != to) {
-            uint256 currentAllowance = allowance(to, msg.sender);
-            if (currentAllowance != type(uint256).max) {
-                require(
-                    currentAllowance >= amount,
-                    "ERC20: transfer amount exceeds allowance"
-                );
-            }
-        }
-
         require(
-            amount <= balanceOf(to),
+            amount <= balanceOf(msg.sender),
             "Burn amount should be less than account balance"
         );
 
-        super._burn(to, amount);
-        emit Burn(to, amount);
+        super._burn(msg.sender, amount);
+        emit Burn(msg.sender, amount);
     }
 
     function setMarketingAddress(address account) public virtual onlyOwner {
@@ -426,5 +432,9 @@ contract CatPizza is ERC20 {
 
     function setSwapThreshold(uint256 value) public virtual onlyOwner {
         swapThreshold = value;
+    }
+
+    function setMaxWalletAmount(uint256 value) public virtual onlyOwner {
+        maxWalletAmount = value;
     }
 }
