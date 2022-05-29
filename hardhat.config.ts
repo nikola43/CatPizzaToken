@@ -156,7 +156,7 @@ module.exports = {
       live: true,
       saveDeployments: true,
       tags: ["staging"],
-      gasMultiplier: 2,
+      //gasMultiplier: 2,
     },
     heco: {
       url: "https://http-mainnet.hecochain.com",
