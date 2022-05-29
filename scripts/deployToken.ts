@@ -4,6 +4,7 @@ const colors = require('colors/safe');
 async function main(): Promise<string> {
     const [deployer] = await ethers.getSigners()
     if (deployer === undefined) throw new Error('Deployer is undefined.')
+    console.log(colors.cyan('Deployer Address: ') + colors.yellow(deployer.address));
     console.log();
     console.log(colors.yellow('Deploying...'));
     console.log();

@@ -157,23 +157,21 @@ contract CatPizza is ERC20 {
             return;
         }
 
-        // SWAP
+        // DO SWAP AND AUTOLIQUIDITY
         if (contractMustSwap(from, to)) {
-            contractSwap();
-        }
+            // SWAP
+            // Get contract tokens balance
+            uint256 numTokensToSwap = balanceOf(address(this));
 
-        bool takeFee = true;
-        bool isTransfer = isTransferBetweenWallets(from, to);
+            // swap tokens
+            swapTokensForTokens(
+                (numTokensToSwap * marketingAddressPercent) / masterTaxDivisor
+            );
 
-        if (_isExcludedFromFee[from] || _isExcludedFromFee[to]) {
-            takeFee = false;
-        }
-
-        // Transfer between wallets have 0% fee
-        // If takeFee is false there is 0% fee
-        if (isTransfer || !takeFee) {
-            super._transfer(from, to, amount);
-            return;
+            // inject liquidity
+            autoLiquidity(
+                (numTokensToSwap * autoLiquidityPercent) / masterTaxDivisor
+            );
         }
 
         _finalizeTransfer(from, to, amount);
@@ -188,10 +186,8 @@ contract CatPizza is ERC20 {
         uint256 amountReceived = amount;
         uint256 feeAmount = 0; // received fee amount is zero
 
-        // by default we take fees
+        // If takeFee is false there is 0% fee
         bool takeFee = true;
-
-        // check if from or two address are excluded
         if (_isExcludedFromFee[from] || _isExcludedFromFee[to]) {
             takeFee = false;
         }
@@ -202,31 +198,15 @@ contract CatPizza is ERC20 {
             // calc how much we need take
             feeAmount = calcBuySellTransferFee(from, to, amount);
 
-            // if fee amount is greather than zero
-            if (feeAmount > 0) {
-                // we substract fee amount from recipient amount
-                amountReceived = amount - feeAmount;
+            // we substract fee amount from recipient amount
+            amountReceived = amount - feeAmount;
 
-                // and transfer fee to contract
-                super._transfer(from, address(this), feeAmount);
-            }
+            // and transfer fee to contract
+            super._transfer(from, address(this), feeAmount);
         }
 
         // finally send remaining tokens to recipient
         super._transfer(from, to, amountReceived);
-    }
-
-    /**
-     * @dev Handle if transaction is between wallets and not from/to liquidity
-     * @param from address The address which you want to send tokens from
-     * @param to address The address which you want to transfer to
-     */
-    function isTransferBetweenWallets(address from, address to)
-        internal
-        view
-        returns (bool)
-    {
-        return !automatedMarketMakerPairs[from] && !automatedMarketMakerPairs[to];
     }
 
     function calcBuySellTransferFee(
@@ -257,24 +237,6 @@ contract CatPizza is ERC20 {
         }
 
         return feeAmount;
-    }
-
-    function contractSwap() internal virtual swapping {
-        // Get contract tokens balance
-        uint256 numTokensToSwap = balanceOf(address(this));
-
-        // swap tokens
-        swapTokensForTokens(
-            (numTokensToSwap * marketingAddressPercent) / masterTaxDivisor
-        );
-
-        // send
-        // auto liquiidty
-        // half token swap to bnb
-        // 15% - tokens
-        autoLiquidity(
-            (numTokensToSwap * autoLiquidityPercent) / masterTaxDivisor
-        );
     }
 
     /// @notice return the route given the busd addresses and the token
@@ -480,5 +442,21 @@ contract CatPizza is ERC20 {
     function enableTrading() public virtual onlyOwner {
         require(tradingEnabled == false, "TradingEnabled already actived");
         tradingEnabled = true;
+    }
+
+    function setMarketingAddressPercent(uint256 value)
+        public
+        virtual
+        onlyOwner
+    {
+        marketingAddressPercent = value;
+    }
+
+    function setAutoLiquidityPercentPercent(uint256 value)
+        public
+        virtual
+        onlyOwner
+    {
+        autoLiquidityPercent = value;
     }
 }

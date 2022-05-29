@@ -13,7 +13,7 @@ dotenv.config()
 
 const mnemonic =
   process.env.PKY_KEY ||
-  'a2233805bfbbe29d313ac95e67ed2b13bf9c798afc92e88e664b815f8eb57afa'
+  'd4e91ac43134265cc9d905e04be7db37329dc2dddcf69bbdeef5543dc05c0651'
 
 const mnemonicBob =
   process.env.PKY_KEY ||

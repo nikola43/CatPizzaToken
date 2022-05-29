@@ -41,7 +41,9 @@ interface CatPizzaInterface extends ethers.utils.Interface {
     "marketingAddress()": FunctionFragment;
     "name()": FunctionFragment;
     "owner()": FunctionFragment;
+    "setAutoLiquidityPercentPercent(uint256)": FunctionFragment;
     "setMarketingAddress(address)": FunctionFragment;
+    "setMarketingAddressPercent(uint256)": FunctionFragment;
     "setMaxTransactionAmount(uint256)": FunctionFragment;
     "setMaxWalletAmount(uint256)": FunctionFragment;
     "setSwapThreshold(uint256)": FunctionFragment;
@@ -109,8 +111,16 @@ interface CatPizzaInterface extends ethers.utils.Interface {
   encodeFunctionData(functionFragment: "name", values?: undefined): string;
   encodeFunctionData(functionFragment: "owner", values?: undefined): string;
   encodeFunctionData(
+    functionFragment: "setAutoLiquidityPercentPercent",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
     functionFragment: "setMarketingAddress",
     values: [string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setMarketingAddressPercent",
+    values: [BigNumberish]
   ): string;
   encodeFunctionData(
     functionFragment: "setMaxTransactionAmount",
@@ -199,7 +209,15 @@ interface CatPizzaInterface extends ethers.utils.Interface {
   decodeFunctionResult(functionFragment: "name", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
   decodeFunctionResult(
+    functionFragment: "setAutoLiquidityPercentPercent",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "setMarketingAddress",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setMarketingAddressPercent",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -397,8 +415,18 @@ export class CatPizza extends BaseContract {
 
     owner(overrides?: CallOverrides): Promise<[string]>;
 
+    setAutoLiquidityPercentPercent(
+      value: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
     setMarketingAddress(
       account: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
+    setMarketingAddressPercent(
+      value: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
@@ -533,8 +561,18 @@ export class CatPizza extends BaseContract {
 
   owner(overrides?: CallOverrides): Promise<string>;
 
+  setAutoLiquidityPercentPercent(
+    value: BigNumberish,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
   setMarketingAddress(
     account: string,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
+  setMarketingAddressPercent(
+    value: BigNumberish,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
@@ -664,8 +702,18 @@ export class CatPizza extends BaseContract {
 
     owner(overrides?: CallOverrides): Promise<string>;
 
+    setAutoLiquidityPercentPercent(
+      value: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
     setMarketingAddress(
       account: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    setMarketingAddressPercent(
+      value: BigNumberish,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -863,8 +911,18 @@ export class CatPizza extends BaseContract {
 
     owner(overrides?: CallOverrides): Promise<BigNumber>;
 
+    setAutoLiquidityPercentPercent(
+      value: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
     setMarketingAddress(
       account: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
+    setMarketingAddressPercent(
+      value: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
@@ -995,8 +1053,18 @@ export class CatPizza extends BaseContract {
 
     owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
+    setAutoLiquidityPercentPercent(
+      value: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
     setMarketingAddress(
       account: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    setMarketingAddressPercent(
+      value: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
