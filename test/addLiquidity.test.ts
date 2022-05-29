@@ -4,20 +4,39 @@ const { parseEther } = ethers.utils;
 const colors = require('colors');
 import { expect } from 'chai'
 import { formatEther } from 'ethers/lib/utils';
+import { Contract } from 'ethers';
+import { SignerWithAddress } from '@nomiclabs/hardhat-ethers/signers';
 
 //available functions
 describe("Token contract", async () => {
 
-    it("Add Liquidity", async () => {
+    let tokenDeployed: Contract;
+    let router: Contract;
+    let pairContract: Contract;
+    let deployer: SignerWithAddress;
+    let bob: SignerWithAddress;
+    let alice: SignerWithAddress;
 
-        // Get Signers
-        const [deployer, bob] = await ethers.getSigners()
-        console.log(`${colors.cyan('Deployer Address')}: ${colors.yellow(deployer?.address)}`)
-        console.log(`${colors.cyan('Bob Address')}: ${colors.yellow(bob?.address)}`)
+    it("1. Get Signer", async () => {
+        const signers = await ethers.getSigners();
+        if (signers[0] !== undefined) {
+            deployer = signers[0];
+            console.log(`${colors.cyan('Deployer Address')}: ${colors.yellow(deployer?.address)}`)
+        }
+        if (signers[1] !== undefined) {
+            bob = signers[1];
+            console.log(`${colors.cyan('Bob Address')}: ${colors.yellow(bob?.address)}`)
+        }
+        if (signers[2] !== undefined) {
+            alice = signers[2];
+            console.log(`${colors.cyan('Alice Address')}: ${colors.yellow(alice?.address)}`)
+        }
+    });
 
+    it("2. Deploy Contract", async () => {
 
         // INSTANCE CONTRACT
-        const router = await util.connectRouter()
+        router = await util.connectRouter()
         //const routerFactory = await util.connectFactory()
         //const bnbContract = await util.connectWBNB()
         //const busdContract = await util.connectBUSD()
@@ -25,13 +44,12 @@ describe("Token contract", async () => {
         // DEPLOY
         const contractName = 'CatPizza'
         const tokenFactory = await ethers.getContractFactory(contractName)
-        const tokenDeployed = await tokenFactory.deploy()
+        tokenDeployed = await tokenFactory.deploy()
         await tokenDeployed.deployed()
 
-        await tokenDeployed.approve(router.address, ethers.constants.MaxUint256);
-        //await util.approveAndAddLiquidity(tokenDeployed, router, deployer, parseEther("30"), parseEther("100000"));
+    });
 
-
+    it("3. Add Liquidity", async () => {
         await tokenDeployed.approve(util.chains.bsc.router, ethers.constants.MaxUint256, { from: deployer?.address })
         const tx = await router.connect(deployer).addLiquidityETH(
             tokenDeployed.address,
@@ -45,54 +63,51 @@ describe("Token contract", async () => {
             }
         )
         console.log(`${colors.cyan('TX')}: ${colors.yellow(tx.hash)}`)
+        console.log()
 
         const routerFactory = await util.connectFactory();
         const pairAddress = await routerFactory.getPair(util.chains.bsc.wChainCoin, tokenDeployed.address)
-        const pairContract = await util.connectPair(pairAddress);
+        pairContract = await util.connectPair(pairAddress);
         console.log(`${colors.cyan('LP Address')}: ${colors.yellow(pairContract?.address)}`)
         console.log(`${colors.cyan('LP Balance')}: ${colors.yellow(formatEther(await pairContract.balanceOf(deployer?.address)))}`)
         expect(1).to.be.eq(1);
+        console.log()
+    });
 
+    it("4. Enable trading", async () => {
         await tokenDeployed.enableTrading();
+        console.log()
+    });
 
+    it("5. Transfer From Owner To Bob ",async () => {
+        await tokenDeployed.transfer(bob.address, parseEther("1000"))
+        expect(await tokenDeployed.balanceOf(bob?.address)).to.be.eq(parseEther("1000"));
+        console.log()
+    });
+
+    it("6. Transfer From Bob To Alice ", async () => {
+        await tokenDeployed.connect(bob).transfer(alice?.address, parseEther("100"))
+        expect(await tokenDeployed.balanceOf(alice?.address)).to.be.eq(parseEther("100"));
+        console.log()
+    });
+
+
+    it("7. Buy Bob", async () => {
+
+        console.log()
         //--- BUY
         await util.swapExactETHForTokens(tokenDeployed.address, router, bob, parseEther("1.2"));
         console.log(`${colors.cyan('Bob token Balance')}: ${colors.yellow(formatEther(await tokenDeployed.balanceOf(bob?.address)))}`)
+        console.log()
+    });
 
-        //await util.swapExactETHForTokens(tokenDeployed.address, router, bob, parseEther("0.2"));
-        console.log(`${colors.cyan('Bob token Balance')}: ${colors.yellow(formatEther(await tokenDeployed.balanceOf(bob?.address)))}`)
-
-
+    it("8. Sell Bob", async () => {
         //--- SELL
         await tokenDeployed.approve(router.address, ethers.constants.MaxUint256);
         //await util.swapExactTokensForETH(tokenDeployed.address, router, bob, parseEther("1000")); // 100 tokens
+
+        await util.swapExactTokensForTokensSupportingFeeOnTransferTokens(tokenDeployed.address, router, bob, parseEther("1000")); // 100 tokens
         //console.log(`${colors.cyan('Bob token Balance')}: ${colors.yellow(formatEther(await tokenDeployed.balanceOf(bob?.address)))}`)
+        console.log()
     });
-
-    /*
-    it("Bob should approve max allowance", async () => {
-        await busdContract.connect(bob).approve(router.address, ethers.constants.MaxUint256);
-    });
-    
-
-    it("Should send BUSD to BOB", async () => {
-        await busdContract.connect(deployer).transfer(bob?.address, parseEther("500"));
-        let balance = await busdContract.balanceOf(bob?.address);
-        expect(balance).to.be.equal(parseEther("500"));
-    });
-
-    it("Bob should swap BNB for BUSD", async () => {
-        await util.swapApproveBNBtoBUSD(busdContract, router, bob, parseEther("100"))
-        let balance = await busdContract.balanceOf(bob?.address);
-        expect(balance).to.be.above(parseEther("488"));
-    });
-    */
-
-    /*
-    it("Bob should buy LFG with BUSD", async () => {
-        await util.buyLFG(busdContract, tokenDeployed, router, bob, parseEther("1"));
-    });
-    */
-
-
 });

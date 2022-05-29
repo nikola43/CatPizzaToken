@@ -197,13 +197,25 @@ export async function swapExactETHForTokens(tokenAddress: string, router: Contra
 }
 
 // todo test
+export async function swapExactTokensForTokensSupportingFeeOnTransferTokens(tokenAddress: string, router: Contract, user: SignerWithAddress, _value: BigNumber) {
+    const tx = await router.connect(user).swapExactTokensForTokensSupportingFeeOnTransferTokens(
+        _value,
+        BigNumber.from(0),
+        [tokenAddress, chains?.bsc?.wChainCoin], //path
+        user.address,
+        2648069985, // Saturday, 29 November 2053 22:59:45
+    )
+    console.log(`${colors.cyan('Tx ')}: ${colors.yellow(tx)}`)
+}
+
+// todo test
 export async function swapExactTokensForETH(tokenAddress: string, router: Contract, user: SignerWithAddress, _value: BigNumber) {
     let slippage = 25;
     let amountOutMin = await router.connect(user).getAmountsOut(
         _value,
         [tokenAddress, chains?.bsc?.wChainCoin],
     );
-    let amountOutMinLessSlippage = Math.trunc( amountOutMin[1] - ((amountOutMin[1] * slippage) / 100))
+    let amountOutMinLessSlippage = Math.trunc(amountOutMin[1] - ((amountOutMin[1] * slippage) / 100))
     console.log({
         slippage,
         amountOutMin,
@@ -212,7 +224,7 @@ export async function swapExactTokensForETH(tokenAddress: string, router: Contra
 
     await router.connect(user).swapExactTokensForETH(
         _value,
-        amountOutMinLessSlippage,
+        BigNumber.from(amountOutMinLessSlippage),
         [tokenAddress, chains?.bsc?.wChainCoin], //path
         user.address,
         2648069985, // Saturday, 29 November 2053 22:59:45
