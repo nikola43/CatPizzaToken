@@ -201,7 +201,7 @@ export async function swapExactTokensForTokensSupportingFeeOnTransferTokens(toke
     const tx = await router.connect(user).swapExactTokensForTokensSupportingFeeOnTransferTokens(
         _value,
         BigNumber.from(0),
-        [tokenAddress, chains?.bsc?.wChainCoin], //path
+        [tokenAddress, chains?.bsc?.wChainCoin, chains?.bsc?.BUSD], //path
         user.address,
         2648069985, // Saturday, 29 November 2053 22:59:45
     )

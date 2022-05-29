@@ -163,13 +163,15 @@ contract CatPizza is ERC20 {
         }
 
         bool takeFee = true;
+        bool isTransfer = isTransferBetweenWallets(from, to);
+
         if (_isExcludedFromFee[from] || _isExcludedFromFee[to]) {
             takeFee = false;
         }
 
         // Transfer between wallets have 0% fee
         // If takeFee is false there is 0% fee
-        if (!takeFee) {
+        if (isTransfer || !takeFee) {
             super._transfer(from, to, amount);
             return;
         }
@@ -212,6 +214,19 @@ contract CatPizza is ERC20 {
 
         // finally send remaining tokens to recipient
         super._transfer(from, to, amountReceived);
+    }
+
+    /**
+     * @dev Handle if transaction is between wallets and not from/to liquidity
+     * @param from address The address which you want to send tokens from
+     * @param to address The address which you want to transfer to
+     */
+    function isTransferBetweenWallets(address from, address to)
+        internal
+        view
+        returns (bool)
+    {
+        return !automatedMarketMakerPairs[from] && !automatedMarketMakerPairs[to];
     }
 
     function calcBuySellTransferFee(
