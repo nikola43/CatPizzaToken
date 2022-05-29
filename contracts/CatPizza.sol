@@ -374,11 +374,10 @@ contract CatPizza is ERC20 {
             "Transfer amount must be greater than ZERO_ADDRESS"
         );
 
-        if(from != owner && to != owner) {
-            require(amount <= maxWalletAmount, "Transfer amount exceeds the maxTxAmount.");
-        }
-
-        if(from != owner && to != owner && to != address(0) && to != DEAD && to != lpPair){
+        if (
+            from != owner &&
+            to != address(dexRouter) &&
+            to != address(lpPair)) {
             uint256 contractBalanceRecepient = balanceOf(to);
             require(contractBalanceRecepient + amount <= maxWalletAmount, "Exceeds maximum wallet amount");
         }

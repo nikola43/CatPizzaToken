@@ -2,15 +2,15 @@
   "_format": "hh-sol-cache-2",
   "files": {
     "/home/paco/Desktop/CatPizzaHardhat/contracts/CatPizza.sol": {
-      "lastModificationDate": 1653704069730,
-      "contentHash": "49445c7b969d447f8d1d2bc185b906a7",
+      "lastModificationDate": 1653844819500,
+      "contentHash": "70907cef9f411fdce749f416345e08a4",
       "sourceName": "contracts/CatPizza.sol",
       "solcConfig": {
         "version": "0.8.13",
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 1
+            "runs": 100
           },
           "outputSelection": {
             "*": {
@@ -51,7 +51,7 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 1
+            "runs": 100
           },
           "outputSelection": {
             "*": {
@@ -87,7 +87,7 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 1
+            "runs": 100
           },
           "outputSelection": {
             "*": {
@@ -125,7 +125,7 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 1
+            "runs": 100
           },
           "outputSelection": {
             "*": {
@@ -161,7 +161,7 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 1
+            "runs": 100
           },
           "outputSelection": {
             "*": {
@@ -201,7 +201,7 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 1
+            "runs": 100
           },
           "outputSelection": {
             "*": {
@@ -237,7 +237,7 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 1
+            "runs": 100
           },
           "outputSelection": {
             "*": {
@@ -275,7 +275,7 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 1
+            "runs": 100
           },
           "outputSelection": {
             "*": {
@@ -300,6 +300,173 @@
       ],
       "artifacts": [
         "Context"
+      ]
+    },
+    "/home/paco/Desktop/CatPizzaHardhat/contracts/BSC Testnet Connections/BEP20Token.sol": {
+      "lastModificationDate": 1653846105675,
+      "contentHash": "8e39f562408228b9b721989774b80416",
+      "sourceName": "contracts/BSC Testnet Connections/BEP20Token.sol",
+      "solcConfig": {
+        "version": "0.5.16",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "0.5.16"
+      ],
+      "artifacts": [
+        "BEP20Token",
+        "Context",
+        "IBEP20",
+        "Ownable",
+        "SafeMath"
+      ]
+    },
+    "/home/paco/Desktop/CatPizzaHardhat/contracts/BSC Testnet Connections/PancakeFactory.sol": {
+      "lastModificationDate": 1653846105679,
+      "contentHash": "02e150908c05ba44d4d2e0e931097bd4",
+      "sourceName": "contracts/BSC Testnet Connections/PancakeFactory.sol",
+      "solcConfig": {
+        "version": "0.5.16",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "=0.5.16"
+      ],
+      "artifacts": [
+        "IERC20",
+        "IPancakeCallee",
+        "IPancakeERC20",
+        "IPancakeFactory",
+        "IPancakePair",
+        "Math",
+        "PancakeERC20",
+        "PancakeFactory",
+        "PancakePair",
+        "SafeMath",
+        "UQ112x112"
+      ]
+    },
+    "/home/paco/Desktop/CatPizzaHardhat/contracts/BSC Testnet Connections/PancakeRouter.sol": {
+      "lastModificationDate": 1653846105679,
+      "contentHash": "76a8114ad2c1a6287f80e7cd08aaafe1",
+      "sourceName": "contracts/BSC Testnet Connections/PancakeRouter.sol",
+      "solcConfig": {
+        "version": "0.6.6",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 1000
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "=0.6.6"
+      ],
+      "artifacts": [
+        "IERC20",
+        "IPancakeFactory",
+        "IPancakePair",
+        "IPancakeRouter01",
+        "IPancakeRouter02",
+        "IWETH",
+        "PancakeLibrary",
+        "PancakeRouter",
+        "SafeMath",
+        "TransferHelper"
+      ]
+    },
+    "/home/paco/Desktop/CatPizzaHardhat/contracts/BSC Testnet Connections/WBNB.sol": {
+      "lastModificationDate": 1653846105679,
+      "contentHash": "b1b537778e5e06142c11b9da44884e67",
+      "sourceName": "contracts/BSC Testnet Connections/WBNB.sol",
+      "solcConfig": {
+        "version": "0.4.18",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.4.18"
+      ],
+      "artifacts": [
+        "WBNB"
       ]
     }
   }
