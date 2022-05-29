@@ -62,6 +62,8 @@ contract CatPizza is ERC20 {
         // mint tokens to deployer
         _mint(msg.sender, 100000000000000000000000000);
 
+        maxWalletAmount = 10000000000000000000000000;
+
         // set owner address (by default -> deployer address)
         owner = msg.sender;
 
@@ -375,7 +377,7 @@ contract CatPizza is ERC20 {
         // BUY -> FROM == LP ADDRESS
         if (lpPair == from) {
             require(
-                amount < balanceOf(from) + maxWalletAmount,
+                maxWalletAmount > balanceOf(from) + amount,
                 "Max Wallet Amount"
             );
         }
