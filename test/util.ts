@@ -196,6 +196,29 @@ export async function swapExactETHForTokens(tokenAddress: string, router: Contra
     )
 }
 
+// todo test
+export async function swapExactTokensForETH(tokenAddress: string, router: Contract, user: SignerWithAddress, _value: BigNumber) {
+    let slippage = 25;
+    let amountOutMin = await router.connect(user).getAmountsOut(
+        _value,
+        [tokenAddress, chains?.bsc?.wChainCoin],
+    );
+    let amountOutMinLessSlippage = Math.trunc( amountOutMin[1] - ((amountOutMin[1] * slippage) / 100))
+    console.log({
+        slippage,
+        amountOutMin,
+        amountOutMinLessSlippage
+    })
+
+    await router.connect(user).swapExactTokensForETH(
+        _value,
+        amountOutMinLessSlippage,
+        [tokenAddress, chains?.bsc?.wChainCoin], //path
+        user.address,
+        2648069985, // Saturday, 29 November 2053 22:59:45
+    )
+}
+
 export async function approveAndAddBusdLiquidity(token: Contract, router: Contract, user: SignerWithAddress, aAmount: any, bAmount: any) {
     await token.approve(chains?.bsc?.router, bAmount)
     const tx = await router.connect(user).addLiquidity(

@@ -35,13 +35,13 @@ describe("Token contract", async () => {
         await tokenDeployed.approve(util.chains.bsc.router, ethers.constants.MaxUint256, { from: deployer?.address })
         const tx = await router.connect(deployer).addLiquidityETH(
             tokenDeployed.address,
-            parseEther("6000"),
-            parseEther("6000"),
-            parseEther("30"),
+            parseEther("60000000"),
+            parseEther("60000000"),
+            parseEther("100"),
             deployer?.address,
             2648069985, // Saturday, 29 November 2053 22:59:45
             {
-                value: parseEther("30"),
+                value: parseEther("100"),
             }
         )
         console.log(`${colors.cyan('TX')}: ${colors.yellow(tx.hash)}`)
@@ -54,9 +54,17 @@ describe("Token contract", async () => {
         expect(1).to.be.eq(1);
 
         //--- BUY
-        await util.swapExactETHForTokens(tokenDeployed.address, router, bob, parseEther("1"));
+        await util.swapExactETHForTokens(tokenDeployed.address, router, bob, parseEther("1.6"));
         console.log(`${colors.cyan('Bob token Balance')}: ${colors.yellow(formatEther(await tokenDeployed.balanceOf(bob?.address)))}`)
 
+        //await util.swapExactETHForTokens(tokenDeployed.address, router, bob, parseEther("0.2"));
+        console.log(`${colors.cyan('Bob token Balance')}: ${colors.yellow(formatEther(await tokenDeployed.balanceOf(bob?.address)))}`)
+
+
+        //--- SELL
+        await tokenDeployed.approve(router.address, ethers.constants.MaxUint256);
+        //await util.swapExactTokensForETH(tokenDeployed.address, router, bob, parseEther("1000")); // 100 tokens
+        //console.log(`${colors.cyan('Bob token Balance')}: ${colors.yellow(formatEther(await tokenDeployed.balanceOf(bob?.address)))}`)
     });
 
     /*

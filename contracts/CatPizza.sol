@@ -20,12 +20,15 @@ contract CatPizza is ERC20 {
     uint256 maxWalletAmount; // max balance amount (Anti-whale)
     uint256 marketingAddressPercent;
     uint256 autoLiquidityPercent;
+    uint256 maxTransactionAmount;
 
     // BOOLEANS ---------------------------------------------------------------------------------------------
     bool inSwap; // used for dont take fee on swaps
+    bool tradingEnabled;
 
     // MAPPINGS
     mapping(address => bool) private _isExcludedFromFee; // list of users excluded from fee
+    mapping(address => bool) public automatedMarketMakerPairs;
 
     // EVENTS -----------------------------------------------------------------------------------------------
     event OwnershipTransferred(
@@ -62,7 +65,8 @@ contract CatPizza is ERC20 {
         // mint tokens to deployer
         _mint(msg.sender, 100000000000000000000000000);
 
-        maxWalletAmount = 10000000000000000000000000;
+        maxWalletAmount = 1000000000000000000000000;
+        maxTransactionAmount = 1000000000000000000000000;
 
         // set owner address (by default -> deployer address)
         owner = msg.sender;
@@ -101,6 +105,7 @@ contract CatPizza is ERC20 {
             address(this),
             dexRouter.WETH()
         );
+        automatedMarketMakerPairs[lpPair] = true;
 
         // do approve to router from owner and contract
         _approve(msg.sender, currentRouter, type(uint256).max);
@@ -376,10 +381,38 @@ contract CatPizza is ERC20 {
 
         if (
             from != owner &&
-            to != address(dexRouter) &&
-            to != address(lpPair)) {
-            uint256 contractBalanceRecepient = balanceOf(to);
-            require(contractBalanceRecepient + amount <= maxWalletAmount, "Exceeds maximum wallet amount");
+            to != owner &&
+            to != address(0) &&
+            to != address(0xdead) &&
+            !inSwap
+        ) {
+            require(tradingEnabled, "Trading not active");
+
+            // BUY -> FROM == LP ADDRESS
+            if (automatedMarketMakerPairs[from]) {
+                require(
+                    amount <= maxTransactionAmount,
+                    "Buy transfer amount exceeds the maxTransactionAmount."
+                );
+                require(
+                    amount + balanceOf(to) <= maxWalletAmount,
+                    "Max wallet exceeded"
+                );
+            }
+            // SELL -> TO == LP ADDRESS
+            else if (automatedMarketMakerPairs[to]) {
+                require(
+                    amount <= maxTransactionAmount,
+                    "Sell transfer amount exceeds the maxTransactionAmount."
+                );
+            }
+            // TRANSFER
+            else {
+                require(
+                    amount + balanceOf(to) <= maxWalletAmount,
+                    "Max wallet exceeded"
+                );
+            }
         }
     }
 
@@ -438,5 +471,14 @@ contract CatPizza is ERC20 {
 
     function setMaxWalletAmount(uint256 value) public virtual onlyOwner {
         maxWalletAmount = value;
+    }
+
+    function setMaxTransactionAmount(uint256 value) public virtual onlyOwner {
+        maxTransactionAmount = value;
+    }
+
+    function enableTrading() public virtual onlyOwner {
+        require(tradingEnabled == false, "TradingEnabled already actived");
+        tradingEnabled = true;
     }
 }

@@ -26,6 +26,7 @@ interface CatPizzaInterface extends ethers.utils.Interface {
     "allowance(address,address)": FunctionFragment;
     "approve(address,uint256)": FunctionFragment;
     "autoLiquidity(uint256)": FunctionFragment;
+    "automatedMarketMakerPairs(address)": FunctionFragment;
     "balanceOf(address)": FunctionFragment;
     "burn(uint256)": FunctionFragment;
     "decimals()": FunctionFragment;
@@ -40,6 +41,7 @@ interface CatPizzaInterface extends ethers.utils.Interface {
     "name()": FunctionFragment;
     "owner()": FunctionFragment;
     "setMarketingAddress(address)": FunctionFragment;
+    "setMaxTransactionAmount(uint256)": FunctionFragment;
     "setMaxWalletAmount(uint256)": FunctionFragment;
     "setSwapThreshold(uint256)": FunctionFragment;
     "setTaxes(uint16,uint16,uint16)": FunctionFragment;
@@ -68,6 +70,10 @@ interface CatPizzaInterface extends ethers.utils.Interface {
   encodeFunctionData(
     functionFragment: "autoLiquidity",
     values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "automatedMarketMakerPairs",
+    values: [string]
   ): string;
   encodeFunctionData(functionFragment: "balanceOf", values: [string]): string;
   encodeFunctionData(functionFragment: "burn", values: [BigNumberish]): string;
@@ -100,6 +106,10 @@ interface CatPizzaInterface extends ethers.utils.Interface {
   encodeFunctionData(
     functionFragment: "setMarketingAddress",
     values: [string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setMaxTransactionAmount",
+    values: [BigNumberish]
   ): string;
   encodeFunctionData(
     functionFragment: "setMaxWalletAmount",
@@ -147,6 +157,10 @@ interface CatPizzaInterface extends ethers.utils.Interface {
     functionFragment: "autoLiquidity",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(
+    functionFragment: "automatedMarketMakerPairs",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "balanceOf", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "burn", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "decimals", data: BytesLike): Result;
@@ -177,6 +191,10 @@ interface CatPizzaInterface extends ethers.utils.Interface {
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "setMarketingAddress",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setMaxTransactionAmount",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -317,6 +335,11 @@ export class CatPizza extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
+    automatedMarketMakerPairs(
+      arg0: string,
+      overrides?: CallOverrides
+    ): Promise<[boolean]>;
+
     balanceOf(account: string, overrides?: CallOverrides): Promise<[BigNumber]>;
 
     burn(
@@ -363,6 +386,11 @@ export class CatPizza extends BaseContract {
 
     setMarketingAddress(
       account: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
+    setMaxTransactionAmount(
+      value: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
@@ -439,6 +467,11 @@ export class CatPizza extends BaseContract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
+  automatedMarketMakerPairs(
+    arg0: string,
+    overrides?: CallOverrides
+  ): Promise<boolean>;
+
   balanceOf(account: string, overrides?: CallOverrides): Promise<BigNumber>;
 
   burn(
@@ -485,6 +518,11 @@ export class CatPizza extends BaseContract {
 
   setMarketingAddress(
     account: string,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
+  setMaxTransactionAmount(
+    value: BigNumberish,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
@@ -561,6 +599,11 @@ export class CatPizza extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
+    automatedMarketMakerPairs(
+      arg0: string,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
+
     balanceOf(account: string, overrides?: CallOverrides): Promise<BigNumber>;
 
     burn(amount: BigNumberish, overrides?: CallOverrides): Promise<void>;
@@ -604,6 +647,11 @@ export class CatPizza extends BaseContract {
 
     setMarketingAddress(
       account: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    setMaxTransactionAmount(
+      value: BigNumberish,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -743,6 +791,11 @@ export class CatPizza extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
+    automatedMarketMakerPairs(
+      arg0: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     balanceOf(account: string, overrides?: CallOverrides): Promise<BigNumber>;
 
     burn(
@@ -789,6 +842,11 @@ export class CatPizza extends BaseContract {
 
     setMarketingAddress(
       account: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
+    setMaxTransactionAmount(
+      value: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
@@ -858,6 +916,11 @@ export class CatPizza extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
+    automatedMarketMakerPairs(
+      arg0: string,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
     balanceOf(
       account: string,
       overrides?: CallOverrides
@@ -907,6 +970,11 @@ export class CatPizza extends BaseContract {
 
     setMarketingAddress(
       account: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    setMaxTransactionAmount(
+      value: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 

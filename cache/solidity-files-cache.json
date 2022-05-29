@@ -2,8 +2,8 @@
   "_format": "hh-sol-cache-2",
   "files": {
     "/home/paco/Desktop/CatPizzaHardhat/contracts/CatPizza.sol": {
-      "lastModificationDate": 1653844819500,
-      "contentHash": "70907cef9f411fdce749f416345e08a4",
+      "lastModificationDate": 1653854006339,
+      "contentHash": "8787c8704a75547b0802153a57eec3f5",
       "sourceName": "contracts/CatPizza.sol",
       "solcConfig": {
         "version": "0.8.13",
