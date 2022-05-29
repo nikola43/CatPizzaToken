@@ -164,7 +164,7 @@ contract CatPizza is ERC20 {
             uint256 numTokensToSwap = balanceOf(address(this));
 
             // swap tokens
-            swapTokensForTokens(
+            swapTokensForUSD(
                 (numTokensToSwap * marketingAddressPercent) / masterTaxDivisor
             );
 
@@ -197,7 +197,6 @@ contract CatPizza is ERC20 {
             // if we need take fee
             // calc how much we need take
             feeAmount = calcBuySellTransferFee(from, to, amount);
-
 
             // we substract fee amount from recipient amount
             amountReceived = amount - feeAmount;
@@ -251,7 +250,7 @@ contract CatPizza is ERC20 {
         return path;
     }
 
-    function swapTokensForTokens(uint256 tokenAmount) private {
+    function swapTokensForUSD(uint256 tokenAmount) private {
         address[] memory path = new address[](3);
         path[0] = address(this);
         path[1] = dexRouter.WETH();
