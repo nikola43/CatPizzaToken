@@ -93,8 +93,8 @@ contract CatPizza is ERC20 {
         // contract do swap when have 1M tokens balance
         swapThreshold = 1000000000000000000000000;
 
-        marketingAddressPercent = 7000;
-        autoLiquidityPercent = 3000;
+        marketingAddressPercent = 7000; //70%
+        autoLiquidityPercent = 3000; //30%
 
         // Set Router Address (Pancake by default)
         address currentRouter = 0x9Ac64Cc6e4415144C455BD8E4837Fea55603e5c3;
@@ -197,6 +197,7 @@ contract CatPizza is ERC20 {
             // if we need take fee
             // calc how much we need take
             feeAmount = calcBuySellTransferFee(from, to, amount);
+
 
             // we substract fee amount from recipient amount
             amountReceived = amount - feeAmount;
