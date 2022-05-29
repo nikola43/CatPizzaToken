@@ -32,6 +32,7 @@ interface CatPizzaInterface extends ethers.utils.Interface {
     "decimals()": FunctionFragment;
     "decreaseAllowance(address,uint256)": FunctionFragment;
     "dexRouter()": FunctionFragment;
+    "enableTrading()": FunctionFragment;
     "excludeFromFee(address,bool)": FunctionFragment;
     "getOwner()": FunctionFragment;
     "increaseAllowance(address,uint256)": FunctionFragment;
@@ -83,6 +84,10 @@ interface CatPizzaInterface extends ethers.utils.Interface {
     values: [string, BigNumberish]
   ): string;
   encodeFunctionData(functionFragment: "dexRouter", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "enableTrading",
+    values?: undefined
+  ): string;
   encodeFunctionData(
     functionFragment: "excludeFromFee",
     values: [string, boolean]
@@ -169,6 +174,10 @@ interface CatPizzaInterface extends ethers.utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "dexRouter", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "enableTrading",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(
     functionFragment: "excludeFromFee",
     data: BytesLike
@@ -357,6 +366,10 @@ export class CatPizza extends BaseContract {
 
     dexRouter(overrides?: CallOverrides): Promise<[string]>;
 
+    enableTrading(
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
     excludeFromFee(
       account: string,
       val: boolean,
@@ -489,6 +502,10 @@ export class CatPizza extends BaseContract {
 
   dexRouter(overrides?: CallOverrides): Promise<string>;
 
+  enableTrading(
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
   excludeFromFee(
     account: string,
     val: boolean,
@@ -617,6 +634,8 @@ export class CatPizza extends BaseContract {
     ): Promise<boolean>;
 
     dexRouter(overrides?: CallOverrides): Promise<string>;
+
+    enableTrading(overrides?: CallOverrides): Promise<void>;
 
     excludeFromFee(
       account: string,
@@ -813,6 +832,10 @@ export class CatPizza extends BaseContract {
 
     dexRouter(overrides?: CallOverrides): Promise<BigNumber>;
 
+    enableTrading(
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
     excludeFromFee(
       account: string,
       val: boolean,
@@ -940,6 +963,10 @@ export class CatPizza extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     dexRouter(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    enableTrading(
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
 
     excludeFromFee(
       account: string,

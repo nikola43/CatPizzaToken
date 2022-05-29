@@ -53,8 +53,10 @@ describe("Token contract", async () => {
         console.log(`${colors.cyan('LP Balance')}: ${colors.yellow(formatEther(await pairContract.balanceOf(deployer?.address)))}`)
         expect(1).to.be.eq(1);
 
+        await tokenDeployed.enableTrading();
+
         //--- BUY
-        await util.swapExactETHForTokens(tokenDeployed.address, router, bob, parseEther("1.6"));
+        await util.swapExactETHForTokens(tokenDeployed.address, router, bob, parseEther("1.2"));
         console.log(`${colors.cyan('Bob token Balance')}: ${colors.yellow(formatEther(await tokenDeployed.balanceOf(bob?.address)))}`)
 
         //await util.swapExactETHForTokens(tokenDeployed.address, router, bob, parseEther("0.2"));
