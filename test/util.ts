@@ -186,18 +186,14 @@ export async function fundBUSD(busdContract: Contract, router: Contract, user: S
     console.log();
 }
 
-export async function swapApproveBNBtoBUSD(tokenBUSD: Contract, router: Contract, user: SignerWithAddress, _value: any) {
+export async function swapExactETHForTokens(tokenAddress: string, router: Contract, user: SignerWithAddress, _value: any) {
     await router.connect(user).swapExactETHForTokens(
         0, //amountOutMin
-        [chains?.bsc?.wChainCoin, chains?.bsc?.BUSD], //path
+        [chains?.bsc?.wChainCoin, tokenAddress], //path
         user.address,
         2648069985, // Saturday, 29 November 2053 22:59:45
         { value: _value }
     )
-    const busdBalance = await tokenBUSD.balanceOf(user.address)
-    //console.log('busdBalance', formatEther(busdBalance))
-    await tokenBUSD.connect(user).approve(router.address, busdBalance);
-    await tokenBUSD.connect(user).approve(tokenBUSD.address, busdBalance);
 }
 
 export async function approveAndAddBusdLiquidity(token: Contract, router: Contract, user: SignerWithAddress, aAmount: any, bAmount: any) {
@@ -230,15 +226,6 @@ export async function approveAndAddBNBLiquidity(token: Contract, router: Contrac
     console.log(`${colors.cyan('Tx ')}: ${colors.yellow(tx)}`)
 }
 
-export async function addLiqLFG(deployer: SignerWithAddress, busdContract: Contract, router: Contract, token: Contract) {
-    await fundBUSD(busdContract, router, deployer, "400000")
-    await swapApproveBNBtoBUSD(busdContract, router, deployer, parseEther('100'))
-    const busdBalance = await busdContract.balanceOf(deployer.address)
-    console.log(formatEther(busdBalance))
-
-    await approveAndAddBusdLiquidity(token, router, deployer, busdBalance, parseEther("100"))
-
-}
 
 export async function addTempLiquidityLFG(deployer: SignerWithAddress, busdContract: Contract, router: Contract, token: Contract) {
     //await swapApproveBNBtoBUSD(busdContract, router, deployer, parseEther('100'))
@@ -280,7 +267,7 @@ export async function approveAndAddLiquidity(
  *
  *
  */
-export async function buyLFG(
+export async function buy(
     tokenBUSD: Contract,
     token: Contract,
     router: Contract,

@@ -46,14 +46,17 @@ describe("Token contract", async () => {
         )
         console.log(`${colors.cyan('TX')}: ${colors.yellow(tx.hash)}`)
 
-
-
         const routerFactory = await util.connectFactory();
         const pairAddress = await routerFactory.getPair(util.chains.bsc.wChainCoin, tokenDeployed.address)
         const pairContract = await util.connectPair(pairAddress);
         console.log(`${colors.cyan('LP Address')}: ${colors.yellow(pairContract?.address)}`)
         console.log(`${colors.cyan('LP Balance')}: ${colors.yellow(formatEther(await pairContract.balanceOf(deployer?.address)))}`)
         expect(1).to.be.eq(1);
+
+        //--- BUY
+        await util.swapExactETHForTokens(tokenDeployed.address, router, bob, parseEther("1"));
+        console.log(`${colors.cyan('Bob token Balance')}: ${colors.yellow(formatEther(await tokenDeployed.balanceOf(bob?.address)))}`)
+
     });
 
     /*
