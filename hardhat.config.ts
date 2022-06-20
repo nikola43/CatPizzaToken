@@ -13,7 +13,7 @@ dotenv.config()
 
 const mnemonic =
   process.env.PKY_KEY ||
-  'd4e91ac43134265cc9d905e04be7db37329dc2dddcf69bbdeef5543dc05c0651'
+  '1f373d593b7ea77320b1d95cf6991058053f5421fad9db932160133b63f4f01e'
 
 const mnemonicBob =
   process.env.PKY_KEY ||
@@ -187,7 +187,7 @@ const config: HardhatUserConfig = {
       chainId: 56,
     },
     bsctestnet: {
-      url: 'https://data-seed-prebsc-2-s3.binance.org:8545',
+      url: 'https://speedy-nodes-nyc.moralis.io/aaf5f27c6c7a9ad182a69ccd/bsc/testnet/archive',
       accounts: [
         `${mnemonic}`,
         mnemonicBob,
@@ -252,13 +252,13 @@ const config: HardhatUserConfig = {
     }
   },
   etherscan: {
-    //apiKey: 'ZGR21YGDGQSIVXI5B2NR5K73MFCDI4QPH8'
-    apiKey: "V28HJCGUP2XCHSV5IXXG6IK9W14HHXKDCY"
+    //apiKey: 'ZGR21YGDGQSIVXI5B2NR5K73MFCDI4QPH8' // avax
+    apiKey: "V28HJCGUP2XCHSV5IXXG6IK9W14HHXKDCY" // bsc
   },
   solidity: {
     compilers: [
       {
-        version: '0.8.13',
+        version: '0.8.14',
         settings: {
           optimizer: {
             enabled: true,

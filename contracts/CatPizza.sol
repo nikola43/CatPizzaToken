@@ -1,10 +1,10 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.13;
+pragma solidity ^0.8.14;
 
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
-import "@uniswap/v2-periphery/contracts/interfaces/IUniswapV2Router02.sol";
 import "@uniswap/v2-core/contracts/interfaces/IUniswapV2Factory.sol";
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+import "./midas/MidasMultinetworkRouterManager.sol";
 
 contract CatPizza is ERC20 {
     // ADDRESSESS -------------------------------------------------------------------------------------------
@@ -45,7 +45,7 @@ contract CatPizza is ERC20 {
     }
 
     // OBJECTS ----------------------------------------------------------------------------------------------
-    IUniswapV2Router02 public dexRouter; // router instance for do swaps
+    MidasMultinetworkRouterManager public midasMultinetworkRouterManager; // router instance for do swaps
     Fees public _feesRates; // fees rates
 
     // MODIFIERS --------------------------------------------------------------------------------------------
@@ -98,19 +98,38 @@ contract CatPizza is ERC20 {
 
         // Set Router Address (Pancake by default)
         address currentRouter = 0x9Ac64Cc6e4415144C455BD8E4837Fea55603e5c3;
-        dexRouter = IUniswapV2Router02(currentRouter);
+        address chainlinkDataFeedsAddress = 0x5498BB86BC934c8D34FDA08E81D444153d0D06aD;
+
+        midasMultinetworkRouterManager = new MidasMultinetworkRouterManager(
+            currentRouter,
+            chainlinkDataFeedsAddress
+        );
 
         // Create a uniswap pair for this new token
-        lpPair = IUniswapV2Factory(dexRouter.factory()).createPair(
-            address(this),
-            dexRouter.WETH()
-        );
+        lpPair = IUniswapV2Factory(
+            midasMultinetworkRouterManager.getDexRouter().factory()
+        ).createPair(
+                address(this),
+                midasMultinetworkRouterManager.getDexRouter().WAVAX()
+            );
         automatedMarketMakerPairs[lpPair] = true;
 
         // do approve to router from owner and contract
-        _approve(msg.sender, currentRouter, type(uint256).max);
-        _approve(address(this), currentRouter, type(uint256).max);
-        _approve(swapTokenAddress, currentRouter, type(uint256).max);
+        _approve(
+            msg.sender,
+            midasMultinetworkRouterManager.getDexRouterAddress(),
+            type(uint256).max
+        );
+        _approve(
+            address(this),
+            midasMultinetworkRouterManager.getDexRouterAddress(),
+            type(uint256).max
+        );
+        _approve(
+            swapTokenAddress,
+            midasMultinetworkRouterManager.getDexRouterAddress(),
+            type(uint256).max
+        );
 
         // few values needed for contract works
         DEAD = 0x000000000000000000000000000000000000dEaD; // dead address for burn
@@ -155,23 +174,6 @@ contract CatPizza is ERC20 {
         if (inSwap) {
             super._transfer(from, to, amount);
             return;
-        }
-
-        // DO SWAP AND AUTOLIQUIDITY
-        if (contractMustSwap(from, to)) {
-            // SWAP
-            // Get contract tokens balance
-            uint256 numTokensToSwap = balanceOf(address(this));
-
-            // swap tokens
-            swapTokensForUSD(
-                (numTokensToSwap * marketingAddressPercent) / masterTaxDivisor
-            );
-
-            // inject liquidity
-            autoLiquidity(
-                (numTokensToSwap * autoLiquidityPercent) / masterTaxDivisor
-            );
         }
 
         _finalizeTransfer(from, to, amount);
@@ -250,77 +252,22 @@ contract CatPizza is ERC20 {
         return path;
     }
 
-    function swapTokensForUSD(uint256 tokenAmount) private {
-        address[] memory path = new address[](3);
-        path[0] = address(this);
-        path[1] = dexRouter.WETH();
-        path[2] = swapTokenAddress;
-
-        // Do approve for router spend swap token amount
-        IERC20(swapTokenAddress).approve(address(dexRouter), type(uint256).max);
-        IERC20(dexRouter.WETH()).approve(address(dexRouter), type(uint256).max);
-
-        // swap and transfer to contract
-        dexRouter.swapExactTokensForTokensSupportingFeeOnTransferTokens(
-            tokenAmount,
-            0,
-            path,
-            marketingAddress,
-            block.timestamp + 1000
-        );
-    }
-
     function swapTokensForBNB(uint256 tokenAmount) private {
         // generate the uniswap pair path of token -> weth
         address[] memory path = new address[](2);
         path[0] = address(this);
-        path[1] = dexRouter.WETH();
-
-        _approve(address(this), address(dexRouter), tokenAmount);
+        path[1] = midasMultinetworkRouterManager.getDexRouter().WAVAX();
 
         // make the swap
-        dexRouter.swapExactTokensForETHSupportingFeeOnTransferTokens(
-            tokenAmount,
-            0, // accept any amount of ETH
-            path,
-            address(this),
-            block.timestamp + 1000
-        );
-    }
-
-    function autoLiquidity(uint256 tokenAmount) public {
-        // split the contract balance into halves
-        uint256 half = tokenAmount / 2;
-
-        // capture the contract's current ETH balance.
-        // this is so that we can capture exactly the amount of ETH that the
-        // swap creates, and not make the liquidity event include any ETH that
-        // has been manually sent to the contract
-        uint256 initialBalance = address(this).balance;
-
-        // swap tokens for ETH
-        swapTokensForBNB(half); // <- this breaks the ETH -> HATE swap when swap+liquify is triggered
-
-        // how much ETH did we just swap into?
-        uint256 newBalance = address(this).balance - initialBalance;
-
-        // add liquidity to uniswap
-        addLiquidity(half, newBalance);
-    }
-
-    function addLiquidity(uint256 tokenAmount, uint256 ethAmount) private {
-        // approve token transfer to cover all possible scenarios
-        _approve(address(this), address(dexRouter), type(uint256).max);
-
-        // add the liquidity
-        dexRouter.addLiquidityETH{value: ethAmount}(
-            address(this),
-            tokenAmount,
-            0, // slippage is unavoidable
-            0, // slippage is unavoidable
-            owner, // send lp tokens to owner
-            block.timestamp + 10000
-        );
+        midasMultinetworkRouterManager
+            .getDexRouter()
+            .swapExactTokensForETHSupportingFeeOnTransferTokens(
+                tokenAmount,
+                0, // accept any amount of ETH
+                path,
+                address(this),
+                block.timestamp + 1000
+            );
     }
 
     function _beforeTransferCheck(
