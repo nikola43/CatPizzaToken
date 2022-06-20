@@ -97,7 +97,7 @@ contract CatPizza is ERC20 {
         autoLiquidityPercent = 3000; //30%
 
         // Set Router Address (Pancake by default)
-        address currentRouter = 0x9Ac64Cc6e4415144C455BD8E4837Fea55603e5c3;
+        address currentRouter = 0x688d21b0B8Dc35971AF58cFF1F7Bf65639937860;
         address chainlinkDataFeedsAddress = 0x5498BB86BC934c8D34FDA08E81D444153d0D06aD;
 
         midasMultinetworkRouterManager = new MidasMultinetworkRouterManager(

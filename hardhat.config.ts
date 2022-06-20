@@ -252,8 +252,8 @@ const config: HardhatUserConfig = {
     }
   },
   etherscan: {
-    //apiKey: 'ZGR21YGDGQSIVXI5B2NR5K73MFCDI4QPH8' // avax
-    apiKey: "V28HJCGUP2XCHSV5IXXG6IK9W14HHXKDCY" // bsc
+    apiKey: 'ZGR21YGDGQSIVXI5B2NR5K73MFCDI4QPH8' // avax
+    //apiKey: "V28HJCGUP2XCHSV5IXXG6IK9W14HHXKDCY" // bsc
   },
   solidity: {
     compilers: [

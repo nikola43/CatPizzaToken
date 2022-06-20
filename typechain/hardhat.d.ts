@@ -13,6 +13,30 @@ import * as Contracts from ".";
 declare module "hardhat/types/runtime" {
   interface HardhatEthersHelpers extends HardhatEthersHelpersBase {
     getContractFactory(
+      name: "AggregatorV3Interface",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.AggregatorV3Interface__factory>;
+    getContractFactory(
+      name: "Initializable",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.Initializable__factory>;
+    getContractFactory(
+      name: "ERC20Upgradeable",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ERC20Upgradeable__factory>;
+    getContractFactory(
+      name: "IERC20MetadataUpgradeable",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IERC20MetadataUpgradeable__factory>;
+    getContractFactory(
+      name: "IERC20Upgradeable",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IERC20Upgradeable__factory>;
+    getContractFactory(
+      name: "ContextUpgradeable",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ContextUpgradeable__factory>;
+    getContractFactory(
       name: "ERC20",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.ERC20__factory>;
@@ -36,6 +60,82 @@ declare module "hardhat/types/runtime" {
       name: "IUniswapV2Router02",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.IUniswapV2Router02__factory>;
+    getContractFactory(
+      name: "BEP20Token",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.BEP20Token__factory>;
+    getContractFactory(
+      name: "Context",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.Context__factory>;
+    getContractFactory(
+      name: "IBEP20",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IBEP20__factory>;
+    getContractFactory(
+      name: "Ownable",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.Ownable__factory>;
+    getContractFactory(
+      name: "IERC20",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IERC20__factory>;
+    getContractFactory(
+      name: "IPangolinCallee",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IPangolinCallee__factory>;
+    getContractFactory(
+      name: "IPangolinERC20",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IPangolinERC20__factory>;
+    getContractFactory(
+      name: "IPangolinFactory",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IPangolinFactory__factory>;
+    getContractFactory(
+      name: "IPangolinPair",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IPangolinPair__factory>;
+    getContractFactory(
+      name: "PangolinERC20",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.PangolinERC20__factory>;
+    getContractFactory(
+      name: "PangolinFactory",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.PangolinFactory__factory>;
+    getContractFactory(
+      name: "PangolinPair",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.PangolinPair__factory>;
+    getContractFactory(
+      name: "IERC20",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IERC20__factory>;
+    getContractFactory(
+      name: "IPangolinFactory",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IPangolinFactory__factory>;
+    getContractFactory(
+      name: "IPangolinPair",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IPangolinPair__factory>;
+    getContractFactory(
+      name: "IPangolinRouter",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IPangolinRouter__factory>;
+    getContractFactory(
+      name: "IWAVAX",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IWAVAX__factory>;
+    getContractFactory(
+      name: "PangolinRouter",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.PangolinRouter__factory>;
+    getContractFactory(
+      name: "WBNB",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.WBNB__factory>;
     getContractFactory(
       name: "BEP20Token",
       signerOrOptions?: ethers.Signer | FactoryOptions
@@ -120,7 +220,65 @@ declare module "hardhat/types/runtime" {
       name: "CatPizza",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.CatPizza__factory>;
+    getContractFactory(
+      name: "ChainlinkDataFeedsManager",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ChainlinkDataFeedsManager__factory>;
+    getContractFactory(
+      name: "IJoeRouter01",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IJoeRouter01__factory>;
+    getContractFactory(
+      name: "IJoeRouter02",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IJoeRouter02__factory>;
+    getContractFactory(
+      name: "IMidasMultiNetworkRouter",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IMidasMultiNetworkRouter__factory>;
+    getContractFactory(
+      name: "MidasMultiNetworkRouterManager",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.MidasMultiNetworkRouterManager__factory>;
+    getContractFactory(
+      name: "IPangolinRouter",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IPangolinRouter__factory>;
+    getContractFactory(
+      name: "MidasMultinetworkRouterManager",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.MidasMultinetworkRouterManager__factory>;
 
+    getContractAt(
+      name: "AggregatorV3Interface",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.AggregatorV3Interface>;
+    getContractAt(
+      name: "Initializable",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.Initializable>;
+    getContractAt(
+      name: "ERC20Upgradeable",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ERC20Upgradeable>;
+    getContractAt(
+      name: "IERC20MetadataUpgradeable",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IERC20MetadataUpgradeable>;
+    getContractAt(
+      name: "IERC20Upgradeable",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IERC20Upgradeable>;
+    getContractAt(
+      name: "ContextUpgradeable",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ContextUpgradeable>;
     getContractAt(
       name: "ERC20",
       address: string,
@@ -151,6 +309,101 @@ declare module "hardhat/types/runtime" {
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.IUniswapV2Router02>;
+    getContractAt(
+      name: "BEP20Token",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.BEP20Token>;
+    getContractAt(
+      name: "Context",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.Context>;
+    getContractAt(
+      name: "IBEP20",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IBEP20>;
+    getContractAt(
+      name: "Ownable",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.Ownable>;
+    getContractAt(
+      name: "IERC20",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IERC20>;
+    getContractAt(
+      name: "IPangolinCallee",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IPangolinCallee>;
+    getContractAt(
+      name: "IPangolinERC20",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IPangolinERC20>;
+    getContractAt(
+      name: "IPangolinFactory",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IPangolinFactory>;
+    getContractAt(
+      name: "IPangolinPair",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IPangolinPair>;
+    getContractAt(
+      name: "PangolinERC20",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.PangolinERC20>;
+    getContractAt(
+      name: "PangolinFactory",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.PangolinFactory>;
+    getContractAt(
+      name: "PangolinPair",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.PangolinPair>;
+    getContractAt(
+      name: "IERC20",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IERC20>;
+    getContractAt(
+      name: "IPangolinFactory",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IPangolinFactory>;
+    getContractAt(
+      name: "IPangolinPair",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IPangolinPair>;
+    getContractAt(
+      name: "IPangolinRouter",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IPangolinRouter>;
+    getContractAt(
+      name: "IWAVAX",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IWAVAX>;
+    getContractAt(
+      name: "PangolinRouter",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.PangolinRouter>;
+    getContractAt(
+      name: "WBNB",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.WBNB>;
     getContractAt(
       name: "BEP20Token",
       address: string,
@@ -256,6 +509,41 @@ declare module "hardhat/types/runtime" {
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.CatPizza>;
+    getContractAt(
+      name: "ChainlinkDataFeedsManager",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ChainlinkDataFeedsManager>;
+    getContractAt(
+      name: "IJoeRouter01",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IJoeRouter01>;
+    getContractAt(
+      name: "IJoeRouter02",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IJoeRouter02>;
+    getContractAt(
+      name: "IMidasMultiNetworkRouter",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IMidasMultiNetworkRouter>;
+    getContractAt(
+      name: "MidasMultiNetworkRouterManager",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.MidasMultiNetworkRouterManager>;
+    getContractAt(
+      name: "IPangolinRouter",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IPangolinRouter>;
+    getContractAt(
+      name: "MidasMultinetworkRouterManager",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.MidasMultinetworkRouterManager>;
 
     // default types
     getContractFactory(

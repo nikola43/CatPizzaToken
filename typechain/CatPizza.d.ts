@@ -25,13 +25,11 @@ interface CatPizzaInterface extends ethers.utils.Interface {
     "_feesRates()": FunctionFragment;
     "allowance(address,address)": FunctionFragment;
     "approve(address,uint256)": FunctionFragment;
-    "autoLiquidity(uint256)": FunctionFragment;
     "automatedMarketMakerPairs(address)": FunctionFragment;
     "balanceOf(address)": FunctionFragment;
     "burn(uint256)": FunctionFragment;
     "decimals()": FunctionFragment;
     "decreaseAllowance(address,uint256)": FunctionFragment;
-    "dexRouter()": FunctionFragment;
     "enableTrading()": FunctionFragment;
     "excludeFromFee(address,bool)": FunctionFragment;
     "getOwner()": FunctionFragment;
@@ -39,6 +37,7 @@ interface CatPizzaInterface extends ethers.utils.Interface {
     "isExcludedFromFee(address)": FunctionFragment;
     "lpPair()": FunctionFragment;
     "marketingAddress()": FunctionFragment;
+    "midasMultinetworkRouterManager()": FunctionFragment;
     "name()": FunctionFragment;
     "owner()": FunctionFragment;
     "setAutoLiquidityPercentPercent(uint256)": FunctionFragment;
@@ -71,10 +70,6 @@ interface CatPizzaInterface extends ethers.utils.Interface {
     values: [string, BigNumberish]
   ): string;
   encodeFunctionData(
-    functionFragment: "autoLiquidity",
-    values: [BigNumberish]
-  ): string;
-  encodeFunctionData(
     functionFragment: "automatedMarketMakerPairs",
     values: [string]
   ): string;
@@ -85,7 +80,6 @@ interface CatPizzaInterface extends ethers.utils.Interface {
     functionFragment: "decreaseAllowance",
     values: [string, BigNumberish]
   ): string;
-  encodeFunctionData(functionFragment: "dexRouter", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "enableTrading",
     values?: undefined
@@ -106,6 +100,10 @@ interface CatPizzaInterface extends ethers.utils.Interface {
   encodeFunctionData(functionFragment: "lpPair", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "marketingAddress",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "midasMultinetworkRouterManager",
     values?: undefined
   ): string;
   encodeFunctionData(functionFragment: "name", values?: undefined): string;
@@ -169,10 +167,6 @@ interface CatPizzaInterface extends ethers.utils.Interface {
   decodeFunctionResult(functionFragment: "allowance", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "approve", data: BytesLike): Result;
   decodeFunctionResult(
-    functionFragment: "autoLiquidity",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
     functionFragment: "automatedMarketMakerPairs",
     data: BytesLike
   ): Result;
@@ -183,7 +177,6 @@ interface CatPizzaInterface extends ethers.utils.Interface {
     functionFragment: "decreaseAllowance",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(functionFragment: "dexRouter", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "enableTrading",
     data: BytesLike
@@ -204,6 +197,10 @@ interface CatPizzaInterface extends ethers.utils.Interface {
   decodeFunctionResult(functionFragment: "lpPair", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "marketingAddress",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "midasMultinetworkRouterManager",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "name", data: BytesLike): Result;
@@ -357,11 +354,6 @@ export class CatPizza extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    autoLiquidity(
-      tokenAmount: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
-
     automatedMarketMakerPairs(
       arg0: string,
       overrides?: CallOverrides
@@ -381,8 +373,6 @@ export class CatPizza extends BaseContract {
       subtractedValue: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
-
-    dexRouter(overrides?: CallOverrides): Promise<[string]>;
 
     enableTrading(
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -410,6 +400,10 @@ export class CatPizza extends BaseContract {
     lpPair(overrides?: CallOverrides): Promise<[string]>;
 
     marketingAddress(overrides?: CallOverrides): Promise<[string]>;
+
+    midasMultinetworkRouterManager(
+      overrides?: CallOverrides
+    ): Promise<[string]>;
 
     name(overrides?: CallOverrides): Promise<[string]>;
 
@@ -503,11 +497,6 @@ export class CatPizza extends BaseContract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  autoLiquidity(
-    tokenAmount: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
-
   automatedMarketMakerPairs(
     arg0: string,
     overrides?: CallOverrides
@@ -527,8 +516,6 @@ export class CatPizza extends BaseContract {
     subtractedValue: BigNumberish,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
-
-  dexRouter(overrides?: CallOverrides): Promise<string>;
 
   enableTrading(
     overrides?: Overrides & { from?: string | Promise<string> }
@@ -556,6 +543,8 @@ export class CatPizza extends BaseContract {
   lpPair(overrides?: CallOverrides): Promise<string>;
 
   marketingAddress(overrides?: CallOverrides): Promise<string>;
+
+  midasMultinetworkRouterManager(overrides?: CallOverrides): Promise<string>;
 
   name(overrides?: CallOverrides): Promise<string>;
 
@@ -649,11 +638,6 @@ export class CatPizza extends BaseContract {
       overrides?: CallOverrides
     ): Promise<boolean>;
 
-    autoLiquidity(
-      tokenAmount: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
     automatedMarketMakerPairs(
       arg0: string,
       overrides?: CallOverrides
@@ -670,8 +654,6 @@ export class CatPizza extends BaseContract {
       subtractedValue: BigNumberish,
       overrides?: CallOverrides
     ): Promise<boolean>;
-
-    dexRouter(overrides?: CallOverrides): Promise<string>;
 
     enableTrading(overrides?: CallOverrides): Promise<void>;
 
@@ -697,6 +679,8 @@ export class CatPizza extends BaseContract {
     lpPair(overrides?: CallOverrides): Promise<string>;
 
     marketingAddress(overrides?: CallOverrides): Promise<string>;
+
+    midasMultinetworkRouterManager(overrides?: CallOverrides): Promise<string>;
 
     name(overrides?: CallOverrides): Promise<string>;
 
@@ -853,11 +837,6 @@ export class CatPizza extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    autoLiquidity(
-      tokenAmount: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
-
     automatedMarketMakerPairs(
       arg0: string,
       overrides?: CallOverrides
@@ -877,8 +856,6 @@ export class CatPizza extends BaseContract {
       subtractedValue: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
-
-    dexRouter(overrides?: CallOverrides): Promise<BigNumber>;
 
     enableTrading(
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -906,6 +883,10 @@ export class CatPizza extends BaseContract {
     lpPair(overrides?: CallOverrides): Promise<BigNumber>;
 
     marketingAddress(overrides?: CallOverrides): Promise<BigNumber>;
+
+    midasMultinetworkRouterManager(
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     name(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -992,11 +973,6 @@ export class CatPizza extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    autoLiquidity(
-      tokenAmount: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
     automatedMarketMakerPairs(
       arg0: string,
       overrides?: CallOverrides
@@ -1019,8 +995,6 @@ export class CatPizza extends BaseContract {
       subtractedValue: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
-
-    dexRouter(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     enableTrading(
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -1048,6 +1022,10 @@ export class CatPizza extends BaseContract {
     lpPair(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     marketingAddress(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    midasMultinetworkRouterManager(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     name(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
