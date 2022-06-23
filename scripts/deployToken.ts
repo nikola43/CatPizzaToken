@@ -8,7 +8,7 @@ async function main(): Promise<string> {
     console.log();
     console.log(colors.yellow('Deploying...'));
     console.log();
-    const token = await ethers.getContractFactory('CatPizza')
+    const token = await ethers.getContractFactory('TeslaMFInu')
     const tokenDeployed = await token.deploy()
     return tokenDeployed.address;
 }
@@ -37,7 +37,7 @@ main()
         console.log(colors.cyan('Deployed Token Address: ') + colors.yellow(r));
         console.log("");
         await execShellCommand("sleep 5");
-        const command = "npx hardhat verify " + r;
+        const command = "npx hardhat verify " + r + " --network bsctestnet"
         console.log(colors.cyan('Run: '));
         console.log("");
         console.log(colors.yellow(command));

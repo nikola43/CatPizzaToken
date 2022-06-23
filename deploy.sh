@@ -5,7 +5,7 @@ rm -rf artifacts
 rm -rf cache
 
 network="bsctestnet"
-script="deployToken"
+script="deployTestToken"
 cmd="npx hardhat run --network $network scripts/$script.ts"
 
 echo "$($cmd)"

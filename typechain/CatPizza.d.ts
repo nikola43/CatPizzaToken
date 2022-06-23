@@ -19,7 +19,7 @@ import { Listener, Provider } from "@ethersproject/providers";
 import { FunctionFragment, EventFragment, Result } from "@ethersproject/abi";
 import type { TypedEventFilter, TypedEvent, TypedListener } from "./common";
 
-interface CatPizzaInterface extends ethers.utils.Interface {
+interface TeslaMFInuInterface extends ethers.utils.Interface {
   functions: {
     "DEAD()": FunctionFragment;
     "_feesRates()": FunctionFragment;
@@ -289,7 +289,7 @@ export type TransferEvent = TypedEvent<
   [string, string, BigNumber] & { from: string; to: string; value: BigNumber }
 >;
 
-export class CatPizza extends BaseContract {
+export class TeslaMFInu extends BaseContract {
   connect(signerOrProvider: Signer | Provider | string): this;
   attach(addressOrName: string): this;
   deployed(): Promise<this>;
@@ -330,7 +330,7 @@ export class CatPizza extends BaseContract {
     toBlock?: string | number | undefined
   ): Promise<Array<TypedEvent<EventArgsArray & EventArgsObject>>>;
 
-  interface: CatPizzaInterface;
+  interface: TeslaMFInuInterface;
 
   functions: {
     DEAD(overrides?: CallOverrides): Promise<[string]>;

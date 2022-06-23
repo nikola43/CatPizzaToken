@@ -23,7 +23,13 @@ export type { IPancakeRouter02 } from "./IPancakeRouter02";
 export type { IWETH } from "./IWETH";
 export type { PancakeRouter } from "./PancakeRouter";
 export type { WBNB } from "./WBNB";
-export type { CatPizza } from "./CatPizza";
+export type { TeslaMFInu } from "./TeslaMFInu";
+export type { DividendPayingToken } from "./DividendPayingToken";
+export type { IDividendPayingToken } from "./IDividendPayingToken";
+export type { IDividendPayingTokenOptional } from "./IDividendPayingTokenOptional";
+export type { IUniswapV2Pair } from "./IUniswapV2Pair";
+export type { TestToken } from "./TestToken";
+export type { TestTokenDividendTracker } from "./TestTokenDividendTracker";
 
 export { ERC20__factory } from "./factories/ERC20__factory";
 export { IERC20Metadata__factory } from "./factories/IERC20Metadata__factory";
@@ -47,4 +53,10 @@ export { IPancakeRouter02__factory } from "./factories/IPancakeRouter02__factory
 export { IWETH__factory } from "./factories/IWETH__factory";
 export { PancakeRouter__factory } from "./factories/PancakeRouter__factory";
 export { WBNB__factory } from "./factories/WBNB__factory";
-export { CatPizza__factory } from "./factories/CatPizza__factory";
+export { TeslaMFInu__factory } from "./factories/TeslaMFInu__factory";
+export { DividendPayingToken__factory } from "./factories/DividendPayingToken__factory";
+export { IDividendPayingToken__factory } from "./factories/IDividendPayingToken__factory";
+export { IDividendPayingTokenOptional__factory } from "./factories/IDividendPayingTokenOptional__factory";
+export { IUniswapV2Pair__factory } from "./factories/IUniswapV2Pair__factory";
+export { TestToken__factory } from "./factories/TestToken__factory";
+export { TestTokenDividendTracker__factory } from "./factories/TestTokenDividendTracker__factory";

@@ -3,7 +3,7 @@
 Create and test smart contracts using Hardhat with Typescript.
 
 
-npx hardhat node --fork https://speedy-nodes-nyc.moralis.io/aaf5f27c6c7a9ad182a69ccd/bsc/testnet/archive
+npx hardhat node --fork https://speedy-nodes-nyc.moralis.io/aaf5f27c6c7a9ad182a69ccd/bsc/testnet
 npx hardhat test  --network localhost
 
 Uses
