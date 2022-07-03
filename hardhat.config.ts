@@ -13,24 +13,24 @@ dotenv.config()
 
 const mnemonic =
   process.env.PKY_KEY ||
-  '1f373d593b7ea77320b1d95cf6991058053f5421fad9db932160133b63f4f01e'
+  '3062979ebcda3efb3bae3919e003f8e3a3597d9244244a13e4a9ff7776221501'
 
 const mnemonicBob =
   process.env.PKY_KEY ||
-  'fe2d7880e7f6236be3518defe10d83f2969b48a47f0ff796fd481bde5bcd5a21'
+  '0xdf7493f4dcc70c4644bc44aa73317b47c8682422b9b79948fd139100b5db3622'
 
 const mnemonicAlice =
   process.env.PKY_KEY ||
-  'bf60370ceb06c7f76055e96e9417f9dca3a677007ea6045c187a98bd71ceee62'
+  '0xa649e1fa61fa26b9af80027d987a4f2728da6927cc2711dc3fe16ce1d91c3f96'
 
 const mnemonic1 =
-  '0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80'
+  '0x670b3e9b0187ab70b1e991021466b517f307dc52de8c70a67e1436deaaafdaaa'
 
 const mnemonic2 =
-  '0x59c6995e998f97a5a0044966f0945389dc9e86dae88c7a8412f4603b6b78690d'
+  '0x3cb5a872c7893556645c1b178c51c458f097c60874bc146fc1645cee8c735147'
 
 const mnemonic3 =
-  '0x5de4111afa1a4b94908f83103eb1f1706367c2e68ca870fc3fb9a804cdab365a'
+  '0x60d10b343a346a70c1adbabc9fe420e92f2ea8e7ef57ac750fca7f08ab6ff471'
 
 const mnemonic4 =
   '0x7c852118294e51e653712a81e05800f419141751be58f605c371e15141b007a6'
@@ -88,7 +88,8 @@ const config: HardhatUserConfig = {
   defaultNetwork: "hardhat",
   networks: {
     localhost: {
-      url: "http://127.0.0.1:8545"
+      url: "http://127.0.0.1:8545",
+      chainId: 31337
     },
     hardhat: {},
     /*
@@ -153,19 +154,18 @@ const config: HardhatUserConfig = {
       chainId: 79377087078960,
       gasMultiplier: 2
     },
-    fantom: {
+    ftm: {
       url: 'https://rpcapi.fantom.network',
       accounts: [`${mnemonic}`],
-      chainId: 250,
-      gasPrice: 22000000000
+      chainId: 250
     },
-    'fantom-testnet': {
+    ftmTestnet: {
       url: 'https://rpc.testnet.fantom.network',
       accounts: [`${mnemonic}`],
       chainId: 4002,
       gasMultiplier: 2
     },
-    matic: {
+    polygon: {
       url: 'https://rpc-mainnet.maticvigil.com',
       accounts: [`${mnemonic}`],
       chainId: 137,
@@ -186,8 +186,8 @@ const config: HardhatUserConfig = {
       accounts: [`${mnemonic}`],
       chainId: 56,
     },
-    bsctestnet: {
-      url: 'https://speedy-nodes-nyc.moralis.io/aaf5f27c6c7a9ad182a69ccd/bsc/testnet/archive',
+    bscTestnet: {
+      url: 'https://data-seed-prebsc-1-s3.binance.org:8545',
       accounts: [
         `${mnemonic}`,
         mnemonicBob,
@@ -230,8 +230,7 @@ const config: HardhatUserConfig = {
     avalanche: {
       url: 'https://api.avax.network/ext/bc/C/rpc',
       accounts: [`${mnemonic}`],
-      chainId: 43114,
-      gasPrice: 225000000000
+      chainId: 43114
     },
     avaxfuji: {
       url: 'https://api.avax-test.network/ext/bc/C/rpc',
@@ -252,8 +251,20 @@ const config: HardhatUserConfig = {
     }
   },
   etherscan: {
-    apiKey: 'ZGR21YGDGQSIVXI5B2NR5K73MFCDI4QPH8' // avax
-    //apiKey: "V28HJCGUP2XCHSV5IXXG6IK9W14HHXKDCY" // bsc
+
+    apiKey: {
+      avalancheFujiTestnet: 'ZGR21YGDGQSIVXI5B2NR5K73MFCDI4QPH8', // avax
+      avalanche: 'ZGR21YGDGQSIVXI5B2NR5K73MFCDI4QPH8', // avax
+
+      bsc: "V28HJCGUP2XCHSV5IXXG6IK9W14HHXKDCY", // bsc
+      bscTestnet: "V28HJCGUP2XCHSV5IXXG6IK9W14HHXKDCY", // bsc
+
+      opera: "IJ7P45C1D6CWVVQZ3FAYMFMR433IYEJ3EW", // ftm
+      ftmTestnet: "IJ7P45C1D6CWVVQZ3FAYMFMR433IYEJ3EW", // ftm
+
+      polygon: "C88WPK1DEGCHQRS74BNNR78QV7ZDRBRRS9", // polygon
+      mumbai: "C88WPK1DEGCHQRS74BNNR78QV7ZDRBRRS9" // polygon
+    }
   },
   solidity: {
     compilers: [
@@ -262,7 +273,7 @@ const config: HardhatUserConfig = {
         settings: {
           optimizer: {
             enabled: true,
-            runs: 100
+            runs: 1
           }
         }
       },

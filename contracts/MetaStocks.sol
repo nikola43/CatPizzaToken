@@ -6,7 +6,7 @@ import "@uniswap/v2-core/contracts/interfaces/IUniswapV2Factory.sol";
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "./IJoeRouter02.sol";
 
-contract CatPizza is ERC20 {
+contract MetaStocks is ERC20 {
     // ADDRESSESS -------------------------------------------------------------------------------------------
     address public owner; // contract owner
     address public DEAD; // DEAD Address for burn tokens
