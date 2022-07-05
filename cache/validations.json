@@ -3,6 +3,3269 @@
   "log": [
     {
       "ERC20": {
+        "src": "@openzeppelin/contracts/token/ERC20/ERC20.sol:35",
+        "version": {
+          "withMetadata": "70ddb9b4058deb7b35dcfaf19f4ece2b87bf6016ce0a1cd22362c432e40eb408",
+          "withoutMetadata": "7eaf6e2da372192c65ae6dd6fa3ba2298f35fb14a7a18391f0b8200e2d1c6918",
+          "linkedWithoutMetadata": "7eaf6e2da372192c65ae6dd6fa3ba2298f35fb14a7a18391f0b8200e2d1c6918"
+        },
+        "inherit": [
+          "IERC20Metadata",
+          "IERC20",
+          "Context"
+        ],
+        "libraries": [],
+        "methods": [
+          "(string,string)",
+          "name()",
+          "symbol()",
+          "decimals()",
+          "totalSupply()",
+          "balanceOf(address)",
+          "transfer(address,uint256)",
+          "allowance(address,address)",
+          "approve(address,uint256)",
+          "transferFrom(address,address,uint256)",
+          "increaseAllowance(address,uint256)",
+          "decreaseAllowance(address,uint256)"
+        ],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "constructor",
+            "contract": "ERC20",
+            "src": "@openzeppelin/contracts/token/ERC20/ERC20.sol:54"
+          }
+        ],
+        "layout": {
+          "storage": [
+            {
+              "label": "_balances",
+              "offset": 0,
+              "slot": "0",
+              "type": "t_mapping(t_address,t_uint256)",
+              "contract": "ERC20",
+              "src": "@openzeppelin/contracts/token/ERC20/ERC20.sol:36"
+            },
+            {
+              "label": "_allowances",
+              "offset": 0,
+              "slot": "1",
+              "type": "t_mapping(t_address,t_mapping(t_address,t_uint256))",
+              "contract": "ERC20",
+              "src": "@openzeppelin/contracts/token/ERC20/ERC20.sol:38"
+            },
+            {
+              "label": "_totalSupply",
+              "offset": 0,
+              "slot": "2",
+              "type": "t_uint256",
+              "contract": "ERC20",
+              "src": "@openzeppelin/contracts/token/ERC20/ERC20.sol:40"
+            },
+            {
+              "label": "_name",
+              "offset": 0,
+              "slot": "3",
+              "type": "t_string_storage",
+              "contract": "ERC20",
+              "src": "@openzeppelin/contracts/token/ERC20/ERC20.sol:42"
+            },
+            {
+              "label": "_symbol",
+              "offset": 0,
+              "slot": "4",
+              "type": "t_string_storage",
+              "contract": "ERC20",
+              "src": "@openzeppelin/contracts/token/ERC20/ERC20.sol:43"
+            }
+          ],
+          "types": {
+            "t_address": {
+              "label": "address",
+              "numberOfBytes": "20"
+            },
+            "t_mapping(t_address,t_mapping(t_address,t_uint256))": {
+              "label": "mapping(address => mapping(address => uint256))",
+              "numberOfBytes": "32"
+            },
+            "t_mapping(t_address,t_uint256)": {
+              "label": "mapping(address => uint256)",
+              "numberOfBytes": "32"
+            },
+            "t_string_storage": {
+              "label": "string",
+              "numberOfBytes": "32"
+            },
+            "t_uint256": {
+              "label": "uint256",
+              "numberOfBytes": "32"
+            }
+          },
+          "layoutVersion": "1.1",
+          "flat": true
+        }
+      },
+      "IERC20": {
+        "src": "@openzeppelin/contracts/token/ERC20/IERC20.sol:9",
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "totalSupply()",
+          "balanceOf(address)",
+          "transfer(address,uint256)",
+          "allowance(address,address)",
+          "approve(address,uint256)",
+          "transferFrom(address,address,uint256)"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1",
+          "flat": false
+        }
+      },
+      "IERC20Metadata": {
+        "src": "@openzeppelin/contracts/token/ERC20/extensions/IERC20Metadata.sol:13",
+        "inherit": [
+          "IERC20"
+        ],
+        "libraries": [],
+        "methods": [
+          "name()",
+          "symbol()",
+          "decimals()"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1",
+          "flat": false
+        }
+      },
+      "Context": {
+        "src": "@openzeppelin/contracts/utils/Context.sol:16",
+        "inherit": [],
+        "libraries": [],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1",
+          "flat": false
+        }
+      },
+      "IUniswapV2Factory": {
+        "src": "@uniswap/v2-core/contracts/interfaces/IUniswapV2Factory.sol:4",
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "feeTo()",
+          "feeToSetter()",
+          "getPair(address,address)",
+          "allPairs(uint256)",
+          "allPairsLength()",
+          "createPair(address,address)",
+          "setFeeTo(address)",
+          "setFeeToSetter(address)"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1",
+          "flat": false
+        }
+      },
+      "IUniswapV2Router01": {
+        "src": "@uniswap/v2-periphery/contracts/interfaces/IUniswapV2Router01.sol:4",
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "factory()",
+          "WETH()",
+          "addLiquidity(address,address,uint256,uint256,uint256,uint256,address,uint256)",
+          "addLiquidityETH(address,uint256,uint256,uint256,address,uint256)",
+          "removeLiquidity(address,address,uint256,uint256,uint256,address,uint256)",
+          "removeLiquidityETH(address,uint256,uint256,uint256,address,uint256)",
+          "removeLiquidityWithPermit(address,address,uint256,uint256,uint256,address,uint256,bool,uint8,bytes32,bytes32)",
+          "removeLiquidityETHWithPermit(address,uint256,uint256,uint256,address,uint256,bool,uint8,bytes32,bytes32)",
+          "swapExactTokensForTokens(uint256,uint256,address[],address,uint256)",
+          "swapTokensForExactTokens(uint256,uint256,address[],address,uint256)",
+          "swapExactETHForTokens(uint256,address[],address,uint256)",
+          "swapTokensForExactETH(uint256,uint256,address[],address,uint256)",
+          "swapExactTokensForETH(uint256,uint256,address[],address,uint256)",
+          "swapETHForExactTokens(uint256,address[],address,uint256)",
+          "quote(uint256,uint256,uint256)",
+          "getAmountOut(uint256,uint256,uint256)",
+          "getAmountIn(uint256,uint256,uint256)",
+          "getAmountsOut(uint256,address[])",
+          "getAmountsIn(uint256,address[])"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1",
+          "flat": false
+        }
+      },
+      "IUniswapV2Router02": {
+        "src": "@uniswap/v2-periphery/contracts/interfaces/IUniswapV2Router02.sol:6",
+        "inherit": [
+          "IUniswapV2Router01"
+        ],
+        "libraries": [],
+        "methods": [
+          "removeLiquidityETHSupportingFeeOnTransferTokens(address,uint256,uint256,uint256,address,uint256)",
+          "removeLiquidityETHWithPermitSupportingFeeOnTransferTokens(address,uint256,uint256,uint256,address,uint256,bool,uint8,bytes32,bytes32)",
+          "swapExactTokensForTokensSupportingFeeOnTransferTokens(uint256,uint256,address[],address,uint256)",
+          "swapExactETHForTokensSupportingFeeOnTransferTokens(uint256,address[],address,uint256)",
+          "swapExactTokensForETHSupportingFeeOnTransferTokens(uint256,uint256,address[],address,uint256)"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1",
+          "flat": false
+        }
+      },
+      "MetaStocks": {
+        "src": "contracts/MetaStocks.sol:9",
+        "version": {
+          "withMetadata": "3caf79a459663793721e26b4f4123e961d2414604ea65366e61cd8327aa2e07e",
+          "withoutMetadata": "c810a03d8430b787e9dda146e6b6e7788ddbf81abd7355ad2955c1bbb13e9e39",
+          "linkedWithoutMetadata": "c810a03d8430b787e9dda146e6b6e7788ddbf81abd7355ad2955c1bbb13e9e39"
+        },
+        "inherit": [
+          "ERC20",
+          "IERC20Metadata",
+          "IERC20",
+          "Context"
+        ],
+        "libraries": [],
+        "methods": [
+          "()",
+          "()",
+          "getOwner()",
+          "setTaxes(uint16,uint16,uint16)",
+          "transferOwnership(address)",
+          "autoLiquidity(uint256)",
+          "burn(uint256)",
+          "setMarketingAddress(address)",
+          "isExcludedFromFee(address)",
+          "excludeFromFee(address,bool)",
+          "setSwapThreshold(uint256)",
+          "setMaxWalletAmount(uint256)",
+          "setMaxTransactionAmount(uint256)",
+          "enableTrading()",
+          "setMarketingAddressPercent(uint256)",
+          "setAutoLiquidityPercentPercent(uint256)"
+        ],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "constructor",
+            "contract": "MetaStocks",
+            "src": "contracts/MetaStocks.sol:64"
+          }
+        ],
+        "layout": {
+          "storage": [
+            {
+              "label": "_balances",
+              "offset": 0,
+              "slot": "0",
+              "type": "t_mapping(t_address,t_uint256)",
+              "contract": "ERC20",
+              "src": "@openzeppelin/contracts/token/ERC20/ERC20.sol:36"
+            },
+            {
+              "label": "_allowances",
+              "offset": 0,
+              "slot": "1",
+              "type": "t_mapping(t_address,t_mapping(t_address,t_uint256))",
+              "contract": "ERC20",
+              "src": "@openzeppelin/contracts/token/ERC20/ERC20.sol:38"
+            },
+            {
+              "label": "_totalSupply",
+              "offset": 0,
+              "slot": "2",
+              "type": "t_uint256",
+              "contract": "ERC20",
+              "src": "@openzeppelin/contracts/token/ERC20/ERC20.sol:40"
+            },
+            {
+              "label": "_name",
+              "offset": 0,
+              "slot": "3",
+              "type": "t_string_storage",
+              "contract": "ERC20",
+              "src": "@openzeppelin/contracts/token/ERC20/ERC20.sol:42"
+            },
+            {
+              "label": "_symbol",
+              "offset": 0,
+              "slot": "4",
+              "type": "t_string_storage",
+              "contract": "ERC20",
+              "src": "@openzeppelin/contracts/token/ERC20/ERC20.sol:43"
+            },
+            {
+              "label": "owner",
+              "offset": 0,
+              "slot": "5",
+              "type": "t_address",
+              "contract": "MetaStocks",
+              "src": "contracts/MetaStocks.sol:11"
+            },
+            {
+              "label": "DEAD",
+              "offset": 0,
+              "slot": "6",
+              "type": "t_address",
+              "contract": "MetaStocks",
+              "src": "contracts/MetaStocks.sol:12"
+            },
+            {
+              "label": "lpPair",
+              "offset": 0,
+              "slot": "7",
+              "type": "t_address",
+              "contract": "MetaStocks",
+              "src": "contracts/MetaStocks.sol:13"
+            },
+            {
+              "label": "swapTokenAddress",
+              "offset": 0,
+              "slot": "8",
+              "type": "t_address",
+              "contract": "MetaStocks",
+              "src": "contracts/MetaStocks.sol:14"
+            },
+            {
+              "label": "marketingAddress",
+              "offset": 0,
+              "slot": "9",
+              "type": "t_address",
+              "contract": "MetaStocks",
+              "src": "contracts/MetaStocks.sol:15"
+            },
+            {
+              "label": "swapThreshold",
+              "offset": 0,
+              "slot": "10",
+              "type": "t_uint256",
+              "contract": "MetaStocks",
+              "src": "contracts/MetaStocks.sol:18"
+            },
+            {
+              "label": "masterTaxDivisor",
+              "offset": 0,
+              "slot": "11",
+              "type": "t_uint256",
+              "contract": "MetaStocks",
+              "src": "contracts/MetaStocks.sol:19"
+            },
+            {
+              "label": "maxWalletAmount",
+              "offset": 0,
+              "slot": "12",
+              "type": "t_uint256",
+              "contract": "MetaStocks",
+              "src": "contracts/MetaStocks.sol:20"
+            },
+            {
+              "label": "marketingAddressPercent",
+              "offset": 0,
+              "slot": "13",
+              "type": "t_uint256",
+              "contract": "MetaStocks",
+              "src": "contracts/MetaStocks.sol:21"
+            },
+            {
+              "label": "autoLiquidityPercent",
+              "offset": 0,
+              "slot": "14",
+              "type": "t_uint256",
+              "contract": "MetaStocks",
+              "src": "contracts/MetaStocks.sol:22"
+            },
+            {
+              "label": "maxTransactionAmount",
+              "offset": 0,
+              "slot": "15",
+              "type": "t_uint256",
+              "contract": "MetaStocks",
+              "src": "contracts/MetaStocks.sol:23"
+            },
+            {
+              "label": "inSwap",
+              "offset": 0,
+              "slot": "16",
+              "type": "t_bool",
+              "contract": "MetaStocks",
+              "src": "contracts/MetaStocks.sol:26"
+            },
+            {
+              "label": "tradingEnabled",
+              "offset": 1,
+              "slot": "16",
+              "type": "t_bool",
+              "contract": "MetaStocks",
+              "src": "contracts/MetaStocks.sol:27"
+            },
+            {
+              "label": "_isExcludedFromFee",
+              "offset": 0,
+              "slot": "17",
+              "type": "t_mapping(t_address,t_bool)",
+              "contract": "MetaStocks",
+              "src": "contracts/MetaStocks.sol:30"
+            },
+            {
+              "label": "automatedMarketMakerPairs",
+              "offset": 0,
+              "slot": "18",
+              "type": "t_mapping(t_address,t_bool)",
+              "contract": "MetaStocks",
+              "src": "contracts/MetaStocks.sol:31"
+            },
+            {
+              "label": "dexRouter",
+              "offset": 0,
+              "slot": "19",
+              "type": "t_contract(IUniswapV2Router02)1169",
+              "contract": "MetaStocks",
+              "src": "contracts/MetaStocks.sol:48"
+            },
+            {
+              "label": "_feesRates",
+              "offset": 0,
+              "slot": "20",
+              "type": "t_struct(Fees)1230_storage",
+              "contract": "MetaStocks",
+              "src": "contracts/MetaStocks.sol:49"
+            }
+          ],
+          "types": {
+            "t_address": {
+              "label": "address",
+              "numberOfBytes": "20"
+            },
+            "t_bool": {
+              "label": "bool",
+              "numberOfBytes": "1"
+            },
+            "t_contract(IUniswapV2Router02)1169": {
+              "label": "contract IUniswapV2Router02",
+              "numberOfBytes": "20"
+            },
+            "t_mapping(t_address,t_bool)": {
+              "label": "mapping(address => bool)",
+              "numberOfBytes": "32"
+            },
+            "t_mapping(t_address,t_mapping(t_address,t_uint256))": {
+              "label": "mapping(address => mapping(address => uint256))",
+              "numberOfBytes": "32"
+            },
+            "t_mapping(t_address,t_uint256)": {
+              "label": "mapping(address => uint256)",
+              "numberOfBytes": "32"
+            },
+            "t_string_storage": {
+              "label": "string",
+              "numberOfBytes": "32"
+            },
+            "t_struct(Fees)1230_storage": {
+              "label": "struct MetaStocks.Fees",
+              "members": [
+                {
+                  "label": "buyFee",
+                  "type": "t_uint16",
+                  "offset": 0,
+                  "slot": "0"
+                },
+                {
+                  "label": "sellFee",
+                  "type": "t_uint16",
+                  "offset": 2,
+                  "slot": "0"
+                },
+                {
+                  "label": "transferFee",
+                  "type": "t_uint16",
+                  "offset": 4,
+                  "slot": "0"
+                }
+              ],
+              "numberOfBytes": "32"
+            },
+            "t_uint16": {
+              "label": "uint16",
+              "numberOfBytes": "2"
+            },
+            "t_uint256": {
+              "label": "uint256",
+              "numberOfBytes": "32"
+            }
+          },
+          "layoutVersion": "1.1",
+          "flat": true
+        }
+      }
+    },
+    {
+      "ERC20": {
+        "src": "@openzeppelin/contracts/token/ERC20/ERC20.sol:35",
+        "version": {
+          "withMetadata": "70ddb9b4058deb7b35dcfaf19f4ece2b87bf6016ce0a1cd22362c432e40eb408",
+          "withoutMetadata": "7eaf6e2da372192c65ae6dd6fa3ba2298f35fb14a7a18391f0b8200e2d1c6918",
+          "linkedWithoutMetadata": "7eaf6e2da372192c65ae6dd6fa3ba2298f35fb14a7a18391f0b8200e2d1c6918"
+        },
+        "inherit": [
+          "IERC20Metadata",
+          "IERC20",
+          "Context"
+        ],
+        "libraries": [],
+        "methods": [
+          "(string,string)",
+          "name()",
+          "symbol()",
+          "decimals()",
+          "totalSupply()",
+          "balanceOf(address)",
+          "transfer(address,uint256)",
+          "allowance(address,address)",
+          "approve(address,uint256)",
+          "transferFrom(address,address,uint256)",
+          "increaseAllowance(address,uint256)",
+          "decreaseAllowance(address,uint256)"
+        ],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "constructor",
+            "contract": "ERC20",
+            "src": "@openzeppelin/contracts/token/ERC20/ERC20.sol:54"
+          }
+        ],
+        "layout": {
+          "storage": [
+            {
+              "label": "_balances",
+              "offset": 0,
+              "slot": "0",
+              "type": "t_mapping(t_address,t_uint256)",
+              "contract": "ERC20",
+              "src": "@openzeppelin/contracts/token/ERC20/ERC20.sol:36"
+            },
+            {
+              "label": "_allowances",
+              "offset": 0,
+              "slot": "1",
+              "type": "t_mapping(t_address,t_mapping(t_address,t_uint256))",
+              "contract": "ERC20",
+              "src": "@openzeppelin/contracts/token/ERC20/ERC20.sol:38"
+            },
+            {
+              "label": "_totalSupply",
+              "offset": 0,
+              "slot": "2",
+              "type": "t_uint256",
+              "contract": "ERC20",
+              "src": "@openzeppelin/contracts/token/ERC20/ERC20.sol:40"
+            },
+            {
+              "label": "_name",
+              "offset": 0,
+              "slot": "3",
+              "type": "t_string_storage",
+              "contract": "ERC20",
+              "src": "@openzeppelin/contracts/token/ERC20/ERC20.sol:42"
+            },
+            {
+              "label": "_symbol",
+              "offset": 0,
+              "slot": "4",
+              "type": "t_string_storage",
+              "contract": "ERC20",
+              "src": "@openzeppelin/contracts/token/ERC20/ERC20.sol:43"
+            }
+          ],
+          "types": {
+            "t_address": {
+              "label": "address",
+              "numberOfBytes": "20"
+            },
+            "t_mapping(t_address,t_mapping(t_address,t_uint256))": {
+              "label": "mapping(address => mapping(address => uint256))",
+              "numberOfBytes": "32"
+            },
+            "t_mapping(t_address,t_uint256)": {
+              "label": "mapping(address => uint256)",
+              "numberOfBytes": "32"
+            },
+            "t_string_storage": {
+              "label": "string",
+              "numberOfBytes": "32"
+            },
+            "t_uint256": {
+              "label": "uint256",
+              "numberOfBytes": "32"
+            }
+          },
+          "layoutVersion": "1.1",
+          "flat": true
+        }
+      },
+      "IERC20": {
+        "src": "@openzeppelin/contracts/token/ERC20/IERC20.sol:9",
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "totalSupply()",
+          "balanceOf(address)",
+          "transfer(address,uint256)",
+          "allowance(address,address)",
+          "approve(address,uint256)",
+          "transferFrom(address,address,uint256)"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1",
+          "flat": false
+        }
+      },
+      "IERC20Metadata": {
+        "src": "@openzeppelin/contracts/token/ERC20/extensions/IERC20Metadata.sol:13",
+        "inherit": [
+          "IERC20"
+        ],
+        "libraries": [],
+        "methods": [
+          "name()",
+          "symbol()",
+          "decimals()"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1",
+          "flat": false
+        }
+      },
+      "Context": {
+        "src": "@openzeppelin/contracts/utils/Context.sol:16",
+        "inherit": [],
+        "libraries": [],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1",
+          "flat": false
+        }
+      },
+      "IUniswapV2Factory": {
+        "src": "@uniswap/v2-core/contracts/interfaces/IUniswapV2Factory.sol:4",
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "feeTo()",
+          "feeToSetter()",
+          "getPair(address,address)",
+          "allPairs(uint256)",
+          "allPairsLength()",
+          "createPair(address,address)",
+          "setFeeTo(address)",
+          "setFeeToSetter(address)"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1",
+          "flat": false
+        }
+      },
+      "IUniswapV2Router01": {
+        "src": "@uniswap/v2-periphery/contracts/interfaces/IUniswapV2Router01.sol:4",
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "factory()",
+          "WETH()",
+          "addLiquidity(address,address,uint256,uint256,uint256,uint256,address,uint256)",
+          "addLiquidityETH(address,uint256,uint256,uint256,address,uint256)",
+          "removeLiquidity(address,address,uint256,uint256,uint256,address,uint256)",
+          "removeLiquidityETH(address,uint256,uint256,uint256,address,uint256)",
+          "removeLiquidityWithPermit(address,address,uint256,uint256,uint256,address,uint256,bool,uint8,bytes32,bytes32)",
+          "removeLiquidityETHWithPermit(address,uint256,uint256,uint256,address,uint256,bool,uint8,bytes32,bytes32)",
+          "swapExactTokensForTokens(uint256,uint256,address[],address,uint256)",
+          "swapTokensForExactTokens(uint256,uint256,address[],address,uint256)",
+          "swapExactETHForTokens(uint256,address[],address,uint256)",
+          "swapTokensForExactETH(uint256,uint256,address[],address,uint256)",
+          "swapExactTokensForETH(uint256,uint256,address[],address,uint256)",
+          "swapETHForExactTokens(uint256,address[],address,uint256)",
+          "quote(uint256,uint256,uint256)",
+          "getAmountOut(uint256,uint256,uint256)",
+          "getAmountIn(uint256,uint256,uint256)",
+          "getAmountsOut(uint256,address[])",
+          "getAmountsIn(uint256,address[])"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1",
+          "flat": false
+        }
+      },
+      "IUniswapV2Router02": {
+        "src": "@uniswap/v2-periphery/contracts/interfaces/IUniswapV2Router02.sol:6",
+        "inherit": [
+          "IUniswapV2Router01"
+        ],
+        "libraries": [],
+        "methods": [
+          "removeLiquidityETHSupportingFeeOnTransferTokens(address,uint256,uint256,uint256,address,uint256)",
+          "removeLiquidityETHWithPermitSupportingFeeOnTransferTokens(address,uint256,uint256,uint256,address,uint256,bool,uint8,bytes32,bytes32)",
+          "swapExactTokensForTokensSupportingFeeOnTransferTokens(uint256,uint256,address[],address,uint256)",
+          "swapExactETHForTokensSupportingFeeOnTransferTokens(uint256,address[],address,uint256)",
+          "swapExactTokensForETHSupportingFeeOnTransferTokens(uint256,uint256,address[],address,uint256)"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1",
+          "flat": false
+        }
+      },
+      "MetaStocks": {
+        "src": "contracts/MetaStocks.sol:9",
+        "version": {
+          "withMetadata": "3caf79a459663793721e26b4f4123e961d2414604ea65366e61cd8327aa2e07e",
+          "withoutMetadata": "c810a03d8430b787e9dda146e6b6e7788ddbf81abd7355ad2955c1bbb13e9e39",
+          "linkedWithoutMetadata": "c810a03d8430b787e9dda146e6b6e7788ddbf81abd7355ad2955c1bbb13e9e39"
+        },
+        "inherit": [
+          "ERC20",
+          "IERC20Metadata",
+          "IERC20",
+          "Context"
+        ],
+        "libraries": [],
+        "methods": [
+          "()",
+          "()",
+          "getOwner()",
+          "setTaxes(uint16,uint16,uint16)",
+          "transferOwnership(address)",
+          "autoLiquidity(uint256)",
+          "burn(uint256)",
+          "setMarketingAddress(address)",
+          "isExcludedFromFee(address)",
+          "excludeFromFee(address,bool)",
+          "setSwapThreshold(uint256)",
+          "setMaxWalletAmount(uint256)",
+          "setMaxTransactionAmount(uint256)",
+          "enableTrading()",
+          "setMarketingAddressPercent(uint256)",
+          "setAutoLiquidityPercentPercent(uint256)"
+        ],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "constructor",
+            "contract": "MetaStocks",
+            "src": "contracts/MetaStocks.sol:64"
+          }
+        ],
+        "layout": {
+          "storage": [
+            {
+              "label": "_balances",
+              "offset": 0,
+              "slot": "0",
+              "type": "t_mapping(t_address,t_uint256)",
+              "contract": "ERC20",
+              "src": "@openzeppelin/contracts/token/ERC20/ERC20.sol:36"
+            },
+            {
+              "label": "_allowances",
+              "offset": 0,
+              "slot": "1",
+              "type": "t_mapping(t_address,t_mapping(t_address,t_uint256))",
+              "contract": "ERC20",
+              "src": "@openzeppelin/contracts/token/ERC20/ERC20.sol:38"
+            },
+            {
+              "label": "_totalSupply",
+              "offset": 0,
+              "slot": "2",
+              "type": "t_uint256",
+              "contract": "ERC20",
+              "src": "@openzeppelin/contracts/token/ERC20/ERC20.sol:40"
+            },
+            {
+              "label": "_name",
+              "offset": 0,
+              "slot": "3",
+              "type": "t_string_storage",
+              "contract": "ERC20",
+              "src": "@openzeppelin/contracts/token/ERC20/ERC20.sol:42"
+            },
+            {
+              "label": "_symbol",
+              "offset": 0,
+              "slot": "4",
+              "type": "t_string_storage",
+              "contract": "ERC20",
+              "src": "@openzeppelin/contracts/token/ERC20/ERC20.sol:43"
+            },
+            {
+              "label": "owner",
+              "offset": 0,
+              "slot": "5",
+              "type": "t_address",
+              "contract": "MetaStocks",
+              "src": "contracts/MetaStocks.sol:11"
+            },
+            {
+              "label": "DEAD",
+              "offset": 0,
+              "slot": "6",
+              "type": "t_address",
+              "contract": "MetaStocks",
+              "src": "contracts/MetaStocks.sol:12"
+            },
+            {
+              "label": "lpPair",
+              "offset": 0,
+              "slot": "7",
+              "type": "t_address",
+              "contract": "MetaStocks",
+              "src": "contracts/MetaStocks.sol:13"
+            },
+            {
+              "label": "swapTokenAddress",
+              "offset": 0,
+              "slot": "8",
+              "type": "t_address",
+              "contract": "MetaStocks",
+              "src": "contracts/MetaStocks.sol:14"
+            },
+            {
+              "label": "marketingAddress",
+              "offset": 0,
+              "slot": "9",
+              "type": "t_address",
+              "contract": "MetaStocks",
+              "src": "contracts/MetaStocks.sol:15"
+            },
+            {
+              "label": "swapThreshold",
+              "offset": 0,
+              "slot": "10",
+              "type": "t_uint256",
+              "contract": "MetaStocks",
+              "src": "contracts/MetaStocks.sol:18"
+            },
+            {
+              "label": "masterTaxDivisor",
+              "offset": 0,
+              "slot": "11",
+              "type": "t_uint256",
+              "contract": "MetaStocks",
+              "src": "contracts/MetaStocks.sol:19"
+            },
+            {
+              "label": "maxWalletAmount",
+              "offset": 0,
+              "slot": "12",
+              "type": "t_uint256",
+              "contract": "MetaStocks",
+              "src": "contracts/MetaStocks.sol:20"
+            },
+            {
+              "label": "marketingAddressPercent",
+              "offset": 0,
+              "slot": "13",
+              "type": "t_uint256",
+              "contract": "MetaStocks",
+              "src": "contracts/MetaStocks.sol:21"
+            },
+            {
+              "label": "autoLiquidityPercent",
+              "offset": 0,
+              "slot": "14",
+              "type": "t_uint256",
+              "contract": "MetaStocks",
+              "src": "contracts/MetaStocks.sol:22"
+            },
+            {
+              "label": "maxTransactionAmount",
+              "offset": 0,
+              "slot": "15",
+              "type": "t_uint256",
+              "contract": "MetaStocks",
+              "src": "contracts/MetaStocks.sol:23"
+            },
+            {
+              "label": "inSwap",
+              "offset": 0,
+              "slot": "16",
+              "type": "t_bool",
+              "contract": "MetaStocks",
+              "src": "contracts/MetaStocks.sol:26"
+            },
+            {
+              "label": "tradingEnabled",
+              "offset": 1,
+              "slot": "16",
+              "type": "t_bool",
+              "contract": "MetaStocks",
+              "src": "contracts/MetaStocks.sol:27"
+            },
+            {
+              "label": "_isExcludedFromFee",
+              "offset": 0,
+              "slot": "17",
+              "type": "t_mapping(t_address,t_bool)",
+              "contract": "MetaStocks",
+              "src": "contracts/MetaStocks.sol:30"
+            },
+            {
+              "label": "automatedMarketMakerPairs",
+              "offset": 0,
+              "slot": "18",
+              "type": "t_mapping(t_address,t_bool)",
+              "contract": "MetaStocks",
+              "src": "contracts/MetaStocks.sol:31"
+            },
+            {
+              "label": "dexRouter",
+              "offset": 0,
+              "slot": "19",
+              "type": "t_contract(IUniswapV2Router02)1169",
+              "contract": "MetaStocks",
+              "src": "contracts/MetaStocks.sol:48"
+            },
+            {
+              "label": "_feesRates",
+              "offset": 0,
+              "slot": "20",
+              "type": "t_struct(Fees)1230_storage",
+              "contract": "MetaStocks",
+              "src": "contracts/MetaStocks.sol:49"
+            }
+          ],
+          "types": {
+            "t_address": {
+              "label": "address",
+              "numberOfBytes": "20"
+            },
+            "t_bool": {
+              "label": "bool",
+              "numberOfBytes": "1"
+            },
+            "t_contract(IUniswapV2Router02)1169": {
+              "label": "contract IUniswapV2Router02",
+              "numberOfBytes": "20"
+            },
+            "t_mapping(t_address,t_bool)": {
+              "label": "mapping(address => bool)",
+              "numberOfBytes": "32"
+            },
+            "t_mapping(t_address,t_mapping(t_address,t_uint256))": {
+              "label": "mapping(address => mapping(address => uint256))",
+              "numberOfBytes": "32"
+            },
+            "t_mapping(t_address,t_uint256)": {
+              "label": "mapping(address => uint256)",
+              "numberOfBytes": "32"
+            },
+            "t_string_storage": {
+              "label": "string",
+              "numberOfBytes": "32"
+            },
+            "t_struct(Fees)1230_storage": {
+              "label": "struct MetaStocks.Fees",
+              "members": [
+                {
+                  "label": "buyFee",
+                  "type": "t_uint16",
+                  "offset": 0,
+                  "slot": "0"
+                },
+                {
+                  "label": "sellFee",
+                  "type": "t_uint16",
+                  "offset": 2,
+                  "slot": "0"
+                },
+                {
+                  "label": "transferFee",
+                  "type": "t_uint16",
+                  "offset": 4,
+                  "slot": "0"
+                }
+              ],
+              "numberOfBytes": "32"
+            },
+            "t_uint16": {
+              "label": "uint16",
+              "numberOfBytes": "2"
+            },
+            "t_uint256": {
+              "label": "uint256",
+              "numberOfBytes": "32"
+            }
+          },
+          "layoutVersion": "1.1",
+          "flat": true
+        }
+      }
+    },
+    {
+      "ERC20": {
+        "src": "@openzeppelin/contracts/token/ERC20/ERC20.sol:35",
+        "version": {
+          "withMetadata": "70ddb9b4058deb7b35dcfaf19f4ece2b87bf6016ce0a1cd22362c432e40eb408",
+          "withoutMetadata": "7eaf6e2da372192c65ae6dd6fa3ba2298f35fb14a7a18391f0b8200e2d1c6918",
+          "linkedWithoutMetadata": "7eaf6e2da372192c65ae6dd6fa3ba2298f35fb14a7a18391f0b8200e2d1c6918"
+        },
+        "inherit": [
+          "IERC20Metadata",
+          "IERC20",
+          "Context"
+        ],
+        "libraries": [],
+        "methods": [
+          "(string,string)",
+          "name()",
+          "symbol()",
+          "decimals()",
+          "totalSupply()",
+          "balanceOf(address)",
+          "transfer(address,uint256)",
+          "allowance(address,address)",
+          "approve(address,uint256)",
+          "transferFrom(address,address,uint256)",
+          "increaseAllowance(address,uint256)",
+          "decreaseAllowance(address,uint256)"
+        ],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "constructor",
+            "contract": "ERC20",
+            "src": "@openzeppelin/contracts/token/ERC20/ERC20.sol:54"
+          }
+        ],
+        "layout": {
+          "storage": [
+            {
+              "label": "_balances",
+              "offset": 0,
+              "slot": "0",
+              "type": "t_mapping(t_address,t_uint256)",
+              "contract": "ERC20",
+              "src": "@openzeppelin/contracts/token/ERC20/ERC20.sol:36"
+            },
+            {
+              "label": "_allowances",
+              "offset": 0,
+              "slot": "1",
+              "type": "t_mapping(t_address,t_mapping(t_address,t_uint256))",
+              "contract": "ERC20",
+              "src": "@openzeppelin/contracts/token/ERC20/ERC20.sol:38"
+            },
+            {
+              "label": "_totalSupply",
+              "offset": 0,
+              "slot": "2",
+              "type": "t_uint256",
+              "contract": "ERC20",
+              "src": "@openzeppelin/contracts/token/ERC20/ERC20.sol:40"
+            },
+            {
+              "label": "_name",
+              "offset": 0,
+              "slot": "3",
+              "type": "t_string_storage",
+              "contract": "ERC20",
+              "src": "@openzeppelin/contracts/token/ERC20/ERC20.sol:42"
+            },
+            {
+              "label": "_symbol",
+              "offset": 0,
+              "slot": "4",
+              "type": "t_string_storage",
+              "contract": "ERC20",
+              "src": "@openzeppelin/contracts/token/ERC20/ERC20.sol:43"
+            }
+          ],
+          "types": {
+            "t_address": {
+              "label": "address",
+              "numberOfBytes": "20"
+            },
+            "t_mapping(t_address,t_mapping(t_address,t_uint256))": {
+              "label": "mapping(address => mapping(address => uint256))",
+              "numberOfBytes": "32"
+            },
+            "t_mapping(t_address,t_uint256)": {
+              "label": "mapping(address => uint256)",
+              "numberOfBytes": "32"
+            },
+            "t_string_storage": {
+              "label": "string",
+              "numberOfBytes": "32"
+            },
+            "t_uint256": {
+              "label": "uint256",
+              "numberOfBytes": "32"
+            }
+          },
+          "layoutVersion": "1.1",
+          "flat": true
+        }
+      },
+      "IERC20": {
+        "src": "@openzeppelin/contracts/token/ERC20/IERC20.sol:9",
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "totalSupply()",
+          "balanceOf(address)",
+          "transfer(address,uint256)",
+          "allowance(address,address)",
+          "approve(address,uint256)",
+          "transferFrom(address,address,uint256)"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1",
+          "flat": false
+        }
+      },
+      "IERC20Metadata": {
+        "src": "@openzeppelin/contracts/token/ERC20/extensions/IERC20Metadata.sol:13",
+        "inherit": [
+          "IERC20"
+        ],
+        "libraries": [],
+        "methods": [
+          "name()",
+          "symbol()",
+          "decimals()"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1",
+          "flat": false
+        }
+      },
+      "Context": {
+        "src": "@openzeppelin/contracts/utils/Context.sol:16",
+        "inherit": [],
+        "libraries": [],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1",
+          "flat": false
+        }
+      },
+      "IUniswapV2Factory": {
+        "src": "@uniswap/v2-core/contracts/interfaces/IUniswapV2Factory.sol:4",
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "feeTo()",
+          "feeToSetter()",
+          "getPair(address,address)",
+          "allPairs(uint256)",
+          "allPairsLength()",
+          "createPair(address,address)",
+          "setFeeTo(address)",
+          "setFeeToSetter(address)"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1",
+          "flat": false
+        }
+      },
+      "IUniswapV2Router01": {
+        "src": "@uniswap/v2-periphery/contracts/interfaces/IUniswapV2Router01.sol:4",
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "factory()",
+          "WETH()",
+          "addLiquidity(address,address,uint256,uint256,uint256,uint256,address,uint256)",
+          "addLiquidityETH(address,uint256,uint256,uint256,address,uint256)",
+          "removeLiquidity(address,address,uint256,uint256,uint256,address,uint256)",
+          "removeLiquidityETH(address,uint256,uint256,uint256,address,uint256)",
+          "removeLiquidityWithPermit(address,address,uint256,uint256,uint256,address,uint256,bool,uint8,bytes32,bytes32)",
+          "removeLiquidityETHWithPermit(address,uint256,uint256,uint256,address,uint256,bool,uint8,bytes32,bytes32)",
+          "swapExactTokensForTokens(uint256,uint256,address[],address,uint256)",
+          "swapTokensForExactTokens(uint256,uint256,address[],address,uint256)",
+          "swapExactETHForTokens(uint256,address[],address,uint256)",
+          "swapTokensForExactETH(uint256,uint256,address[],address,uint256)",
+          "swapExactTokensForETH(uint256,uint256,address[],address,uint256)",
+          "swapETHForExactTokens(uint256,address[],address,uint256)",
+          "quote(uint256,uint256,uint256)",
+          "getAmountOut(uint256,uint256,uint256)",
+          "getAmountIn(uint256,uint256,uint256)",
+          "getAmountsOut(uint256,address[])",
+          "getAmountsIn(uint256,address[])"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1",
+          "flat": false
+        }
+      },
+      "IUniswapV2Router02": {
+        "src": "@uniswap/v2-periphery/contracts/interfaces/IUniswapV2Router02.sol:6",
+        "inherit": [
+          "IUniswapV2Router01"
+        ],
+        "libraries": [],
+        "methods": [
+          "removeLiquidityETHSupportingFeeOnTransferTokens(address,uint256,uint256,uint256,address,uint256)",
+          "removeLiquidityETHWithPermitSupportingFeeOnTransferTokens(address,uint256,uint256,uint256,address,uint256,bool,uint8,bytes32,bytes32)",
+          "swapExactTokensForTokensSupportingFeeOnTransferTokens(uint256,uint256,address[],address,uint256)",
+          "swapExactETHForTokensSupportingFeeOnTransferTokens(uint256,address[],address,uint256)",
+          "swapExactTokensForETHSupportingFeeOnTransferTokens(uint256,uint256,address[],address,uint256)"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1",
+          "flat": false
+        }
+      },
+      "MetaStocks": {
+        "src": "contracts/MetaStocks.sol:9",
+        "version": {
+          "withMetadata": "bdbbcde1452a3215f261a99bdc63e89baf8ec0227c8e9b10ac668c7321d09ef7",
+          "withoutMetadata": "953ed83df40e499eed6be6410272c05bb7590d4513faae8a11c63fe4798759f0",
+          "linkedWithoutMetadata": "953ed83df40e499eed6be6410272c05bb7590d4513faae8a11c63fe4798759f0"
+        },
+        "inherit": [
+          "ERC20",
+          "IERC20Metadata",
+          "IERC20",
+          "Context"
+        ],
+        "libraries": [],
+        "methods": [
+          "()",
+          "()",
+          "getOwner()",
+          "setTaxes(uint16,uint16,uint16)",
+          "transferOwnership(address)",
+          "autoLiquidity(uint256)",
+          "burn(uint256)",
+          "setMarketingAddress(address)",
+          "isExcludedFromFee(address)",
+          "excludeFromFee(address,bool)",
+          "setSwapThreshold(uint256)",
+          "setMaxWalletAmount(uint256)",
+          "setMaxTransactionAmount(uint256)",
+          "enableTrading()",
+          "setMarketingAddressPercent(uint256)",
+          "setAutoLiquidityPercentPercent(uint256)"
+        ],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "constructor",
+            "contract": "MetaStocks",
+            "src": "contracts/MetaStocks.sol:64"
+          }
+        ],
+        "layout": {
+          "storage": [
+            {
+              "label": "_balances",
+              "offset": 0,
+              "slot": "0",
+              "type": "t_mapping(t_address,t_uint256)",
+              "contract": "ERC20",
+              "src": "@openzeppelin/contracts/token/ERC20/ERC20.sol:36"
+            },
+            {
+              "label": "_allowances",
+              "offset": 0,
+              "slot": "1",
+              "type": "t_mapping(t_address,t_mapping(t_address,t_uint256))",
+              "contract": "ERC20",
+              "src": "@openzeppelin/contracts/token/ERC20/ERC20.sol:38"
+            },
+            {
+              "label": "_totalSupply",
+              "offset": 0,
+              "slot": "2",
+              "type": "t_uint256",
+              "contract": "ERC20",
+              "src": "@openzeppelin/contracts/token/ERC20/ERC20.sol:40"
+            },
+            {
+              "label": "_name",
+              "offset": 0,
+              "slot": "3",
+              "type": "t_string_storage",
+              "contract": "ERC20",
+              "src": "@openzeppelin/contracts/token/ERC20/ERC20.sol:42"
+            },
+            {
+              "label": "_symbol",
+              "offset": 0,
+              "slot": "4",
+              "type": "t_string_storage",
+              "contract": "ERC20",
+              "src": "@openzeppelin/contracts/token/ERC20/ERC20.sol:43"
+            },
+            {
+              "label": "owner",
+              "offset": 0,
+              "slot": "5",
+              "type": "t_address",
+              "contract": "MetaStocks",
+              "src": "contracts/MetaStocks.sol:11"
+            },
+            {
+              "label": "DEAD",
+              "offset": 0,
+              "slot": "6",
+              "type": "t_address",
+              "contract": "MetaStocks",
+              "src": "contracts/MetaStocks.sol:12"
+            },
+            {
+              "label": "lpPair",
+              "offset": 0,
+              "slot": "7",
+              "type": "t_address",
+              "contract": "MetaStocks",
+              "src": "contracts/MetaStocks.sol:13"
+            },
+            {
+              "label": "swapTokenAddress",
+              "offset": 0,
+              "slot": "8",
+              "type": "t_address",
+              "contract": "MetaStocks",
+              "src": "contracts/MetaStocks.sol:14"
+            },
+            {
+              "label": "marketingAddress",
+              "offset": 0,
+              "slot": "9",
+              "type": "t_address",
+              "contract": "MetaStocks",
+              "src": "contracts/MetaStocks.sol:15"
+            },
+            {
+              "label": "swapThreshold",
+              "offset": 0,
+              "slot": "10",
+              "type": "t_uint256",
+              "contract": "MetaStocks",
+              "src": "contracts/MetaStocks.sol:18"
+            },
+            {
+              "label": "masterTaxDivisor",
+              "offset": 0,
+              "slot": "11",
+              "type": "t_uint256",
+              "contract": "MetaStocks",
+              "src": "contracts/MetaStocks.sol:19"
+            },
+            {
+              "label": "maxWalletAmount",
+              "offset": 0,
+              "slot": "12",
+              "type": "t_uint256",
+              "contract": "MetaStocks",
+              "src": "contracts/MetaStocks.sol:20"
+            },
+            {
+              "label": "marketingAddressPercent",
+              "offset": 0,
+              "slot": "13",
+              "type": "t_uint256",
+              "contract": "MetaStocks",
+              "src": "contracts/MetaStocks.sol:21"
+            },
+            {
+              "label": "autoLiquidityPercent",
+              "offset": 0,
+              "slot": "14",
+              "type": "t_uint256",
+              "contract": "MetaStocks",
+              "src": "contracts/MetaStocks.sol:22"
+            },
+            {
+              "label": "maxTransactionAmount",
+              "offset": 0,
+              "slot": "15",
+              "type": "t_uint256",
+              "contract": "MetaStocks",
+              "src": "contracts/MetaStocks.sol:23"
+            },
+            {
+              "label": "inSwap",
+              "offset": 0,
+              "slot": "16",
+              "type": "t_bool",
+              "contract": "MetaStocks",
+              "src": "contracts/MetaStocks.sol:26"
+            },
+            {
+              "label": "tradingEnabled",
+              "offset": 1,
+              "slot": "16",
+              "type": "t_bool",
+              "contract": "MetaStocks",
+              "src": "contracts/MetaStocks.sol:27"
+            },
+            {
+              "label": "_isExcludedFromFee",
+              "offset": 0,
+              "slot": "17",
+              "type": "t_mapping(t_address,t_bool)",
+              "contract": "MetaStocks",
+              "src": "contracts/MetaStocks.sol:30"
+            },
+            {
+              "label": "automatedMarketMakerPairs",
+              "offset": 0,
+              "slot": "18",
+              "type": "t_mapping(t_address,t_bool)",
+              "contract": "MetaStocks",
+              "src": "contracts/MetaStocks.sol:31"
+            },
+            {
+              "label": "dexRouter",
+              "offset": 0,
+              "slot": "19",
+              "type": "t_contract(IUniswapV2Router02)1169",
+              "contract": "MetaStocks",
+              "src": "contracts/MetaStocks.sol:48"
+            },
+            {
+              "label": "_feesRates",
+              "offset": 0,
+              "slot": "20",
+              "type": "t_struct(Fees)1230_storage",
+              "contract": "MetaStocks",
+              "src": "contracts/MetaStocks.sol:49"
+            }
+          ],
+          "types": {
+            "t_address": {
+              "label": "address",
+              "numberOfBytes": "20"
+            },
+            "t_bool": {
+              "label": "bool",
+              "numberOfBytes": "1"
+            },
+            "t_contract(IUniswapV2Router02)1169": {
+              "label": "contract IUniswapV2Router02",
+              "numberOfBytes": "20"
+            },
+            "t_mapping(t_address,t_bool)": {
+              "label": "mapping(address => bool)",
+              "numberOfBytes": "32"
+            },
+            "t_mapping(t_address,t_mapping(t_address,t_uint256))": {
+              "label": "mapping(address => mapping(address => uint256))",
+              "numberOfBytes": "32"
+            },
+            "t_mapping(t_address,t_uint256)": {
+              "label": "mapping(address => uint256)",
+              "numberOfBytes": "32"
+            },
+            "t_string_storage": {
+              "label": "string",
+              "numberOfBytes": "32"
+            },
+            "t_struct(Fees)1230_storage": {
+              "label": "struct MetaStocks.Fees",
+              "members": [
+                {
+                  "label": "buyFee",
+                  "type": "t_uint16",
+                  "offset": 0,
+                  "slot": "0"
+                },
+                {
+                  "label": "sellFee",
+                  "type": "t_uint16",
+                  "offset": 2,
+                  "slot": "0"
+                },
+                {
+                  "label": "transferFee",
+                  "type": "t_uint16",
+                  "offset": 4,
+                  "slot": "0"
+                }
+              ],
+              "numberOfBytes": "32"
+            },
+            "t_uint16": {
+              "label": "uint16",
+              "numberOfBytes": "2"
+            },
+            "t_uint256": {
+              "label": "uint256",
+              "numberOfBytes": "32"
+            }
+          },
+          "layoutVersion": "1.1",
+          "flat": true
+        }
+      }
+    },
+    {
+      "ERC20": {
+        "src": "@openzeppelin/contracts/token/ERC20/ERC20.sol:35",
+        "version": {
+          "withMetadata": "70ddb9b4058deb7b35dcfaf19f4ece2b87bf6016ce0a1cd22362c432e40eb408",
+          "withoutMetadata": "7eaf6e2da372192c65ae6dd6fa3ba2298f35fb14a7a18391f0b8200e2d1c6918",
+          "linkedWithoutMetadata": "7eaf6e2da372192c65ae6dd6fa3ba2298f35fb14a7a18391f0b8200e2d1c6918"
+        },
+        "inherit": [
+          "IERC20Metadata",
+          "IERC20",
+          "Context"
+        ],
+        "libraries": [],
+        "methods": [
+          "(string,string)",
+          "name()",
+          "symbol()",
+          "decimals()",
+          "totalSupply()",
+          "balanceOf(address)",
+          "transfer(address,uint256)",
+          "allowance(address,address)",
+          "approve(address,uint256)",
+          "transferFrom(address,address,uint256)",
+          "increaseAllowance(address,uint256)",
+          "decreaseAllowance(address,uint256)"
+        ],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "constructor",
+            "contract": "ERC20",
+            "src": "@openzeppelin/contracts/token/ERC20/ERC20.sol:54"
+          }
+        ],
+        "layout": {
+          "storage": [
+            {
+              "label": "_balances",
+              "offset": 0,
+              "slot": "0",
+              "type": "t_mapping(t_address,t_uint256)",
+              "contract": "ERC20",
+              "src": "@openzeppelin/contracts/token/ERC20/ERC20.sol:36"
+            },
+            {
+              "label": "_allowances",
+              "offset": 0,
+              "slot": "1",
+              "type": "t_mapping(t_address,t_mapping(t_address,t_uint256))",
+              "contract": "ERC20",
+              "src": "@openzeppelin/contracts/token/ERC20/ERC20.sol:38"
+            },
+            {
+              "label": "_totalSupply",
+              "offset": 0,
+              "slot": "2",
+              "type": "t_uint256",
+              "contract": "ERC20",
+              "src": "@openzeppelin/contracts/token/ERC20/ERC20.sol:40"
+            },
+            {
+              "label": "_name",
+              "offset": 0,
+              "slot": "3",
+              "type": "t_string_storage",
+              "contract": "ERC20",
+              "src": "@openzeppelin/contracts/token/ERC20/ERC20.sol:42"
+            },
+            {
+              "label": "_symbol",
+              "offset": 0,
+              "slot": "4",
+              "type": "t_string_storage",
+              "contract": "ERC20",
+              "src": "@openzeppelin/contracts/token/ERC20/ERC20.sol:43"
+            }
+          ],
+          "types": {
+            "t_address": {
+              "label": "address",
+              "numberOfBytes": "20"
+            },
+            "t_mapping(t_address,t_mapping(t_address,t_uint256))": {
+              "label": "mapping(address => mapping(address => uint256))",
+              "numberOfBytes": "32"
+            },
+            "t_mapping(t_address,t_uint256)": {
+              "label": "mapping(address => uint256)",
+              "numberOfBytes": "32"
+            },
+            "t_string_storage": {
+              "label": "string",
+              "numberOfBytes": "32"
+            },
+            "t_uint256": {
+              "label": "uint256",
+              "numberOfBytes": "32"
+            }
+          },
+          "layoutVersion": "1.1",
+          "flat": true
+        }
+      },
+      "IERC20": {
+        "src": "@openzeppelin/contracts/token/ERC20/IERC20.sol:9",
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "totalSupply()",
+          "balanceOf(address)",
+          "transfer(address,uint256)",
+          "allowance(address,address)",
+          "approve(address,uint256)",
+          "transferFrom(address,address,uint256)"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1",
+          "flat": false
+        }
+      },
+      "IERC20Metadata": {
+        "src": "@openzeppelin/contracts/token/ERC20/extensions/IERC20Metadata.sol:13",
+        "inherit": [
+          "IERC20"
+        ],
+        "libraries": [],
+        "methods": [
+          "name()",
+          "symbol()",
+          "decimals()"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1",
+          "flat": false
+        }
+      },
+      "Context": {
+        "src": "@openzeppelin/contracts/utils/Context.sol:16",
+        "inherit": [],
+        "libraries": [],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1",
+          "flat": false
+        }
+      },
+      "IUniswapV2Factory": {
+        "src": "@uniswap/v2-core/contracts/interfaces/IUniswapV2Factory.sol:4",
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "feeTo()",
+          "feeToSetter()",
+          "getPair(address,address)",
+          "allPairs(uint256)",
+          "allPairsLength()",
+          "createPair(address,address)",
+          "setFeeTo(address)",
+          "setFeeToSetter(address)"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1",
+          "flat": false
+        }
+      },
+      "IUniswapV2Router01": {
+        "src": "@uniswap/v2-periphery/contracts/interfaces/IUniswapV2Router01.sol:4",
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "factory()",
+          "WETH()",
+          "addLiquidity(address,address,uint256,uint256,uint256,uint256,address,uint256)",
+          "addLiquidityETH(address,uint256,uint256,uint256,address,uint256)",
+          "removeLiquidity(address,address,uint256,uint256,uint256,address,uint256)",
+          "removeLiquidityETH(address,uint256,uint256,uint256,address,uint256)",
+          "removeLiquidityWithPermit(address,address,uint256,uint256,uint256,address,uint256,bool,uint8,bytes32,bytes32)",
+          "removeLiquidityETHWithPermit(address,uint256,uint256,uint256,address,uint256,bool,uint8,bytes32,bytes32)",
+          "swapExactTokensForTokens(uint256,uint256,address[],address,uint256)",
+          "swapTokensForExactTokens(uint256,uint256,address[],address,uint256)",
+          "swapExactETHForTokens(uint256,address[],address,uint256)",
+          "swapTokensForExactETH(uint256,uint256,address[],address,uint256)",
+          "swapExactTokensForETH(uint256,uint256,address[],address,uint256)",
+          "swapETHForExactTokens(uint256,address[],address,uint256)",
+          "quote(uint256,uint256,uint256)",
+          "getAmountOut(uint256,uint256,uint256)",
+          "getAmountIn(uint256,uint256,uint256)",
+          "getAmountsOut(uint256,address[])",
+          "getAmountsIn(uint256,address[])"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1",
+          "flat": false
+        }
+      },
+      "IUniswapV2Router02": {
+        "src": "@uniswap/v2-periphery/contracts/interfaces/IUniswapV2Router02.sol:6",
+        "inherit": [
+          "IUniswapV2Router01"
+        ],
+        "libraries": [],
+        "methods": [
+          "removeLiquidityETHSupportingFeeOnTransferTokens(address,uint256,uint256,uint256,address,uint256)",
+          "removeLiquidityETHWithPermitSupportingFeeOnTransferTokens(address,uint256,uint256,uint256,address,uint256,bool,uint8,bytes32,bytes32)",
+          "swapExactTokensForTokensSupportingFeeOnTransferTokens(uint256,uint256,address[],address,uint256)",
+          "swapExactETHForTokensSupportingFeeOnTransferTokens(uint256,address[],address,uint256)",
+          "swapExactTokensForETHSupportingFeeOnTransferTokens(uint256,uint256,address[],address,uint256)"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1",
+          "flat": false
+        }
+      },
+      "MetaStocks": {
+        "src": "contracts/MetaStocks.sol:9",
+        "version": {
+          "withMetadata": "ad1bb03f2299db741b535ca8733c049dbc36283b54ea460f2e15d734b757f61b",
+          "withoutMetadata": "42a51a64c07b330e88b6b1fbcec0e70ea3fe380ff4b176d8095cae68f9bc6acc",
+          "linkedWithoutMetadata": "42a51a64c07b330e88b6b1fbcec0e70ea3fe380ff4b176d8095cae68f9bc6acc"
+        },
+        "inherit": [
+          "ERC20",
+          "IERC20Metadata",
+          "IERC20",
+          "Context"
+        ],
+        "libraries": [],
+        "methods": [
+          "()",
+          "()",
+          "getOwner()",
+          "setTaxes(uint16,uint16,uint16)",
+          "transferOwnership(address)",
+          "autoLiquidity(uint256)",
+          "burn(uint256)",
+          "setMarketingAddress(address)",
+          "isExcludedFromFee(address)",
+          "excludeFromFee(address,bool)",
+          "setSwapThreshold(uint256)",
+          "setMaxWalletAmount(uint256)",
+          "setMaxTransactionAmount(uint256)",
+          "enableTrading()",
+          "setMarketingAddressPercent(uint256)",
+          "setAutoLiquidityPercentPercent(uint256)"
+        ],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "constructor",
+            "contract": "MetaStocks",
+            "src": "contracts/MetaStocks.sol:64"
+          }
+        ],
+        "layout": {
+          "storage": [
+            {
+              "label": "_balances",
+              "offset": 0,
+              "slot": "0",
+              "type": "t_mapping(t_address,t_uint256)",
+              "contract": "ERC20",
+              "src": "@openzeppelin/contracts/token/ERC20/ERC20.sol:36"
+            },
+            {
+              "label": "_allowances",
+              "offset": 0,
+              "slot": "1",
+              "type": "t_mapping(t_address,t_mapping(t_address,t_uint256))",
+              "contract": "ERC20",
+              "src": "@openzeppelin/contracts/token/ERC20/ERC20.sol:38"
+            },
+            {
+              "label": "_totalSupply",
+              "offset": 0,
+              "slot": "2",
+              "type": "t_uint256",
+              "contract": "ERC20",
+              "src": "@openzeppelin/contracts/token/ERC20/ERC20.sol:40"
+            },
+            {
+              "label": "_name",
+              "offset": 0,
+              "slot": "3",
+              "type": "t_string_storage",
+              "contract": "ERC20",
+              "src": "@openzeppelin/contracts/token/ERC20/ERC20.sol:42"
+            },
+            {
+              "label": "_symbol",
+              "offset": 0,
+              "slot": "4",
+              "type": "t_string_storage",
+              "contract": "ERC20",
+              "src": "@openzeppelin/contracts/token/ERC20/ERC20.sol:43"
+            },
+            {
+              "label": "owner",
+              "offset": 0,
+              "slot": "5",
+              "type": "t_address",
+              "contract": "MetaStocks",
+              "src": "contracts/MetaStocks.sol:11"
+            },
+            {
+              "label": "DEAD",
+              "offset": 0,
+              "slot": "6",
+              "type": "t_address",
+              "contract": "MetaStocks",
+              "src": "contracts/MetaStocks.sol:12"
+            },
+            {
+              "label": "lpPair",
+              "offset": 0,
+              "slot": "7",
+              "type": "t_address",
+              "contract": "MetaStocks",
+              "src": "contracts/MetaStocks.sol:13"
+            },
+            {
+              "label": "swapTokenAddress",
+              "offset": 0,
+              "slot": "8",
+              "type": "t_address",
+              "contract": "MetaStocks",
+              "src": "contracts/MetaStocks.sol:14"
+            },
+            {
+              "label": "marketingAddress",
+              "offset": 0,
+              "slot": "9",
+              "type": "t_address",
+              "contract": "MetaStocks",
+              "src": "contracts/MetaStocks.sol:15"
+            },
+            {
+              "label": "swapThreshold",
+              "offset": 0,
+              "slot": "10",
+              "type": "t_uint256",
+              "contract": "MetaStocks",
+              "src": "contracts/MetaStocks.sol:18"
+            },
+            {
+              "label": "masterTaxDivisor",
+              "offset": 0,
+              "slot": "11",
+              "type": "t_uint256",
+              "contract": "MetaStocks",
+              "src": "contracts/MetaStocks.sol:19"
+            },
+            {
+              "label": "maxWalletAmount",
+              "offset": 0,
+              "slot": "12",
+              "type": "t_uint256",
+              "contract": "MetaStocks",
+              "src": "contracts/MetaStocks.sol:20"
+            },
+            {
+              "label": "marketingAddressPercent",
+              "offset": 0,
+              "slot": "13",
+              "type": "t_uint256",
+              "contract": "MetaStocks",
+              "src": "contracts/MetaStocks.sol:21"
+            },
+            {
+              "label": "autoLiquidityPercent",
+              "offset": 0,
+              "slot": "14",
+              "type": "t_uint256",
+              "contract": "MetaStocks",
+              "src": "contracts/MetaStocks.sol:22"
+            },
+            {
+              "label": "maxTransactionAmount",
+              "offset": 0,
+              "slot": "15",
+              "type": "t_uint256",
+              "contract": "MetaStocks",
+              "src": "contracts/MetaStocks.sol:23"
+            },
+            {
+              "label": "inSwap",
+              "offset": 0,
+              "slot": "16",
+              "type": "t_bool",
+              "contract": "MetaStocks",
+              "src": "contracts/MetaStocks.sol:26"
+            },
+            {
+              "label": "tradingEnabled",
+              "offset": 1,
+              "slot": "16",
+              "type": "t_bool",
+              "contract": "MetaStocks",
+              "src": "contracts/MetaStocks.sol:27"
+            },
+            {
+              "label": "_isExcludedFromFee",
+              "offset": 0,
+              "slot": "17",
+              "type": "t_mapping(t_address,t_bool)",
+              "contract": "MetaStocks",
+              "src": "contracts/MetaStocks.sol:30"
+            },
+            {
+              "label": "automatedMarketMakerPairs",
+              "offset": 0,
+              "slot": "18",
+              "type": "t_mapping(t_address,t_bool)",
+              "contract": "MetaStocks",
+              "src": "contracts/MetaStocks.sol:31"
+            },
+            {
+              "label": "dexRouter",
+              "offset": 0,
+              "slot": "19",
+              "type": "t_contract(IUniswapV2Router02)1169",
+              "contract": "MetaStocks",
+              "src": "contracts/MetaStocks.sol:48"
+            },
+            {
+              "label": "_feesRates",
+              "offset": 0,
+              "slot": "20",
+              "type": "t_struct(Fees)1230_storage",
+              "contract": "MetaStocks",
+              "src": "contracts/MetaStocks.sol:49"
+            }
+          ],
+          "types": {
+            "t_address": {
+              "label": "address",
+              "numberOfBytes": "20"
+            },
+            "t_bool": {
+              "label": "bool",
+              "numberOfBytes": "1"
+            },
+            "t_contract(IUniswapV2Router02)1169": {
+              "label": "contract IUniswapV2Router02",
+              "numberOfBytes": "20"
+            },
+            "t_mapping(t_address,t_bool)": {
+              "label": "mapping(address => bool)",
+              "numberOfBytes": "32"
+            },
+            "t_mapping(t_address,t_mapping(t_address,t_uint256))": {
+              "label": "mapping(address => mapping(address => uint256))",
+              "numberOfBytes": "32"
+            },
+            "t_mapping(t_address,t_uint256)": {
+              "label": "mapping(address => uint256)",
+              "numberOfBytes": "32"
+            },
+            "t_string_storage": {
+              "label": "string",
+              "numberOfBytes": "32"
+            },
+            "t_struct(Fees)1230_storage": {
+              "label": "struct MetaStocks.Fees",
+              "members": [
+                {
+                  "label": "buyFee",
+                  "type": "t_uint16",
+                  "offset": 0,
+                  "slot": "0"
+                },
+                {
+                  "label": "sellFee",
+                  "type": "t_uint16",
+                  "offset": 2,
+                  "slot": "0"
+                },
+                {
+                  "label": "transferFee",
+                  "type": "t_uint16",
+                  "offset": 4,
+                  "slot": "0"
+                }
+              ],
+              "numberOfBytes": "32"
+            },
+            "t_uint16": {
+              "label": "uint16",
+              "numberOfBytes": "2"
+            },
+            "t_uint256": {
+              "label": "uint256",
+              "numberOfBytes": "32"
+            }
+          },
+          "layoutVersion": "1.1",
+          "flat": true
+        }
+      }
+    },
+    {
+      "IERC20": {
+        "src": "contracts/BSC Testnet Connections/PancakeRouter.sol:353",
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "name()",
+          "symbol()",
+          "decimals()",
+          "totalSupply()",
+          "balanceOf(address)",
+          "allowance(address,address)",
+          "approve(address,uint256)",
+          "transfer(address,uint256)",
+          "transferFrom(address,address,uint256)"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1",
+          "flat": false
+        }
+      },
+      "IPancakeFactory": {
+        "src": "contracts/BSC Testnet Connections/PancakeRouter.sol:8",
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "feeTo()",
+          "feeToSetter()",
+          "getPair(address,address)",
+          "allPairs(uint256)",
+          "allPairsLength()",
+          "createPair(address,address)",
+          "setFeeTo(address)",
+          "setFeeToSetter(address)"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1",
+          "flat": false
+        }
+      },
+      "IPancakePair": {
+        "src": "contracts/BSC Testnet Connections/PancakeRouter.sol:208",
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "name()",
+          "symbol()",
+          "decimals()",
+          "totalSupply()",
+          "balanceOf(address)",
+          "allowance(address,address)",
+          "approve(address,uint256)",
+          "transfer(address,uint256)",
+          "transferFrom(address,address,uint256)",
+          "DOMAIN_SEPARATOR()",
+          "PERMIT_TYPEHASH()",
+          "nonces(address)",
+          "permit(address,address,uint256,uint256,uint8,bytes32,bytes32)",
+          "MINIMUM_LIQUIDITY()",
+          "factory()",
+          "token0()",
+          "token1()",
+          "getReserves()",
+          "price0CumulativeLast()",
+          "price1CumulativeLast()",
+          "kLast()",
+          "mint(address)",
+          "burn(address)",
+          "swap(uint256,uint256,address,bytes)",
+          "skim(address)",
+          "sync()",
+          "initialize(address,address)"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1",
+          "flat": false
+        }
+      },
+      "IPancakeRouter01": {
+        "src": "contracts/BSC Testnet Connections/PancakeRouter.sol:73",
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "factory()",
+          "WETH()",
+          "addLiquidity(address,address,uint256,uint256,uint256,uint256,address,uint256)",
+          "addLiquidityETH(address,uint256,uint256,uint256,address,uint256)",
+          "removeLiquidity(address,address,uint256,uint256,uint256,address,uint256)",
+          "removeLiquidityETH(address,uint256,uint256,uint256,address,uint256)",
+          "removeLiquidityWithPermit(address,address,uint256,uint256,uint256,address,uint256,bool,uint8,bytes32,bytes32)",
+          "removeLiquidityETHWithPermit(address,uint256,uint256,uint256,address,uint256,bool,uint8,bytes32,bytes32)",
+          "swapExactTokensForTokens(uint256,uint256,address[],address,uint256)",
+          "swapTokensForExactTokens(uint256,uint256,address[],address,uint256)",
+          "swapExactETHForTokens(uint256,address[],address,uint256)",
+          "swapTokensForExactETH(uint256,uint256,address[],address,uint256)",
+          "swapExactTokensForETH(uint256,uint256,address[],address,uint256)",
+          "swapETHForExactTokens(uint256,address[],address,uint256)",
+          "quote(uint256,uint256,uint256)",
+          "getAmountOut(uint256,uint256,uint256)",
+          "getAmountIn(uint256,uint256,uint256)",
+          "getAmountsOut(uint256,address[])",
+          "getAmountsIn(uint256,address[])"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1",
+          "flat": false
+        }
+      },
+      "IPancakeRouter02": {
+        "src": "contracts/BSC Testnet Connections/PancakeRouter.sol:167",
+        "inherit": [
+          "IPancakeRouter01"
+        ],
+        "libraries": [],
+        "methods": [
+          "removeLiquidityETHSupportingFeeOnTransferTokens(address,uint256,uint256,uint256,address,uint256)",
+          "removeLiquidityETHWithPermitSupportingFeeOnTransferTokens(address,uint256,uint256,uint256,address,uint256,bool,uint8,bytes32,bytes32)",
+          "swapExactTokensForTokensSupportingFeeOnTransferTokens(uint256,uint256,address[],address,uint256)",
+          "swapExactETHForTokensSupportingFeeOnTransferTokens(uint256,address[],address,uint256)",
+          "swapExactTokensForETHSupportingFeeOnTransferTokens(uint256,uint256,address[],address,uint256)"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1",
+          "flat": false
+        }
+      },
+      "IWETH": {
+        "src": "contracts/BSC Testnet Connections/PancakeRouter.sol:369",
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "deposit()",
+          "transfer(address,uint256)",
+          "withdraw(uint256)"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1",
+          "flat": false
+        }
+      },
+      "PancakeLibrary": {
+        "src": "contracts/BSC Testnet Connections/PancakeRouter.sol:274",
+        "version": {
+          "withMetadata": "175122e74c6a2448b508fe28b34cb5e46729cf7175a675555c5683eb7e4f28f2",
+          "withoutMetadata": "aaa148c474cd10e1a6cd0a52c0b55f1aa9b7bb7b42d7f1cb5acaea4f42f04bc8",
+          "linkedWithoutMetadata": "aaa148c474cd10e1a6cd0a52c0b55f1aa9b7bb7b42d7f1cb5acaea4f42f04bc8"
+        },
+        "inherit": [],
+        "libraries": [
+          "SafeMath"
+        ],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1",
+          "flat": false
+        }
+      },
+      "PancakeRouter": {
+        "src": "contracts/BSC Testnet Connections/PancakeRouter.sol:375",
+        "version": {
+          "withMetadata": "3f7fbed8aec2d38c920a1f035963ea0bc34beea699ee8a3a9e491544503fa4e4",
+          "withoutMetadata": "fe9a515a7e2825d1136d3c7bd0156f08767310d3c9241635cfa7255885a73866",
+          "linkedWithoutMetadata": "fe9a515a7e2825d1136d3c7bd0156f08767310d3c9241635cfa7255885a73866"
+        },
+        "inherit": [
+          "IPancakeRouter02",
+          "IPancakeRouter01"
+        ],
+        "libraries": [
+          "SafeMath",
+          "PancakeLibrary",
+          "TransferHelper"
+        ],
+        "methods": [
+          "(address,address)",
+          "()",
+          "addLiquidity(address,address,uint256,uint256,uint256,uint256,address,uint256)",
+          "addLiquidityETH(address,uint256,uint256,uint256,address,uint256)",
+          "removeLiquidity(address,address,uint256,uint256,uint256,address,uint256)",
+          "removeLiquidityETH(address,uint256,uint256,uint256,address,uint256)",
+          "removeLiquidityWithPermit(address,address,uint256,uint256,uint256,address,uint256,bool,uint8,bytes32,bytes32)",
+          "removeLiquidityETHWithPermit(address,uint256,uint256,uint256,address,uint256,bool,uint8,bytes32,bytes32)",
+          "removeLiquidityETHSupportingFeeOnTransferTokens(address,uint256,uint256,uint256,address,uint256)",
+          "removeLiquidityETHWithPermitSupportingFeeOnTransferTokens(address,uint256,uint256,uint256,address,uint256,bool,uint8,bytes32,bytes32)",
+          "swapExactTokensForTokens(uint256,uint256,address[],address,uint256)",
+          "swapTokensForExactTokens(uint256,uint256,address[],address,uint256)",
+          "swapExactETHForTokens(uint256,address[],address,uint256)",
+          "swapTokensForExactETH(uint256,uint256,address[],address,uint256)",
+          "swapExactTokensForETH(uint256,uint256,address[],address,uint256)",
+          "swapETHForExactTokens(uint256,address[],address,uint256)",
+          "swapExactTokensForTokensSupportingFeeOnTransferTokens(uint256,uint256,address[],address,uint256)",
+          "swapExactETHForTokensSupportingFeeOnTransferTokens(uint256,address[],address,uint256)",
+          "swapExactTokensForETHSupportingFeeOnTransferTokens(uint256,uint256,address[],address,uint256)",
+          "quote(uint256,uint256,uint256)",
+          "getAmountOut(uint256,uint256,uint256)",
+          "getAmountIn(uint256,uint256,uint256)",
+          "getAmountsOut(uint256,address[])",
+          "getAmountsIn(uint256,address[])"
+        ],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "constructor",
+            "contract": "PancakeRouter",
+            "src": "contracts/BSC Testnet Connections/PancakeRouter.sol:386"
+          },
+          {
+            "kind": "state-variable-immutable",
+            "name": "factory",
+            "src": "contracts/BSC Testnet Connections/PancakeRouter.sol:378"
+          },
+          {
+            "kind": "state-variable-immutable",
+            "name": "WETH",
+            "src": "contracts/BSC Testnet Connections/PancakeRouter.sol:379"
+          }
+        ],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1",
+          "flat": false
+        }
+      },
+      "SafeMath": {
+        "src": "contracts/BSC Testnet Connections/PancakeRouter.sol:260",
+        "version": {
+          "withMetadata": "e8bb2503e05100c408121c50f1a6d6e201896f677f8c21cead2a1616e8b96ac4",
+          "withoutMetadata": "aaa148c474cd10e1a6cd0a52c0b55f1aa9b7bb7b42d7f1cb5acaea4f42f04bc8",
+          "linkedWithoutMetadata": "aaa148c474cd10e1a6cd0a52c0b55f1aa9b7bb7b42d7f1cb5acaea4f42f04bc8"
+        },
+        "inherit": [],
+        "libraries": [],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1",
+          "flat": false
+        }
+      },
+      "TransferHelper": {
+        "src": "contracts/BSC Testnet Connections/PancakeRouter.sol:26",
+        "version": {
+          "withMetadata": "80102c522c8e3f23b21b3394fb25769812355038601408c5b3a0c89fe9111219",
+          "withoutMetadata": "aaa148c474cd10e1a6cd0a52c0b55f1aa9b7bb7b42d7f1cb5acaea4f42f04bc8",
+          "linkedWithoutMetadata": "aaa148c474cd10e1a6cd0a52c0b55f1aa9b7bb7b42d7f1cb5acaea4f42f04bc8"
+        },
+        "inherit": [],
+        "libraries": [],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1",
+          "flat": false
+        }
+      }
+    },
+    {
+      "BEP20Token": {
+        "src": "contracts/BSC Testnet Connections/BEP20Token.sol:347",
+        "version": {
+          "withMetadata": "ea872a728bf16c8ad89facdb2b0125b9ab7f9d77fd64342a43b9d96aba778038",
+          "withoutMetadata": "d6ec17d7f9b6e119f2b1a758e4f737e830093153b5714697e0ac56791d942c67",
+          "linkedWithoutMetadata": "d6ec17d7f9b6e119f2b1a758e4f737e830093153b5714697e0ac56791d942c67"
+        },
+        "inherit": [
+          "Ownable",
+          "IBEP20",
+          "Context"
+        ],
+        "libraries": [
+          "SafeMath"
+        ],
+        "methods": [
+          "()",
+          "getOwner()",
+          "decimals()",
+          "symbol()",
+          "name()",
+          "totalSupply()",
+          "balanceOf(address)",
+          "transfer(address,uint256)",
+          "allowance(address,address)",
+          "approve(address,uint256)",
+          "transferFrom(address,address,uint256)",
+          "increaseAllowance(address,uint256)",
+          "decreaseAllowance(address,uint256)",
+          "mint(uint256)",
+          "burn(uint256)"
+        ],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "constructor",
+            "contract": "BEP20Token",
+            "src": "contracts/BSC Testnet Connections/BEP20Token.sol:359"
+          }
+        ],
+        "layout": {
+          "storage": [
+            {
+              "label": "_owner",
+              "offset": 0,
+              "slot": "0",
+              "type": "t_address",
+              "contract": "Ownable",
+              "src": "contracts/BSC Testnet Connections/BEP20Token.sol:289"
+            },
+            {
+              "label": "_balances",
+              "offset": 0,
+              "slot": "1",
+              "type": "t_mapping(t_address,t_uint256)",
+              "contract": "BEP20Token",
+              "src": "contracts/BSC Testnet Connections/BEP20Token.sol:350"
+            },
+            {
+              "label": "_allowances",
+              "offset": 0,
+              "slot": "2",
+              "type": "t_mapping(t_address,t_mapping(t_address,t_uint256))",
+              "contract": "BEP20Token",
+              "src": "contracts/BSC Testnet Connections/BEP20Token.sol:352"
+            },
+            {
+              "label": "_totalSupply",
+              "offset": 0,
+              "slot": "3",
+              "type": "t_uint256",
+              "contract": "BEP20Token",
+              "src": "contracts/BSC Testnet Connections/BEP20Token.sol:354"
+            },
+            {
+              "label": "_decimals",
+              "offset": 0,
+              "slot": "4",
+              "type": "t_uint8",
+              "contract": "BEP20Token",
+              "src": "contracts/BSC Testnet Connections/BEP20Token.sol:355"
+            },
+            {
+              "label": "_symbol",
+              "offset": 0,
+              "slot": "5",
+              "type": "t_string_storage",
+              "contract": "BEP20Token",
+              "src": "contracts/BSC Testnet Connections/BEP20Token.sol:356"
+            },
+            {
+              "label": "_name",
+              "offset": 0,
+              "slot": "6",
+              "type": "t_string_storage",
+              "contract": "BEP20Token",
+              "src": "contracts/BSC Testnet Connections/BEP20Token.sol:357"
+            }
+          ],
+          "types": {
+            "t_address": {
+              "label": "address",
+              "numberOfBytes": "20"
+            },
+            "t_mapping(t_address,t_mapping(t_address,t_uint256))": {
+              "label": "mapping(address => mapping(address => uint256))",
+              "numberOfBytes": "32"
+            },
+            "t_mapping(t_address,t_uint256)": {
+              "label": "mapping(address => uint256)",
+              "numberOfBytes": "32"
+            },
+            "t_string_storage": {
+              "label": "string",
+              "numberOfBytes": "32"
+            },
+            "t_uint256": {
+              "label": "uint256",
+              "numberOfBytes": "32"
+            },
+            "t_uint8": {
+              "label": "uint8",
+              "numberOfBytes": "1"
+            }
+          },
+          "layoutVersion": "1.1",
+          "flat": true
+        }
+      },
+      "Context": {
+        "src": "contracts/BSC Testnet Connections/BEP20Token.sol:112",
+        "inherit": [],
+        "libraries": [],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1",
+          "flat": false
+        }
+      },
+      "IBEP20": {
+        "src": "contracts/BSC Testnet Connections/BEP20Token.sol:11",
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "totalSupply()",
+          "decimals()",
+          "symbol()",
+          "name()",
+          "getOwner()",
+          "balanceOf(address)",
+          "transfer(address,uint256)",
+          "allowance(address,address)",
+          "approve(address,uint256)",
+          "transferFrom(address,address,uint256)"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1",
+          "flat": false
+        }
+      },
+      "Ownable": {
+        "src": "contracts/BSC Testnet Connections/BEP20Token.sol:288",
+        "inherit": [
+          "Context"
+        ],
+        "libraries": [],
+        "methods": [
+          "owner()",
+          "renounceOwnership()",
+          "transferOwnership(address)"
+        ],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "constructor",
+            "contract": "Ownable",
+            "src": "contracts/BSC Testnet Connections/BEP20Token.sol:296"
+          }
+        ],
+        "layout": {
+          "storage": [
+            {
+              "label": "_owner",
+              "offset": 0,
+              "slot": "0",
+              "type": "t_address",
+              "contract": "Ownable",
+              "src": "contracts/BSC Testnet Connections/BEP20Token.sol:289"
+            }
+          ],
+          "types": {
+            "t_address": {
+              "label": "address",
+              "numberOfBytes": "20"
+            }
+          },
+          "layoutVersion": "1.1",
+          "flat": true
+        }
+      },
+      "SafeMath": {
+        "src": "contracts/BSC Testnet Connections/PancakeFactory.sol:98",
+        "version": {
+          "withMetadata": "e774f782a37263f644871c47f47523deeb77ed6e37645b8b797a9ef4e0e5b3ff",
+          "withoutMetadata": "84fb217c68f538a0f01a573a7f9b991a4d3395eb699ba1c1542256b37f46c48b",
+          "linkedWithoutMetadata": "84fb217c68f538a0f01a573a7f9b991a4d3395eb699ba1c1542256b37f46c48b"
+        },
+        "inherit": [],
+        "libraries": [],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1",
+          "flat": false
+        }
+      },
+      "IERC20": {
+        "src": "contracts/BSC Testnet Connections/PancakeFactory.sol:240",
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "name()",
+          "symbol()",
+          "decimals()",
+          "totalSupply()",
+          "balanceOf(address)",
+          "allowance(address,address)",
+          "approve(address,uint256)",
+          "transfer(address,uint256)",
+          "transferFrom(address,address,uint256)"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1",
+          "flat": false
+        }
+      },
+      "IPancakeCallee": {
+        "src": "contracts/BSC Testnet Connections/PancakeFactory.sol:256",
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "pancakeCall(address,uint256,uint256,bytes)"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1",
+          "flat": false
+        }
+      },
+      "IPancakeERC20": {
+        "src": "contracts/BSC Testnet Connections/PancakeFactory.sol:75",
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "name()",
+          "symbol()",
+          "decimals()",
+          "totalSupply()",
+          "balanceOf(address)",
+          "allowance(address,address)",
+          "approve(address,uint256)",
+          "transfer(address,uint256)",
+          "transferFrom(address,address,uint256)",
+          "DOMAIN_SEPARATOR()",
+          "PERMIT_TYPEHASH()",
+          "nonces(address)",
+          "permit(address,address,uint256,uint256,uint8,bytes32,bytes32)"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1",
+          "flat": false
+        }
+      },
+      "IPancakeFactory": {
+        "src": "contracts/BSC Testnet Connections/PancakeFactory.sol:8",
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "feeTo()",
+          "feeToSetter()",
+          "getPair(address,address)",
+          "allPairs(uint256)",
+          "allPairsLength()",
+          "createPair(address,address)",
+          "setFeeTo(address)",
+          "setFeeToSetter(address)"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1",
+          "flat": false
+        }
+      },
+      "IPancakePair": {
+        "src": "contracts/BSC Testnet Connections/PancakeFactory.sol:24",
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "name()",
+          "symbol()",
+          "decimals()",
+          "totalSupply()",
+          "balanceOf(address)",
+          "allowance(address,address)",
+          "approve(address,uint256)",
+          "transfer(address,uint256)",
+          "transferFrom(address,address,uint256)",
+          "DOMAIN_SEPARATOR()",
+          "PERMIT_TYPEHASH()",
+          "nonces(address)",
+          "permit(address,address,uint256,uint256,uint8,bytes32,bytes32)",
+          "MINIMUM_LIQUIDITY()",
+          "factory()",
+          "token0()",
+          "token1()",
+          "getReserves()",
+          "price0CumulativeLast()",
+          "price1CumulativeLast()",
+          "kLast()",
+          "mint(address)",
+          "burn(address)",
+          "swap(uint256,uint256,address,bytes)",
+          "skim(address)",
+          "sync()",
+          "initialize(address,address)"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1",
+          "flat": false
+        }
+      },
+      "Math": {
+        "src": "contracts/BSC Testnet Connections/PancakeFactory.sol:203",
+        "version": {
+          "withMetadata": "4aac2cd12b6cc6306419c139454f2530ce8dc86fb2d78fdb2f2fc26b81cbcb52",
+          "withoutMetadata": "84fb217c68f538a0f01a573a7f9b991a4d3395eb699ba1c1542256b37f46c48b",
+          "linkedWithoutMetadata": "84fb217c68f538a0f01a573a7f9b991a4d3395eb699ba1c1542256b37f46c48b"
+        },
+        "inherit": [],
+        "libraries": [],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1",
+          "flat": false
+        }
+      },
+      "PancakeERC20": {
+        "src": "contracts/BSC Testnet Connections/PancakeFactory.sol:112",
+        "version": {
+          "withMetadata": "b55e111799c297f95fe3243d55014369645ffc6023a626190250260b80ab51c8",
+          "withoutMetadata": "b55e111799c297f95fe3243d55014369645ffc6023a626190250260b80ab51c8",
+          "linkedWithoutMetadata": "b55e111799c297f95fe3243d55014369645ffc6023a626190250260b80ab51c8"
+        },
+        "inherit": [
+          "IPancakeERC20"
+        ],
+        "libraries": [
+          "SafeMath"
+        ],
+        "methods": [
+          "()",
+          "approve(address,uint256)",
+          "transfer(address,uint256)",
+          "transferFrom(address,address,uint256)",
+          "permit(address,address,uint256,uint256,uint8,bytes32,bytes32)"
+        ],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "constructor",
+            "contract": "PancakeERC20",
+            "src": "contracts/BSC Testnet Connections/PancakeFactory.sol:130"
+          }
+        ],
+        "layout": {
+          "storage": [
+            {
+              "label": "totalSupply",
+              "offset": 0,
+              "slot": "0",
+              "type": "t_uint256",
+              "contract": "PancakeERC20",
+              "src": "contracts/BSC Testnet Connections/PancakeFactory.sol:118"
+            },
+            {
+              "label": "balanceOf",
+              "offset": 0,
+              "slot": "1",
+              "type": "t_mapping(t_address,t_uint256)",
+              "contract": "PancakeERC20",
+              "src": "contracts/BSC Testnet Connections/PancakeFactory.sol:119"
+            },
+            {
+              "label": "allowance",
+              "offset": 0,
+              "slot": "2",
+              "type": "t_mapping(t_address,t_mapping(t_address,t_uint256))",
+              "contract": "PancakeERC20",
+              "src": "contracts/BSC Testnet Connections/PancakeFactory.sol:120"
+            },
+            {
+              "label": "DOMAIN_SEPARATOR",
+              "offset": 0,
+              "slot": "3",
+              "type": "t_bytes32",
+              "contract": "PancakeERC20",
+              "src": "contracts/BSC Testnet Connections/PancakeFactory.sol:122"
+            },
+            {
+              "label": "nonces",
+              "offset": 0,
+              "slot": "4",
+              "type": "t_mapping(t_address,t_uint256)",
+              "contract": "PancakeERC20",
+              "src": "contracts/BSC Testnet Connections/PancakeFactory.sol:125"
+            }
+          ],
+          "types": {
+            "t_address": {
+              "label": "address",
+              "numberOfBytes": "20"
+            },
+            "t_bytes32": {
+              "label": "bytes32",
+              "numberOfBytes": "32"
+            },
+            "t_mapping(t_address,t_mapping(t_address,t_uint256))": {
+              "label": "mapping(address => mapping(address => uint256))",
+              "numberOfBytes": "32"
+            },
+            "t_mapping(t_address,t_uint256)": {
+              "label": "mapping(address => uint256)",
+              "numberOfBytes": "32"
+            },
+            "t_uint256": {
+              "label": "uint256",
+              "numberOfBytes": "32"
+            }
+          },
+          "layoutVersion": "1.1",
+          "flat": true
+        }
+      },
+      "PancakeFactory": {
+        "src": "contracts/BSC Testnet Connections/PancakeFactory.sol:452",
+        "version": {
+          "withMetadata": "f9f38632e59c58c184f9595ca616176f6bdfa4c80c26b7c561caafadb5451edf",
+          "withoutMetadata": "71d6aea5d77c89d61d078d24e7ab2fdc67c43de52a34bd271470fbb2f271a015",
+          "linkedWithoutMetadata": "71d6aea5d77c89d61d078d24e7ab2fdc67c43de52a34bd271470fbb2f271a015"
+        },
+        "inherit": [
+          "IPancakeFactory"
+        ],
+        "libraries": [],
+        "methods": [
+          "(address)",
+          "allPairsLength()",
+          "createPair(address,address)",
+          "setFeeTo(address)",
+          "setFeeToSetter(address)"
+        ],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "constructor",
+            "contract": "PancakeFactory",
+            "src": "contracts/BSC Testnet Connections/PancakeFactory.sol:463"
+          }
+        ],
+        "layout": {
+          "storage": [
+            {
+              "label": "feeTo",
+              "offset": 0,
+              "slot": "0",
+              "type": "t_address",
+              "contract": "PancakeFactory",
+              "src": "contracts/BSC Testnet Connections/PancakeFactory.sol:455"
+            },
+            {
+              "label": "feeToSetter",
+              "offset": 0,
+              "slot": "1",
+              "type": "t_address",
+              "contract": "PancakeFactory",
+              "src": "contracts/BSC Testnet Connections/PancakeFactory.sol:456"
+            },
+            {
+              "label": "getPair",
+              "offset": 0,
+              "slot": "2",
+              "type": "t_mapping(t_address,t_mapping(t_address,t_address))",
+              "contract": "PancakeFactory",
+              "src": "contracts/BSC Testnet Connections/PancakeFactory.sol:458"
+            },
+            {
+              "label": "allPairs",
+              "offset": 0,
+              "slot": "3",
+              "type": "t_array(t_address)dyn_storage",
+              "contract": "PancakeFactory",
+              "src": "contracts/BSC Testnet Connections/PancakeFactory.sol:459"
+            }
+          ],
+          "types": {
+            "t_address": {
+              "label": "address",
+              "numberOfBytes": "20"
+            },
+            "t_array(t_address)dyn_storage": {
+              "label": "address[]",
+              "numberOfBytes": "32"
+            },
+            "t_mapping(t_address,t_address)": {
+              "label": "mapping(address => address)",
+              "numberOfBytes": "32"
+            },
+            "t_mapping(t_address,t_mapping(t_address,t_address))": {
+              "label": "mapping(address => mapping(address => address))",
+              "numberOfBytes": "32"
+            }
+          },
+          "layoutVersion": "1.1",
+          "flat": true
+        }
+      },
+      "PancakePair": {
+        "src": "contracts/BSC Testnet Connections/PancakeFactory.sol:260",
+        "version": {
+          "withMetadata": "3c4eae323c1d53141d05be1f266dee95396c6483aaf96a57a707f3ec087d4b6d",
+          "withoutMetadata": "3c4eae323c1d53141d05be1f266dee95396c6483aaf96a57a707f3ec087d4b6d",
+          "linkedWithoutMetadata": "3c4eae323c1d53141d05be1f266dee95396c6483aaf96a57a707f3ec087d4b6d"
+        },
+        "inherit": [
+          "PancakeERC20",
+          "IPancakeERC20",
+          "IPancakePair"
+        ],
+        "libraries": [
+          "SafeMath",
+          "UQ112x112",
+          "Math"
+        ],
+        "methods": [
+          "getReserves()",
+          "()",
+          "initialize(address,address)",
+          "mint(address)",
+          "burn(address)",
+          "swap(uint256,uint256,address,bytes)",
+          "skim(address)",
+          "sync()"
+        ],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "constructor",
+            "contract": "PancakePair",
+            "src": "contracts/BSC Testnet Connections/PancakeFactory.sol:310"
+          },
+          {
+            "kind": "state-variable-assignment",
+            "name": "unlocked",
+            "src": "contracts/BSC Testnet Connections/PancakeFactory.sol:279"
+          }
+        ],
+        "layout": {
+          "storage": [
+            {
+              "label": "totalSupply",
+              "offset": 0,
+              "slot": "0",
+              "type": "t_uint256",
+              "contract": "PancakeERC20",
+              "src": "contracts/BSC Testnet Connections/PancakeFactory.sol:118"
+            },
+            {
+              "label": "balanceOf",
+              "offset": 0,
+              "slot": "1",
+              "type": "t_mapping(t_address,t_uint256)",
+              "contract": "PancakeERC20",
+              "src": "contracts/BSC Testnet Connections/PancakeFactory.sol:119"
+            },
+            {
+              "label": "allowance",
+              "offset": 0,
+              "slot": "2",
+              "type": "t_mapping(t_address,t_mapping(t_address,t_uint256))",
+              "contract": "PancakeERC20",
+              "src": "contracts/BSC Testnet Connections/PancakeFactory.sol:120"
+            },
+            {
+              "label": "DOMAIN_SEPARATOR",
+              "offset": 0,
+              "slot": "3",
+              "type": "t_bytes32",
+              "contract": "PancakeERC20",
+              "src": "contracts/BSC Testnet Connections/PancakeFactory.sol:122"
+            },
+            {
+              "label": "nonces",
+              "offset": 0,
+              "slot": "4",
+              "type": "t_mapping(t_address,t_uint256)",
+              "contract": "PancakeERC20",
+              "src": "contracts/BSC Testnet Connections/PancakeFactory.sol:125"
+            },
+            {
+              "label": "factory",
+              "offset": 0,
+              "slot": "5",
+              "type": "t_address",
+              "contract": "PancakePair",
+              "src": "contracts/BSC Testnet Connections/PancakeFactory.sol:267"
+            },
+            {
+              "label": "token0",
+              "offset": 0,
+              "slot": "6",
+              "type": "t_address",
+              "contract": "PancakePair",
+              "src": "contracts/BSC Testnet Connections/PancakeFactory.sol:268"
+            },
+            {
+              "label": "token1",
+              "offset": 0,
+              "slot": "7",
+              "type": "t_address",
+              "contract": "PancakePair",
+              "src": "contracts/BSC Testnet Connections/PancakeFactory.sol:269"
+            },
+            {
+              "label": "reserve0",
+              "offset": 0,
+              "slot": "8",
+              "type": "t_uint112",
+              "contract": "PancakePair",
+              "src": "contracts/BSC Testnet Connections/PancakeFactory.sol:271"
+            },
+            {
+              "label": "reserve1",
+              "offset": 14,
+              "slot": "8",
+              "type": "t_uint112",
+              "contract": "PancakePair",
+              "src": "contracts/BSC Testnet Connections/PancakeFactory.sol:272"
+            },
+            {
+              "label": "blockTimestampLast",
+              "offset": 28,
+              "slot": "8",
+              "type": "t_uint32",
+              "contract": "PancakePair",
+              "src": "contracts/BSC Testnet Connections/PancakeFactory.sol:273"
+            },
+            {
+              "label": "price0CumulativeLast",
+              "offset": 0,
+              "slot": "9",
+              "type": "t_uint256",
+              "contract": "PancakePair",
+              "src": "contracts/BSC Testnet Connections/PancakeFactory.sol:275"
+            },
+            {
+              "label": "price1CumulativeLast",
+              "offset": 0,
+              "slot": "10",
+              "type": "t_uint256",
+              "contract": "PancakePair",
+              "src": "contracts/BSC Testnet Connections/PancakeFactory.sol:276"
+            },
+            {
+              "label": "kLast",
+              "offset": 0,
+              "slot": "11",
+              "type": "t_uint256",
+              "contract": "PancakePair",
+              "src": "contracts/BSC Testnet Connections/PancakeFactory.sol:277"
+            },
+            {
+              "label": "unlocked",
+              "offset": 0,
+              "slot": "12",
+              "type": "t_uint256",
+              "contract": "PancakePair",
+              "src": "contracts/BSC Testnet Connections/PancakeFactory.sol:279"
+            }
+          ],
+          "types": {
+            "t_address": {
+              "label": "address",
+              "numberOfBytes": "20"
+            },
+            "t_bytes32": {
+              "label": "bytes32",
+              "numberOfBytes": "32"
+            },
+            "t_mapping(t_address,t_mapping(t_address,t_uint256))": {
+              "label": "mapping(address => mapping(address => uint256))",
+              "numberOfBytes": "32"
+            },
+            "t_mapping(t_address,t_uint256)": {
+              "label": "mapping(address => uint256)",
+              "numberOfBytes": "32"
+            },
+            "t_uint112": {
+              "label": "uint112",
+              "numberOfBytes": "14"
+            },
+            "t_uint256": {
+              "label": "uint256",
+              "numberOfBytes": "32"
+            },
+            "t_uint32": {
+              "label": "uint32",
+              "numberOfBytes": "4"
+            }
+          },
+          "layoutVersion": "1.1",
+          "flat": true
+        }
+      },
+      "UQ112x112": {
+        "src": "contracts/BSC Testnet Connections/PancakeFactory.sol:226",
+        "version": {
+          "withMetadata": "942571b02b24ff92b7fe67a9ac37f72a0d5c160db5006f63669b0a5ba11d0583",
+          "withoutMetadata": "84fb217c68f538a0f01a573a7f9b991a4d3395eb699ba1c1542256b37f46c48b",
+          "linkedWithoutMetadata": "84fb217c68f538a0f01a573a7f9b991a4d3395eb699ba1c1542256b37f46c48b"
+        },
+        "inherit": [],
+        "libraries": [],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1",
+          "flat": false
+        }
+      }
+    },
+    {
+      "WBNB": {
+        "src": "contracts/BSC Testnet Connections/WBNB.sol:7",
+        "version": {
+          "withMetadata": "0d8b51e1510100bc81189adc2f43dfb1c0caf3d1dd3dd483b9eb03b48bbc21cf",
+          "withoutMetadata": "744a68f567b443c4366f0c261dd32e3ea8a733d1a5f2f7403a36248dd397e910",
+          "linkedWithoutMetadata": "744a68f567b443c4366f0c261dd32e3ea8a733d1a5f2f7403a36248dd397e910"
+        },
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "()",
+          "deposit()",
+          "withdraw(uint256)",
+          "totalSupply()",
+          "approve(address,uint256)",
+          "transfer(address,uint256)",
+          "transferFrom(address,address,uint256)"
+        ],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "state-variable-assignment",
+            "name": "name",
+            "src": "contracts/BSC Testnet Connections/WBNB.sol:8"
+          },
+          {
+            "kind": "state-variable-assignment",
+            "name": "symbol",
+            "src": "contracts/BSC Testnet Connections/WBNB.sol:9"
+          },
+          {
+            "kind": "state-variable-assignment",
+            "name": "decimals",
+            "src": "contracts/BSC Testnet Connections/WBNB.sol:10"
+          }
+        ],
+        "layout": {
+          "storage": [
+            {
+              "contract": "WBNB",
+              "label": "name",
+              "type": "t_string_storage",
+              "src": "contracts/BSC Testnet Connections/WBNB.sol:8"
+            },
+            {
+              "contract": "WBNB",
+              "label": "symbol",
+              "type": "t_string_storage",
+              "src": "contracts/BSC Testnet Connections/WBNB.sol:9"
+            },
+            {
+              "contract": "WBNB",
+              "label": "decimals",
+              "type": "t_uint8",
+              "src": "contracts/BSC Testnet Connections/WBNB.sol:10"
+            },
+            {
+              "contract": "WBNB",
+              "label": "balanceOf",
+              "type": "t_mapping(t_address,t_uint256)",
+              "src": "contracts/BSC Testnet Connections/WBNB.sol:17"
+            },
+            {
+              "contract": "WBNB",
+              "label": "allowance",
+              "type": "t_mapping(t_address,t_mapping(t_address,t_uint256))",
+              "src": "contracts/BSC Testnet Connections/WBNB.sol:18"
+            }
+          ],
+          "types": {
+            "t_string_storage": {
+              "label": "string storage pointer"
+            },
+            "t_uint8": {
+              "label": "uint8"
+            },
+            "t_mapping(t_address,t_uint256)": {
+              "label": "mapping(address => uint256)"
+            },
+            "t_address": {
+              "label": "address"
+            },
+            "t_uint256": {
+              "label": "uint256"
+            },
+            "t_mapping(t_address,t_mapping(t_address,t_uint256))": {
+              "label": "mapping(address => mapping(address => uint256))"
+            }
+          },
+          "layoutVersion": "1.1",
+          "flat": false
+        }
+      }
+    },
+    {
+      "ERC20": {
         "src": "@openzeppelin\\contracts\\token\\ERC20\\ERC20.sol:35",
         "version": {
           "withMetadata": "da930956526c41a5de20d318cd81f377f93fca7b337b877e31fe08d800807f6c",

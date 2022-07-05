@@ -8,7 +8,7 @@ async function main(): Promise<string> {
     console.log();
     console.log(colors.yellow('Deploying...'));
     console.log();
-    const token = await ethers.getContractFactory('CatPizza')
+    const token = await ethers.getContractFactory('MetaStocks')
     const tokenDeployed = await token.deploy()
     return tokenDeployed.address;
 }

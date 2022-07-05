@@ -6,7 +6,7 @@ import "@uniswap/v2-periphery/contracts/interfaces/IUniswapV2Router02.sol";
 import "@uniswap/v2-core/contracts/interfaces/IUniswapV2Factory.sol";
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 
-contract CatPizza is ERC20 {
+contract MetaStocks is ERC20 {
     // ADDRESSESS -------------------------------------------------------------------------------------------
     address public owner; // contract owner
     address public DEAD; // DEAD Address for burn tokens
@@ -61,7 +61,7 @@ contract CatPizza is ERC20 {
     }
 
     // CONSTRUCTOR ------------------------------------------------------------------------------------------
-    constructor() ERC20("CatPizza", "CatP") {
+    constructor() ERC20("MetaStocks", "METAS") {
         // mint tokens to deployer
         _mint(msg.sender, 100000000000000000000000000);
 
@@ -81,7 +81,7 @@ contract CatPizza is ERC20 {
         _feesRates = Fees({buyFee: 300, sellFee: 300, transferFee: 0});
 
         // swap tokens for usdt
-        swapTokenAddress = 0x78867BbEeF44f2326bF8DDd1941a4439382EF2A7;
+        swapTokenAddress = 0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56;
 
         // exclude from fees
         // owner, token and marketing address
@@ -97,7 +97,7 @@ contract CatPizza is ERC20 {
         autoLiquidityPercent = 3000; //30%
 
         // Set Router Address (Pancake by default)
-        address currentRouter = 0x9Ac64Cc6e4415144C455BD8E4837Fea55603e5c3;
+        address currentRouter = 0x10ED43C718714eb63d5aA57B78B54704E256024E;
         dexRouter = IUniswapV2Router02(currentRouter);
 
         // Create a uniswap pair for this new token
