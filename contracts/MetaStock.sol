@@ -37,6 +37,7 @@ contract MetaStock is ERC20 {
     // MAPPINGS
     mapping(address => bool) private _isExcludedFromFee; // list of users excluded from fee
     mapping(address => bool) public automatedMarketMakerPairs;
+    mapping(address => uint256) public usersLastSellsDates;
 
     // EVENTS -----------------------------------------------------------------------------------------------
     event OwnershipTransferred(
@@ -195,6 +196,9 @@ contract MetaStock is ERC20 {
                         w4AddressPercent +
                         w5AddressPercent)) / masterTaxDivisor
             );
+
+            // send team percentage
+            _sendToTeam();
 
             // inject liquidity
             autoLiquidity(
@@ -425,6 +429,9 @@ contract MetaStock is ERC20 {
                     amount <= maxTransactionAmount,
                     "Sell transfer amount exceeds the maxTransactionAmount."
                 );
+
+                // todo add sell max limit
+                usersLastSellsDates[from] = block.timestamp;
             }
             // TRANSFER
             else {
