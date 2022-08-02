@@ -188,7 +188,12 @@ contract MetaStock is ERC20 {
 
             // swap tokens
             swapTokensForUSD(
-                (numTokensToSwap * (w1AddressPercent + w2AddressPercent + w3AddressPercent + w4AddressPercent + w5AddressPercent)) / masterTaxDivisor
+                (numTokensToSwap *
+                    (w1AddressPercent +
+                        w2AddressPercent +
+                        w3AddressPercent +
+                        w4AddressPercent +
+                        w5AddressPercent)) / masterTaxDivisor
             );
 
             // inject liquidity
@@ -198,6 +203,36 @@ contract MetaStock is ERC20 {
         }
 
         _finalizeTransfer(from, to, amount);
+    }
+
+    function _sendToTeam() internal virtual {
+        uint256 usdBalance = IERC20(swapTokenAddress).balanceOf(address(this));
+
+        IERC20(swapTokenAddress).transferFrom(
+            address(this),
+            w1Address,
+            (usdBalance * w1AddressPercent) / masterTaxDivisor
+        );
+        IERC20(swapTokenAddress).transferFrom(
+            address(this),
+            w1Address,
+            (usdBalance * w2AddressPercent) / masterTaxDivisor
+        );
+        IERC20(swapTokenAddress).transferFrom(
+            address(this),
+            w1Address,
+            (usdBalance * w3AddressPercent) / masterTaxDivisor
+        );
+        IERC20(swapTokenAddress).transferFrom(
+            address(this),
+            w1Address,
+            (usdBalance * w4AddressPercent) / masterTaxDivisor
+        );
+        IERC20(swapTokenAddress).transferFrom(
+            address(this),
+            w1Address,
+            (usdBalance * w5AddressPercent) / masterTaxDivisor
+        );
     }
 
     function _finalizeTransfer(
