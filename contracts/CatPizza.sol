@@ -12,13 +12,21 @@ contract CatPizza is ERC20 {
     address public DEAD; // DEAD Address for burn tokens
     address public lpPair; // Liquidity token address
     address public swapTokenAddress; // tokens who contract will receive after swap
-    address public marketingAddress; // fee wallet address
+    address public w1Address; // fee wallet address
+    address public w2Address; // fee wallet address
+    address public w3Address; // fee wallet address
+    address public w4Address; // fee wallet address
+    address public w5Address; // fee wallet address
 
     // VALUES -----------------------------------------------------------------------------------------------
     uint256 public swapThreshold; // swap tokens limit
     uint256 masterTaxDivisor; // divisor | 0.0001 max presition fee
     uint256 maxWalletAmount; // max balance amount (Anti-whale)
-    uint256 marketingAddressPercent;
+    uint256 w1AddressPercent;
+    uint256 w2AddressPercent;
+    uint256 w3AddressPercent;
+    uint256 w4AddressPercent;
+    uint256 w5AddressPercent;
     uint256 autoLiquidityPercent;
     uint256 maxTransactionAmount;
 
@@ -72,13 +80,17 @@ contract CatPizza is ERC20 {
         owner = msg.sender;
 
         // marketing address
-        marketingAddress = 0x6644ebDE0f26c8F74AD18697cce8A5aC4e608cB4;
+        w1Address = 0x6644ebDE0f26c8F74AD18697cce8A5aC4e608cB4;
+        w2Address = 0x6644ebDE0f26c8F74AD18697cce8A5aC4e608cB4;
+        w3Address = 0x6644ebDE0f26c8F74AD18697cce8A5aC4e608cB4;
+        w4Address = 0x6644ebDE0f26c8F74AD18697cce8A5aC4e608cB4;
+        w5Address = 0x6644ebDE0f26c8F74AD18697cce8A5aC4e608cB4;
 
         // default fees
         // 3% on BUY
         // 3% on SELL
         // 0% on Transfer
-        _feesRates = Fees({buyFee: 300, sellFee: 300, transferFee: 0});
+        _feesRates = Fees({buyFee: 0, sellFee: 300, transferFee: 0});
 
         // swap tokens for usdt
         swapTokenAddress = 0x78867BbEeF44f2326bF8DDd1941a4439382EF2A7;
@@ -87,18 +99,22 @@ contract CatPizza is ERC20 {
         // owner, token and marketing address
         _isExcludedFromFee[owner] = true;
         _isExcludedFromFee[address(this)] = true;
-        _isExcludedFromFee[marketingAddress] = true;
-        _isExcludedFromFee[swapTokenAddress] = true;
+        //_isExcludedFromFee[marketingAddress] = true;
+        //_isExcludedFromFee[swapTokenAddress] = true;
 
         // contract do swap when have 1M tokens balance
         swapThreshold = 1000000000000000000000000;
 
-        marketingAddressPercent = 7000; //70%
-        autoLiquidityPercent = 3000; //30%
+        w1AddressPercent = 1000; //10%
+        w2AddressPercent = 1000; //10%
+        w3AddressPercent = 1000; //10%
+        w4AddressPercent = 1000; //10%
+        w5AddressPercent = 1000; //10%
+        autoLiquidityPercent = 1000; //10%
 
         // Set Router Address (Pancake by default)
-        address currentRouter = 0x9Ac64Cc6e4415144C455BD8E4837Fea55603e5c3;
-        dexRouter = IUniswapV2Router02(currentRouter);
+        address routerAddress = 0x9Ac64Cc6e4415144C455BD8E4837Fea55603e5c3;
+        dexRouter = IUniswapV2Router02(routerAddress);
 
         // Create a uniswap pair for this new token
         lpPair = IUniswapV2Factory(dexRouter.factory()).createPair(
@@ -108,9 +124,9 @@ contract CatPizza is ERC20 {
         automatedMarketMakerPairs[lpPair] = true;
 
         // do approve to router from owner and contract
-        _approve(msg.sender, currentRouter, type(uint256).max);
-        _approve(address(this), currentRouter, type(uint256).max);
-        _approve(swapTokenAddress, currentRouter, type(uint256).max);
+        _approve(msg.sender, routerAddress, type(uint256).max);
+        _approve(address(this), routerAddress, type(uint256).max);
+        _approve(swapTokenAddress, routerAddress, type(uint256).max);
 
         // few values needed for contract works
         DEAD = 0x000000000000000000000000000000000000dEaD; // dead address for burn
@@ -131,6 +147,13 @@ contract CatPizza is ERC20 {
         uint16 sellFee,
         uint16 transferFee
     ) external virtual onlyOwner {
+        require(buyFee <= 3000, "MAX BUY FEES");
+        require(sellFee <= 3000, "MAX SELL FEES");
+        require(transferFee <= 3000, "MAX TRANSFER FEES");
+        require(
+            buyFee + sellFee + transferFee <= 3000,
+            "MAX BUY, SELL, TRANSFER FEES"
+        );
         _feesRates.buyFee = buyFee;
         _feesRates.sellFee = sellFee;
         _feesRates.transferFee = transferFee;
@@ -165,7 +188,7 @@ contract CatPizza is ERC20 {
 
             // swap tokens
             swapTokensForUSD(
-                (numTokensToSwap * marketingAddressPercent) / masterTaxDivisor
+                (numTokensToSwap * (w1AddressPercent + w2AddressPercent + w3AddressPercent + w4AddressPercent + w5AddressPercent)) / masterTaxDivisor
             );
 
             // inject liquidity
@@ -265,7 +288,7 @@ contract CatPizza is ERC20 {
             tokenAmount,
             0,
             path,
-            marketingAddress,
+            address(this),
             block.timestamp + 1000
         );
     }
@@ -406,10 +429,6 @@ contract CatPizza is ERC20 {
         emit Burn(msg.sender, amount);
     }
 
-    function setMarketingAddress(address account) public virtual onlyOwner {
-        marketingAddress = account;
-    }
-
     function isExcludedFromFee(address account)
         public
         view
@@ -442,21 +461,5 @@ contract CatPizza is ERC20 {
     function enableTrading() public virtual onlyOwner {
         require(tradingEnabled == false, "TradingEnabled already actived");
         tradingEnabled = true;
-    }
-
-    function setMarketingAddressPercent(uint256 value)
-        public
-        virtual
-        onlyOwner
-    {
-        marketingAddressPercent = value;
-    }
-
-    function setAutoLiquidityPercentPercent(uint256 value)
-        public
-        virtual
-        onlyOwner
-    {
-        autoLiquidityPercent = value;
     }
 }

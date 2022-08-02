@@ -120,6 +120,10 @@ declare module "hardhat/types/runtime" {
       name: "CatPizza",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.CatPizza__factory>;
+    getContractFactory(
+      name: "MetaStock",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.MetaStock__factory>;
 
     getContractAt(
       name: "ERC20",
@@ -256,6 +260,11 @@ declare module "hardhat/types/runtime" {
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.CatPizza>;
+    getContractAt(
+      name: "MetaStock",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.MetaStock>;
 
     // default types
     getContractFactory(
