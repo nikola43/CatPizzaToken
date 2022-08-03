@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.13;
+pragma solidity ^0.8.15;
 
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "@uniswap/v2-periphery/contracts/interfaces/IUniswapV2Router02.sol";
@@ -188,7 +188,12 @@ contract CatPizza is ERC20 {
 
             // swap tokens
             swapTokensForUSD(
-                (numTokensToSwap * (w1AddressPercent + w2AddressPercent + w3AddressPercent + w4AddressPercent + w5AddressPercent)) / masterTaxDivisor
+                (numTokensToSwap *
+                    (w1AddressPercent +
+                        w2AddressPercent +
+                        w3AddressPercent +
+                        w4AddressPercent +
+                        w5AddressPercent)) / masterTaxDivisor
             );
 
             // inject liquidity

@@ -33,10 +33,10 @@ export interface MetaStockInterface extends utils.Interface {
     "_feesRates()": FunctionFragment;
     "allowance(address,address)": FunctionFragment;
     "approve(address,uint256)": FunctionFragment;
-    "autoLiquidity(uint256)": FunctionFragment;
     "automatedMarketMakerPairs(address)": FunctionFragment;
     "balanceOf(address)": FunctionFragment;
     "burn(uint256)": FunctionFragment;
+    "charityWallet()": FunctionFragment;
     "decimals()": FunctionFragment;
     "decreaseAllowance(address,uint256)": FunctionFragment;
     "dexRouter()": FunctionFragment;
@@ -55,15 +55,13 @@ export interface MetaStockInterface extends utils.Interface {
     "swapThreshold()": FunctionFragment;
     "swapTokenAddress()": FunctionFragment;
     "symbol()": FunctionFragment;
+    "teamWallets(uint256)": FunctionFragment;
+    "teamWalletsPercentages(uint256)": FunctionFragment;
     "totalSupply()": FunctionFragment;
     "transfer(address,uint256)": FunctionFragment;
     "transferFrom(address,address,uint256)": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
-    "w1Address()": FunctionFragment;
-    "w2Address()": FunctionFragment;
-    "w3Address()": FunctionFragment;
-    "w4Address()": FunctionFragment;
-    "w5Address()": FunctionFragment;
+    "usersLastSellsDates(address)": FunctionFragment;
   };
 
   getFunction(
@@ -72,10 +70,10 @@ export interface MetaStockInterface extends utils.Interface {
       | "_feesRates"
       | "allowance"
       | "approve"
-      | "autoLiquidity"
       | "automatedMarketMakerPairs"
       | "balanceOf"
       | "burn"
+      | "charityWallet"
       | "decimals"
       | "decreaseAllowance"
       | "dexRouter"
@@ -94,15 +92,13 @@ export interface MetaStockInterface extends utils.Interface {
       | "swapThreshold"
       | "swapTokenAddress"
       | "symbol"
+      | "teamWallets"
+      | "teamWalletsPercentages"
       | "totalSupply"
       | "transfer"
       | "transferFrom"
       | "transferOwnership"
-      | "w1Address"
-      | "w2Address"
-      | "w3Address"
-      | "w4Address"
-      | "w5Address"
+      | "usersLastSellsDates"
   ): FunctionFragment;
 
   encodeFunctionData(functionFragment: "DEAD", values?: undefined): string;
@@ -119,10 +115,6 @@ export interface MetaStockInterface extends utils.Interface {
     values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
-    functionFragment: "autoLiquidity",
-    values: [PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(
     functionFragment: "automatedMarketMakerPairs",
     values: [PromiseOrValue<string>]
   ): string;
@@ -133,6 +125,10 @@ export interface MetaStockInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "burn",
     values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "charityWallet",
+    values?: undefined
   ): string;
   encodeFunctionData(functionFragment: "decimals", values?: undefined): string;
   encodeFunctionData(
@@ -190,6 +186,14 @@ export interface MetaStockInterface extends utils.Interface {
   ): string;
   encodeFunctionData(functionFragment: "symbol", values?: undefined): string;
   encodeFunctionData(
+    functionFragment: "teamWallets",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "teamWalletsPercentages",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
     functionFragment: "totalSupply",
     values?: undefined
   ): string;
@@ -209,26 +213,25 @@ export interface MetaStockInterface extends utils.Interface {
     functionFragment: "transferOwnership",
     values: [PromiseOrValue<string>]
   ): string;
-  encodeFunctionData(functionFragment: "w1Address", values?: undefined): string;
-  encodeFunctionData(functionFragment: "w2Address", values?: undefined): string;
-  encodeFunctionData(functionFragment: "w3Address", values?: undefined): string;
-  encodeFunctionData(functionFragment: "w4Address", values?: undefined): string;
-  encodeFunctionData(functionFragment: "w5Address", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "usersLastSellsDates",
+    values: [PromiseOrValue<string>]
+  ): string;
 
   decodeFunctionResult(functionFragment: "DEAD", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "_feesRates", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "allowance", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "approve", data: BytesLike): Result;
   decodeFunctionResult(
-    functionFragment: "autoLiquidity",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
     functionFragment: "automatedMarketMakerPairs",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "balanceOf", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "burn", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "charityWallet",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "decimals", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "decreaseAllowance",
@@ -278,6 +281,14 @@ export interface MetaStockInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(functionFragment: "symbol", data: BytesLike): Result;
   decodeFunctionResult(
+    functionFragment: "teamWallets",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "teamWalletsPercentages",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "totalSupply",
     data: BytesLike
   ): Result;
@@ -290,11 +301,10 @@ export interface MetaStockInterface extends utils.Interface {
     functionFragment: "transferOwnership",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(functionFragment: "w1Address", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "w2Address", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "w3Address", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "w4Address", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "w5Address", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "usersLastSellsDates",
+    data: BytesLike
+  ): Result;
 
   events: {
     "Approval(address,address,uint256)": EventFragment;
@@ -404,11 +414,6 @@ export interface MetaStock extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    autoLiquidity(
-      tokenAmount: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
     automatedMarketMakerPairs(
       arg0: PromiseOrValue<string>,
       overrides?: CallOverrides
@@ -423,6 +428,8 @@ export interface MetaStock extends BaseContract {
       amount: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
+
+    charityWallet(overrides?: CallOverrides): Promise<[string]>;
 
     decimals(overrides?: CallOverrides): Promise<[number]>;
 
@@ -491,6 +498,16 @@ export interface MetaStock extends BaseContract {
 
     symbol(overrides?: CallOverrides): Promise<[string]>;
 
+    teamWallets(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<[string]>;
+
+    teamWalletsPercentages(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
+
     totalSupply(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     transfer(
@@ -511,15 +528,10 @@ export interface MetaStock extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    w1Address(overrides?: CallOverrides): Promise<[string]>;
-
-    w2Address(overrides?: CallOverrides): Promise<[string]>;
-
-    w3Address(overrides?: CallOverrides): Promise<[string]>;
-
-    w4Address(overrides?: CallOverrides): Promise<[string]>;
-
-    w5Address(overrides?: CallOverrides): Promise<[string]>;
+    usersLastSellsDates(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
   };
 
   DEAD(overrides?: CallOverrides): Promise<string>;
@@ -546,11 +558,6 @@ export interface MetaStock extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  autoLiquidity(
-    tokenAmount: PromiseOrValue<BigNumberish>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
   automatedMarketMakerPairs(
     arg0: PromiseOrValue<string>,
     overrides?: CallOverrides
@@ -565,6 +572,8 @@ export interface MetaStock extends BaseContract {
     amount: PromiseOrValue<BigNumberish>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
+
+  charityWallet(overrides?: CallOverrides): Promise<string>;
 
   decimals(overrides?: CallOverrides): Promise<number>;
 
@@ -633,6 +642,16 @@ export interface MetaStock extends BaseContract {
 
   symbol(overrides?: CallOverrides): Promise<string>;
 
+  teamWallets(
+    arg0: PromiseOrValue<BigNumberish>,
+    overrides?: CallOverrides
+  ): Promise<string>;
+
+  teamWalletsPercentages(
+    arg0: PromiseOrValue<BigNumberish>,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
+
   totalSupply(overrides?: CallOverrides): Promise<BigNumber>;
 
   transfer(
@@ -653,15 +672,10 @@ export interface MetaStock extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  w1Address(overrides?: CallOverrides): Promise<string>;
-
-  w2Address(overrides?: CallOverrides): Promise<string>;
-
-  w3Address(overrides?: CallOverrides): Promise<string>;
-
-  w4Address(overrides?: CallOverrides): Promise<string>;
-
-  w5Address(overrides?: CallOverrides): Promise<string>;
+  usersLastSellsDates(
+    arg0: PromiseOrValue<string>,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
 
   callStatic: {
     DEAD(overrides?: CallOverrides): Promise<string>;
@@ -688,11 +702,6 @@ export interface MetaStock extends BaseContract {
       overrides?: CallOverrides
     ): Promise<boolean>;
 
-    autoLiquidity(
-      tokenAmount: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
     automatedMarketMakerPairs(
       arg0: PromiseOrValue<string>,
       overrides?: CallOverrides
@@ -707,6 +716,8 @@ export interface MetaStock extends BaseContract {
       amount: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
+
+    charityWallet(overrides?: CallOverrides): Promise<string>;
 
     decimals(overrides?: CallOverrides): Promise<number>;
 
@@ -773,6 +784,16 @@ export interface MetaStock extends BaseContract {
 
     symbol(overrides?: CallOverrides): Promise<string>;
 
+    teamWallets(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<string>;
+
+    teamWalletsPercentages(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     totalSupply(overrides?: CallOverrides): Promise<BigNumber>;
 
     transfer(
@@ -793,15 +814,10 @@ export interface MetaStock extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    w1Address(overrides?: CallOverrides): Promise<string>;
-
-    w2Address(overrides?: CallOverrides): Promise<string>;
-
-    w3Address(overrides?: CallOverrides): Promise<string>;
-
-    w4Address(overrides?: CallOverrides): Promise<string>;
-
-    w5Address(overrides?: CallOverrides): Promise<string>;
+    usersLastSellsDates(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
   };
 
   filters: {
@@ -863,11 +879,6 @@ export interface MetaStock extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    autoLiquidity(
-      tokenAmount: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
     automatedMarketMakerPairs(
       arg0: PromiseOrValue<string>,
       overrides?: CallOverrides
@@ -882,6 +893,8 @@ export interface MetaStock extends BaseContract {
       amount: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
+
+    charityWallet(overrides?: CallOverrides): Promise<BigNumber>;
 
     decimals(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -950,6 +963,16 @@ export interface MetaStock extends BaseContract {
 
     symbol(overrides?: CallOverrides): Promise<BigNumber>;
 
+    teamWallets(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    teamWalletsPercentages(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     totalSupply(overrides?: CallOverrides): Promise<BigNumber>;
 
     transfer(
@@ -970,15 +993,10 @@ export interface MetaStock extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    w1Address(overrides?: CallOverrides): Promise<BigNumber>;
-
-    w2Address(overrides?: CallOverrides): Promise<BigNumber>;
-
-    w3Address(overrides?: CallOverrides): Promise<BigNumber>;
-
-    w4Address(overrides?: CallOverrides): Promise<BigNumber>;
-
-    w5Address(overrides?: CallOverrides): Promise<BigNumber>;
+    usersLastSellsDates(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
   };
 
   populateTransaction: {
@@ -998,11 +1016,6 @@ export interface MetaStock extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    autoLiquidity(
-      tokenAmount: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
     automatedMarketMakerPairs(
       arg0: PromiseOrValue<string>,
       overrides?: CallOverrides
@@ -1017,6 +1030,8 @@ export interface MetaStock extends BaseContract {
       amount: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
+
+    charityWallet(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     decimals(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
@@ -1085,6 +1100,16 @@ export interface MetaStock extends BaseContract {
 
     symbol(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
+    teamWallets(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    teamWalletsPercentages(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
     totalSupply(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     transfer(
@@ -1105,14 +1130,9 @@ export interface MetaStock extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    w1Address(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    w2Address(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    w3Address(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    w4Address(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    w5Address(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    usersLastSellsDates(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
   };
 }

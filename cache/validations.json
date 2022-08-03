@@ -5,9 +5,9 @@
       "ERC20": {
         "src": "@openzeppelin\\contracts\\token\\ERC20\\ERC20.sol:35",
         "version": {
-          "withMetadata": "70ddb9b4058deb7b35dcfaf19f4ece2b87bf6016ce0a1cd22362c432e40eb408",
-          "withoutMetadata": "7eaf6e2da372192c65ae6dd6fa3ba2298f35fb14a7a18391f0b8200e2d1c6918",
-          "linkedWithoutMetadata": "7eaf6e2da372192c65ae6dd6fa3ba2298f35fb14a7a18391f0b8200e2d1c6918"
+          "withMetadata": "ad949e377b2cceb8e804fd1b1618852d55dfe81e1e86b8ffb5531b71a50aa8df",
+          "withoutMetadata": "87aa8c8d17cd1312eb03f4cadbb8bc3208618c630c838f96bc7517adf46ac99d",
+          "linkedWithoutMetadata": "87aa8c8d17cd1312eb03f4cadbb8bc3208618c630c838f96bc7517adf46ac99d"
         },
         "inherit": [
           "IERC20Metadata",
@@ -162,7 +162,7 @@
         }
       },
       "IUniswapV2Factory": {
-        "src": "@uniswap\\v2-core\\contracts\\interfaces\\IUniswapV2Factory.sol:3",
+        "src": "@uniswap\\v2-core\\contracts\\interfaces\\IUniswapV2Factory.sol:4",
         "inherit": [],
         "libraries": [],
         "methods": [
@@ -185,7 +185,7 @@
         }
       },
       "IUniswapV2Router01": {
-        "src": "@uniswap\\v2-periphery\\contracts\\interfaces\\IUniswapV2Router01.sol:3",
+        "src": "@uniswap\\v2-periphery\\contracts\\interfaces\\IUniswapV2Router01.sol:4",
         "inherit": [],
         "libraries": [],
         "methods": [
@@ -219,7 +219,7 @@
         }
       },
       "IUniswapV2Router02": {
-        "src": "@uniswap\\v2-periphery\\contracts\\interfaces\\IUniswapV2Router02.sol:5",
+        "src": "@uniswap\\v2-periphery\\contracts\\interfaces\\IUniswapV2Router02.sol:6",
         "inherit": [
           "IUniswapV2Router01"
         ],
@@ -243,9 +243,9 @@
       "CatPizza": {
         "src": "contracts\\CatPizza.sol:9",
         "version": {
-          "withMetadata": "53ee06d6939cd0b3fb7740caa09d675781c5b91fb08a9cd81bc9dc2b7883a8de",
-          "withoutMetadata": "533779fbaca60112dcd54145c5c5c4ac33af87181fe04126410afd33bf82caa1",
-          "linkedWithoutMetadata": "533779fbaca60112dcd54145c5c5c4ac33af87181fe04126410afd33bf82caa1"
+          "withMetadata": "22ed255a9bdd9f973d3ae11d6e9159b38bf8fe145431d6d264be107572839094",
+          "withoutMetadata": "f26cdd6c673ceef8e8a3a88a410b09bbefbcadb34ebd9cd534eb4351c6d3a9d6",
+          "linkedWithoutMetadata": "f26cdd6c673ceef8e8a3a88a410b09bbefbcadb34ebd9cd534eb4351c6d3a9d6"
         },
         "inherit": [
           "ERC20",
@@ -587,11 +587,11 @@
         }
       },
       "MetaStock": {
-        "src": "contracts\\MetaStock.sol:9",
+        "src": "contracts\\MetaStock.sol:10",
         "version": {
-          "withMetadata": "255b2cbe8594920ef42caf82052692c6e012344d05f770d046337b00b8231c26",
-          "withoutMetadata": "e3828351c0a35f96a7fd4b318e074d8a3c806e4848175bec9c92849a7ae26860",
-          "linkedWithoutMetadata": "e3828351c0a35f96a7fd4b318e074d8a3c806e4848175bec9c92849a7ae26860"
+          "withMetadata": "25f9d41f509526c64323a3db5b2a8549102c9e7e7008b55e858a58f85ea1cdf6",
+          "withoutMetadata": "d66f05c30890e91e00af615177ae33ae949f8f0a2f42584badc6f94e84e02039",
+          "linkedWithoutMetadata": "d66f05c30890e91e00af615177ae33ae949f8f0a2f42584badc6f94e84e02039"
         },
         "inherit": [
           "ERC20",
@@ -606,7 +606,6 @@
           "getOwner()",
           "setTaxes(uint16,uint16,uint16)",
           "transferOwnership(address)",
-          "autoLiquidity(uint256)",
           "burn(uint256)",
           "isExcludedFromFee(address)",
           "excludeFromFee(address,bool)",
@@ -620,7 +619,82 @@
           {
             "kind": "constructor",
             "contract": "MetaStock",
-            "src": "contracts\\MetaStock.sol:72"
+            "src": "contracts\\MetaStock.sol:76"
+          },
+          {
+            "kind": "state-variable-assignment",
+            "name": "DEAD",
+            "src": "contracts\\MetaStock.sol:13"
+          },
+          {
+            "kind": "state-variable-assignment",
+            "name": "swapTokenAddress",
+            "src": "contracts\\MetaStock.sol:15"
+          },
+          {
+            "kind": "state-variable-assignment",
+            "name": "charityWallet",
+            "src": "contracts\\MetaStock.sol:18"
+          },
+          {
+            "kind": "state-variable-assignment",
+            "name": "teamWallets",
+            "src": "contracts\\MetaStock.sol:19"
+          },
+          {
+            "kind": "state-variable-assignment",
+            "name": "teamWalletsPercentages",
+            "src": "contracts\\MetaStock.sol:20"
+          },
+          {
+            "kind": "state-variable-assignment",
+            "name": "routerAddress",
+            "src": "contracts\\MetaStock.sol:22"
+          },
+          {
+            "kind": "state-variable-assignment",
+            "name": "swapThreshold",
+            "src": "contracts\\MetaStock.sol:25"
+          },
+          {
+            "kind": "state-variable-assignment",
+            "name": "masterTaxDivisor",
+            "src": "contracts\\MetaStock.sol:26"
+          },
+          {
+            "kind": "state-variable-assignment",
+            "name": "maxWalletAmount",
+            "src": "contracts\\MetaStock.sol:27"
+          },
+          {
+            "kind": "state-variable-assignment",
+            "name": "teamPercent",
+            "src": "contracts\\MetaStock.sol:29"
+          },
+          {
+            "kind": "state-variable-assignment",
+            "name": "autoLiquidityPercent",
+            "src": "contracts\\MetaStock.sol:30"
+          },
+          {
+            "kind": "state-variable-assignment",
+            "name": "buyBackPercent",
+            "src": "contracts\\MetaStock.sol:31"
+          },
+          {
+            "kind": "state-variable-assignment",
+            "name": "charityPercent",
+            "src": "contracts\\MetaStock.sol:32"
+          },
+          {
+            "kind": "state-variable-assignment",
+            "name": "maxTransactionAmount",
+            "src": "contracts\\MetaStock.sol:33"
+          },
+          {
+            "kind": "state-variable-assignment",
+            "name": "metaStockUtils",
+            "src": "contracts\\MetaStock.sol:61"
           }
         ],
         "layout": {
@@ -671,7 +745,7 @@
               "slot": "5",
               "type": "t_address",
               "contract": "MetaStock",
-              "src": "contracts\\MetaStock.sol:11"
+              "src": "contracts\\MetaStock.sol:12"
             },
             {
               "label": "DEAD",
@@ -679,7 +753,7 @@
               "slot": "6",
               "type": "t_address",
               "contract": "MetaStock",
-              "src": "contracts\\MetaStock.sol:12"
+              "src": "contracts\\MetaStock.sol:13"
             },
             {
               "label": "lpPair",
@@ -687,7 +761,7 @@
               "slot": "7",
               "type": "t_address",
               "contract": "MetaStock",
-              "src": "contracts\\MetaStock.sol:13"
+              "src": "contracts\\MetaStock.sol:14"
             },
             {
               "label": "swapTokenAddress",
@@ -695,108 +769,68 @@
               "slot": "8",
               "type": "t_address",
               "contract": "MetaStock",
-              "src": "contracts\\MetaStock.sol:14"
-            },
-            {
-              "label": "w1Address",
-              "offset": 0,
-              "slot": "9",
-              "type": "t_address",
-              "contract": "MetaStock",
               "src": "contracts\\MetaStock.sol:15"
             },
             {
-              "label": "w2Address",
+              "label": "charityWallet",
               "offset": 0,
-              "slot": "10",
-              "type": "t_address",
-              "contract": "MetaStock",
-              "src": "contracts\\MetaStock.sol:16"
-            },
-            {
-              "label": "w3Address",
-              "offset": 0,
-              "slot": "11",
-              "type": "t_address",
-              "contract": "MetaStock",
-              "src": "contracts\\MetaStock.sol:17"
-            },
-            {
-              "label": "w4Address",
-              "offset": 0,
-              "slot": "12",
+              "slot": "9",
               "type": "t_address",
               "contract": "MetaStock",
               "src": "contracts\\MetaStock.sol:18"
             },
             {
-              "label": "w5Address",
+              "label": "teamWallets",
               "offset": 0,
-              "slot": "13",
-              "type": "t_address",
+              "slot": "10",
+              "type": "t_array(t_address)dyn_storage",
               "contract": "MetaStock",
               "src": "contracts\\MetaStock.sol:19"
             },
             {
-              "label": "swapThreshold",
+              "label": "teamWalletsPercentages",
               "offset": 0,
-              "slot": "14",
-              "type": "t_uint256",
+              "slot": "11",
+              "type": "t_array(t_uint256)dyn_storage",
+              "contract": "MetaStock",
+              "src": "contracts\\MetaStock.sol:20"
+            },
+            {
+              "label": "routerAddress",
+              "offset": 0,
+              "slot": "12",
+              "type": "t_address",
               "contract": "MetaStock",
               "src": "contracts\\MetaStock.sol:22"
             },
             {
-              "label": "masterTaxDivisor",
+              "label": "swapThreshold",
               "offset": 0,
-              "slot": "15",
-              "type": "t_uint256",
-              "contract": "MetaStock",
-              "src": "contracts\\MetaStock.sol:23"
-            },
-            {
-              "label": "maxWalletAmount",
-              "offset": 0,
-              "slot": "16",
-              "type": "t_uint256",
-              "contract": "MetaStock",
-              "src": "contracts\\MetaStock.sol:24"
-            },
-            {
-              "label": "w1AddressPercent",
-              "offset": 0,
-              "slot": "17",
+              "slot": "13",
               "type": "t_uint256",
               "contract": "MetaStock",
               "src": "contracts\\MetaStock.sol:25"
             },
             {
-              "label": "w2AddressPercent",
+              "label": "masterTaxDivisor",
               "offset": 0,
-              "slot": "18",
+              "slot": "14",
               "type": "t_uint256",
               "contract": "MetaStock",
               "src": "contracts\\MetaStock.sol:26"
             },
             {
-              "label": "w3AddressPercent",
+              "label": "maxWalletAmount",
               "offset": 0,
-              "slot": "19",
+              "slot": "15",
               "type": "t_uint256",
               "contract": "MetaStock",
               "src": "contracts\\MetaStock.sol:27"
             },
             {
-              "label": "w4AddressPercent",
+              "label": "teamPercent",
               "offset": 0,
-              "slot": "20",
-              "type": "t_uint256",
-              "contract": "MetaStock",
-              "src": "contracts\\MetaStock.sol:28"
-            },
-            {
-              "label": "w5AddressPercent",
-              "offset": 0,
-              "slot": "21",
+              "slot": "16",
               "type": "t_uint256",
               "contract": "MetaStock",
               "src": "contracts\\MetaStock.sol:29"
@@ -804,66 +838,98 @@
             {
               "label": "autoLiquidityPercent",
               "offset": 0,
-              "slot": "22",
+              "slot": "17",
               "type": "t_uint256",
               "contract": "MetaStock",
               "src": "contracts\\MetaStock.sol:30"
             },
             {
-              "label": "maxTransactionAmount",
+              "label": "buyBackPercent",
               "offset": 0,
-              "slot": "23",
+              "slot": "18",
               "type": "t_uint256",
               "contract": "MetaStock",
               "src": "contracts\\MetaStock.sol:31"
             },
             {
+              "label": "charityPercent",
+              "offset": 0,
+              "slot": "19",
+              "type": "t_uint256",
+              "contract": "MetaStock",
+              "src": "contracts\\MetaStock.sol:32"
+            },
+            {
+              "label": "maxTransactionAmount",
+              "offset": 0,
+              "slot": "20",
+              "type": "t_uint256",
+              "contract": "MetaStock",
+              "src": "contracts\\MetaStock.sol:33"
+            },
+            {
               "label": "inSwap",
               "offset": 0,
-              "slot": "24",
+              "slot": "21",
               "type": "t_bool",
               "contract": "MetaStock",
-              "src": "contracts\\MetaStock.sol:34"
+              "src": "contracts\\MetaStock.sol:36"
             },
             {
               "label": "tradingEnabled",
               "offset": 1,
-              "slot": "24",
+              "slot": "21",
               "type": "t_bool",
               "contract": "MetaStock",
-              "src": "contracts\\MetaStock.sol:35"
+              "src": "contracts\\MetaStock.sol:37"
             },
             {
               "label": "_isExcludedFromFee",
               "offset": 0,
-              "slot": "25",
+              "slot": "22",
               "type": "t_mapping(t_address,t_bool)",
               "contract": "MetaStock",
-              "src": "contracts\\MetaStock.sol:38"
+              "src": "contracts\\MetaStock.sol:40"
             },
             {
               "label": "automatedMarketMakerPairs",
               "offset": 0,
-              "slot": "26",
+              "slot": "23",
               "type": "t_mapping(t_address,t_bool)",
               "contract": "MetaStock",
-              "src": "contracts\\MetaStock.sol:39"
+              "src": "contracts\\MetaStock.sol:41"
+            },
+            {
+              "label": "usersLastSellsDates",
+              "offset": 0,
+              "slot": "24",
+              "type": "t_mapping(t_address,t_uint256)",
+              "contract": "MetaStock",
+              "src": "contracts\\MetaStock.sol:42"
             },
             {
               "label": "dexRouter",
               "offset": 0,
-              "slot": "27",
+              "slot": "25",
               "type": "t_contract(IUniswapV2Router02)1169",
               "contract": "MetaStock",
-              "src": "contracts\\MetaStock.sol:56"
+              "src": "contracts\\MetaStock.sol:59"
             },
             {
               "label": "_feesRates",
               "offset": 0,
-              "slot": "28",
-              "type": "t_struct(Fees)2375_storage",
+              "slot": "26",
+              "type": "t_struct(Fees)2398_storage",
               "contract": "MetaStock",
-              "src": "contracts\\MetaStock.sol:57"
+              "src": "contracts\\MetaStock.sol:60"
+            },
+            {
+              "label": "metaStockUtils",
+              "offset": 0,
+              "slot": "27",
+              "type": "t_contract(MetaStockUtils)3563",
+              "contract": "MetaStock",
+              "src": "contracts\\MetaStock.sol:61"
             }
           ],
           "types": {
@@ -871,12 +937,24 @@
               "label": "address",
               "numberOfBytes": "20"
             },
+            "t_array(t_address)dyn_storage": {
+              "label": "address[]",
+              "numberOfBytes": "32"
+            },
+            "t_array(t_uint256)dyn_storage": {
+              "label": "uint256[]",
+              "numberOfBytes": "32"
+            },
             "t_bool": {
               "label": "bool",
               "numberOfBytes": "1"
             },
             "t_contract(IUniswapV2Router02)1169": {
               "label": "contract IUniswapV2Router02",
+              "numberOfBytes": "20"
+            },
+            "t_contract(MetaStockUtils)3563": {
+              "label": "contract MetaStockUtils",
               "numberOfBytes": "20"
             },
             "t_mapping(t_address,t_bool)": {
@@ -895,7 +973,7 @@
               "label": "string",
               "numberOfBytes": "32"
             },
-            "t_struct(Fees)2375_storage": {
+            "t_struct(Fees)2398_storage": {
               "label": "struct MetaStock.Fees",
               "members": [
                 {
@@ -930,6 +1008,32 @@
           },
           "layoutVersion": "1.1",
           "flat": true
+        }
+      },
+      "MetaStockUtils": {
+        "src": "contracts\\MetaStockUtils.sol:8",
+        "version": {
+          "withMetadata": "d9c51e34cf18a67eee8ff4dfa379106218c1a99c471f821e612934916e2bc5b8",
+          "withoutMetadata": "fba73533286d3559932d249d3f427cc8c869745eee446167e8a13f360f67aad2",
+          "linkedWithoutMetadata": "fba73533286d3559932d249d3f427cc8c869745eee446167e8a13f360f67aad2"
+        },
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "getPathForTokensToTokens(address,address)",
+          "swapTokensForUSD(address,address,address,uint256)",
+          "swapTokensForBNB(address,address,uint256)",
+          "sendToTeam(address,address[],uint256[])",
+          "addLiquidity(address,address,uint256,uint256,address)",
+          "autoLiquidity(address,address,uint256,address)"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1",
+          "flat": false
         }
       }
     },

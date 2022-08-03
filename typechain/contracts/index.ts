@@ -5,3 +5,4 @@ import type * as bscTestnetConnections from "./BSC Testnet Connections";
 export type { bscTestnetConnections };
 export type { CatPizza } from "./CatPizza";
 export type { MetaStock } from "./MetaStock";
+export type { MetaStockUtils } from "./MetaStockUtils";

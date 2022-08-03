@@ -56,3 +56,5 @@ export type { CatPizza } from "./contracts/CatPizza";
 export { CatPizza__factory } from "./factories/contracts/CatPizza__factory";
 export type { MetaStock } from "./contracts/MetaStock";
 export { MetaStock__factory } from "./factories/contracts/MetaStock__factory";
+export type { MetaStockUtils } from "./contracts/MetaStockUtils";
+export { MetaStockUtils__factory } from "./factories/contracts/MetaStockUtils__factory";
