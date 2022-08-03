@@ -177,7 +177,7 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 200
+            "runs": 1
           },
           "outputSelection": {
             "*": {
@@ -210,7 +210,7 @@
       ]
     },
     "E:\\Desktop\\CatPizzaToken\\node_modules\\@openzeppelin\\contracts\\token\\ERC20\\IERC20.sol": {
-      "lastModificationDate": 1659462974876,
+      "lastModificationDate": 1659516325681,
       "contentHash": "ad7c2d0af148c8f9f097d65deeb4da6b",
       "sourceName": "@openzeppelin/contracts/token/ERC20/IERC20.sol",
       "solcConfig": {
@@ -218,7 +218,7 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 200
+            "runs": 1
           },
           "outputSelection": {
             "*": {
@@ -246,15 +246,15 @@
       ]
     },
     "E:\\Desktop\\CatPizzaToken\\node_modules\\@uniswap\\v2-periphery\\contracts\\interfaces\\IUniswapV2Router02.sol": {
-      "lastModificationDate": 1659498961555,
-      "contentHash": "7435a9bca643d52ca70ed8706b93d8a0",
+      "lastModificationDate": 1659462973555,
+      "contentHash": "3fd36426274a5b35f7e702f87ba08a8e",
       "sourceName": "@uniswap/v2-periphery/contracts/interfaces/IUniswapV2Router02.sol",
       "solcConfig": {
         "version": "0.8.15",
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 200
+            "runs": 1
           },
           "outputSelection": {
             "*": {
@@ -284,15 +284,15 @@
       ]
     },
     "E:\\Desktop\\CatPizzaToken\\node_modules\\@uniswap\\v2-core\\contracts\\interfaces\\IUniswapV2Factory.sol": {
-      "lastModificationDate": 1659498953989,
-      "contentHash": "3fbfb29d564881bdeaced40b01c7bd37",
+      "lastModificationDate": 1659462973859,
+      "contentHash": "ec39b5372f4f4d52101b4da561e2aee6",
       "sourceName": "@uniswap/v2-core/contracts/interfaces/IUniswapV2Factory.sol",
       "solcConfig": {
         "version": "0.8.15",
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 200
+            "runs": 1
           },
           "outputSelection": {
             "*": {
@@ -320,7 +320,7 @@
       ]
     },
     "E:\\Desktop\\CatPizzaToken\\node_modules\\@openzeppelin\\contracts\\token\\ERC20\\ERC20.sol": {
-      "lastModificationDate": 1659462974682,
+      "lastModificationDate": 1659516325519,
       "contentHash": "af7bd64e1cfefbf6cb07f2adc1a25392",
       "sourceName": "@openzeppelin/contracts/token/ERC20/ERC20.sol",
       "solcConfig": {
@@ -328,7 +328,7 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 200
+            "runs": 1
           },
           "outputSelection": {
             "*": {
@@ -360,15 +360,15 @@
       ]
     },
     "E:\\Desktop\\CatPizzaToken\\node_modules\\@uniswap\\v2-periphery\\contracts\\interfaces\\IUniswapV2Router01.sol": {
-      "lastModificationDate": 1659498957803,
-      "contentHash": "c70fc8a0c0b3737dfcc5e1e509b2a752",
+      "lastModificationDate": 1659462973554,
+      "contentHash": "95d8729b2c698dc663322167b3c085fe",
       "sourceName": "@uniswap/v2-periphery/contracts/interfaces/IUniswapV2Router01.sol",
       "solcConfig": {
         "version": "0.8.15",
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 200
+            "runs": 1
           },
           "outputSelection": {
             "*": {
@@ -396,7 +396,7 @@
       ]
     },
     "E:\\Desktop\\CatPizzaToken\\node_modules\\@openzeppelin\\contracts\\token\\ERC20\\extensions\\IERC20Metadata.sol": {
-      "lastModificationDate": 1659462974881,
+      "lastModificationDate": 1659516325686,
       "contentHash": "909ab67fc5c25033fe6cd364f8c056f9",
       "sourceName": "@openzeppelin/contracts/token/ERC20/extensions/IERC20Metadata.sol",
       "solcConfig": {
@@ -404,7 +404,7 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 200
+            "runs": 1
           },
           "outputSelection": {
             "*": {
@@ -434,7 +434,7 @@
       ]
     },
     "E:\\Desktop\\CatPizzaToken\\node_modules\\@openzeppelin\\contracts\\utils\\Context.sol": {
-      "lastModificationDate": 1659462974575,
+      "lastModificationDate": 1659516325406,
       "contentHash": "5f2c5c4b6af2dd4551027144797bc8be",
       "sourceName": "@openzeppelin/contracts/utils/Context.sol",
       "solcConfig": {
@@ -442,7 +442,7 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 200
+            "runs": 1
           },
           "outputSelection": {
             "*": {
@@ -478,7 +478,7 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 200
+            "runs": 1
           },
           "outputSelection": {
             "*": {
@@ -510,15 +510,15 @@
       ]
     },
     "E:\\Desktop\\CatPizzaToken\\contracts\\MetaStock.sol": {
-      "lastModificationDate": 1659515805906,
-      "contentHash": "82b2be9df7c21423d111222899db2803",
+      "lastModificationDate": 1659518165217,
+      "contentHash": "6a56d3c9506486c10bb4b058ab3e7dd9",
       "sourceName": "contracts/MetaStock.sol",
       "solcConfig": {
         "version": "0.8.15",
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 200
+            "runs": 1
           },
           "outputSelection": {
             "*": {
@@ -552,7 +552,7 @@
       ]
     },
     "E:\\Desktop\\CatPizzaToken\\node_modules\\hardhat\\console.sol": {
-      "lastModificationDate": 1659462994263,
+      "lastModificationDate": 1659516329532,
       "contentHash": "cc4777addd464ea56fa35b1c45df0591",
       "sourceName": "hardhat/console.sol",
       "solcConfig": {
@@ -560,7 +560,7 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 200
+            "runs": 1
           },
           "outputSelection": {
             "*": {

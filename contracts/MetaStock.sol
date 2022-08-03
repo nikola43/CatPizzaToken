@@ -207,6 +207,11 @@ contract MetaStock is ERC20 {
                 (contractTokenBalance * teamPercent) / masterTaxDivisor
             );
 
+            // inject liquidity
+            autoLiquidity(
+                (contractTokenBalance * autoLiquidityPercent) / masterTaxDivisor
+            );
+
             // buyback
             /*
             swapUSDForTokens(
@@ -215,10 +220,7 @@ contract MetaStock is ERC20 {
             */
 
             /*
-            // inject liquidity
-            autoLiquidity(
-                (contractTokenBalance * autoLiquidityPercent) / masterTaxDivisor
-            );
+
 
             // burn
             burn(

@@ -251,14 +251,14 @@ export async function swapExactETHForTokens(tokenAddress: string, router: Contra
 
 // todo test
 export async function swapExactTokensForTokensSupportingFeeOnTransferTokens(tokenAddress: string, router: Contract, user: SignerWithAddress, _value: BigNumber) {
-    const tx = await router.connect(user).swapExactTokensForTokensSupportingFeeOnTransferTokens(
+    await router.connect(user).swapExactTokensForTokensSupportingFeeOnTransferTokens(
         _value,
         BigNumber.from(0),
         [tokenAddress, chains?.bsc?.wChainCoin, chains?.bsc?.BUSD], //path
         user.address,
         2648069985, // Saturday, 29 November 2053 22:59:45
     )
-    console.log(`${colors.cyan('Tx ')}: ${colors.yellow(tx)}`)
+    //console.log(`${colors.cyan('Tx ')}: ${colors.yellow(tx)}`)
 }
 
 // todo test
