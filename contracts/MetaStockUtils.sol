@@ -28,8 +28,33 @@ contract MetaStockUtils {
         path[2] = usd;
 
         // Do approve for router spend swap token amount
-        IERC20(usd).approve(address(dexRouter), type(uint256).max);
-        IERC20(dexRouter.WETH()).approve(address(dexRouter), type(uint256).max);
+        IERC20(tokenAddress).approve(address(dexRouter), type(uint256).max);
+        //IERC20(dexRouter.WETH()).approve(address(dexRouter), type(uint256).max);
+
+        // swap and transfer to contract
+        dexRouter.swapExactTokensForTokensSupportingFeeOnTransferTokens(
+            tokenAmount,
+            0,
+            path,
+            tokenAddress,
+            block.timestamp + 1000
+        );
+    }
+
+    function swapUSDForTokens(
+        IUniswapV2Router02 dexRouter,
+        address tokenAddress,
+        address usd,
+        uint256 tokenAmount
+    ) public {
+        address[] memory path = new address[](3);
+        path[0] = usd;
+        path[1] = dexRouter.WETH();
+        path[2] = tokenAddress;
+
+        // Do approve for router spend swap token amount
+        IERC20(tokenAddress).approve(address(dexRouter), type(uint256).max);
+        //IERC20(dexRouter.WETH()).approve(address(dexRouter), type(uint256).max);
 
         // swap and transfer to contract
         dexRouter.swapExactTokensForTokensSupportingFeeOnTransferTokens(

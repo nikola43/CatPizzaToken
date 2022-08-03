@@ -470,8 +470,8 @@
       ]
     },
     "E:\\Desktop\\CatPizzaToken\\contracts\\MetaStockUtils.sol": {
-      "lastModificationDate": 1659500044892,
-      "contentHash": "2e02a9bbb5c29282950aa3a49475f27e",
+      "lastModificationDate": 1659500482352,
+      "contentHash": "251549d9bd8a55437f8830f0527c2adf",
       "sourceName": "contracts/MetaStockUtils.sol",
       "solcConfig": {
         "version": "0.8.15",
@@ -510,8 +510,8 @@
       ]
     },
     "E:\\Desktop\\CatPizzaToken\\contracts\\MetaStock.sol": {
-      "lastModificationDate": 1659500027723,
-      "contentHash": "1f7688f9af81c726f2be4c02824b6bc5",
+      "lastModificationDate": 1659500753907,
+      "contentHash": "af8d47a1e63dfae6e36d03b03e28a519",
       "sourceName": "contracts/MetaStock.sol",
       "solcConfig": {
         "version": "0.8.15",
@@ -541,11 +541,10 @@
         "@openzeppelin/contracts/token/ERC20/IERC20.sol",
         "@uniswap/v2-periphery/contracts/interfaces/IUniswapV2Router02.sol",
         "@uniswap/v2-core/contracts/interfaces/IUniswapV2Factory.sol",
-        "@openzeppelin/contracts/token/ERC20/ERC20.sol",
-        "./MetaStockUtils.sol"
+        "@openzeppelin/contracts/token/ERC20/ERC20.sol"
       ],
       "versionPragmas": [
-        "^0.8.15"
+        "^0.8.13"
       ],
       "artifacts": [
         "MetaStock"

@@ -1,11 +1,10 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.15;
+pragma solidity ^0.8.13;
 
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "@uniswap/v2-periphery/contracts/interfaces/IUniswapV2Router02.sol";
 import "@uniswap/v2-core/contracts/interfaces/IUniswapV2Factory.sol";
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
-import "./MetaStockUtils.sol";
 
 contract MetaStock is ERC20 {
     // ADDRESSESS -------------------------------------------------------------------------------------------
@@ -14,18 +13,23 @@ contract MetaStock is ERC20 {
     address public lpPair; // Liquidity token address
     address public swapTokenAddress =
         0x78867BbEeF44f2326bF8DDd1941a4439382EF2A7; // tokens who contract will receive after swap
-
+    address public w1Address = 0x6644ebDE0f26c8F74AD18697cce8A5aC4e608cB4; // fee wallet address
+    address public w2Address = 0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC; // fee wallet address
+    address public w3Address = 0x90F79bf6EB2c4f870365E785982E1f101E93b906; // fee wallet address
+    address public w4Address = 0xfbAA3c716dA6378A0840754185BFf6A05a20e1C8; // fee wallet address
+    address public w5Address = 0x4CF4525Ea8225ef715236538a3D7F06151BfEe11; // fee wallet address
     address public charityWallet = 0x492A9CE7f973958454fcBcae0E22985e15cdBE58; // charity wallet address
-    address[] public teamWallets = new address[](10);
-    uint256[] public teamWalletsPercentages = new uint256[](10);
-
     address routerAddress = 0x9Ac64Cc6e4415144C455BD8E4837Fea55603e5c3;
 
     // VALUES -----------------------------------------------------------------------------------------------
     uint256 public swapThreshold = 1000000000000000000000000; // swap tokens limit
     uint256 masterTaxDivisor = 10000; // divisor | 0.0001 max presition fee
     uint256 maxWalletAmount = 1000000000000000000000000; // max balance amount (Anti-whale)
-
+    uint256 w1AddressPercent = 1600;
+    uint256 w2AddressPercent = 3000;
+    uint256 w3AddressPercent = 500;
+    uint256 w4AddressPercent = 2900;
+    uint256 w5AddressPercent = 2000;
     uint256 teamPercent = 5000;
     uint256 autoLiquidityPercent = 2000;
     uint256 buyBackPercent = 2000;
@@ -39,7 +43,10 @@ contract MetaStock is ERC20 {
     // MAPPINGS
     mapping(address => bool) private _isExcludedFromFee; // list of users excluded from fee
     mapping(address => bool) public automatedMarketMakerPairs;
-    mapping(address => uint256) public usersLastSellsDates;
+    mapping(address => uint256) public usersBuysCounter;
+    mapping(address => uint256) public usersSellCounter;
+    mapping(uint256 => uint256) public usersLastBuysTxs;
+    mapping(uint256 => uint256) public usersLastSellsTxs;
 
     // EVENTS -----------------------------------------------------------------------------------------------
     event OwnershipTransferred(
@@ -58,7 +65,6 @@ contract MetaStock is ERC20 {
     // OBJECTS ----------------------------------------------------------------------------------------------
     IUniswapV2Router02 public dexRouter; // router instance for do swaps
     Fees public _feesRates; // fees rates
-    MetaStockUtils metaStockUtils = new MetaStockUtils();
 
     // MODIFIERS --------------------------------------------------------------------------------------------
     modifier swapping() {
@@ -81,15 +87,17 @@ contract MetaStock is ERC20 {
         owner = msg.sender;
 
         // default fees
-        // 0% on BUY
+        // 3% on BUY
         // 3% on SELL
         // 0% on Transfer
         _feesRates = Fees({buyFee: 0, sellFee: 300, transferFee: 0});
 
         // exclude from fees
-        // owner, token
+        // owner, token and marketing address
         _isExcludedFromFee[owner] = true;
         _isExcludedFromFee[address(this)] = true;
+        //_isExcludedFromFee[marketingAddress] = true;
+        //_isExcludedFromFee[swapTokenAddress] = true;
 
         // Set Router Address (Pancake by default)
         dexRouter = IUniswapV2Router02(routerAddress);
@@ -105,24 +113,6 @@ contract MetaStock is ERC20 {
         _approve(msg.sender, routerAddress, type(uint256).max);
         _approve(address(this), routerAddress, type(uint256).max);
         _approve(swapTokenAddress, routerAddress, type(uint256).max);
-
-        teamWallets[0] = 0x4CF4525Ea8225ef715236538a3D7F06151BfEe11;
-        teamWalletsPercentages[0] = 2000;
-        teamWallets[1] = 0x6644ebDE0f26c8F74AD18697cce8A5aC4e608cB4;
-        teamWalletsPercentages[1] = 1600;
-        teamWallets[2] = 0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC;
-        teamWalletsPercentages[2] = 3000;
-        teamWallets[3] = 0x90F79bf6EB2c4f870365E785982E1f101E93b906;
-        teamWalletsPercentages[3] = 500;
-        teamWallets[4] = 0xfbAA3c716dA6378A0840754185BFf6A05a20e1C8;
-        teamWalletsPercentages[4] = 2900;
-        teamWallets[5] = 0x4CF4525Ea8225ef715236538a3D7F06151BfEe11;
-        teamWalletsPercentages[5] = 2000;
-    }
-
-    // get contract owner address
-    function self() internal view virtual returns (address) {
-        return address(this);
     }
 
     // To receive BNB from dexRouter when swapping
@@ -176,39 +166,56 @@ contract MetaStock is ERC20 {
         if (contractMustSwap(from, to)) {
             // SWAP
             // Get contract tokens balance
-            uint256 numTokensToSwap = balanceOf(self());
+            uint256 numTokensToSwap = balanceOf(address(this));
 
             // swap teamPercent of tokens
-            metaStockUtils.swapTokensForUSD(
-                dexRouter,
-                self(),
-                swapTokenAddress,
+            swapTokensForUSD(
                 (numTokensToSwap * teamPercent) / masterTaxDivisor
             );
 
             // send team percentage
-            metaStockUtils.sendToTeam(
-                self(),
-                teamWallets,
-                teamWalletsPercentages
+            _sendToTeam();
+
+            // inject liquidity
+            autoLiquidity(
+                (numTokensToSwap * autoLiquidityPercent) / masterTaxDivisor
             );
 
-            // // inject liquidity
-            metaStockUtils.autoLiquidity(
-                dexRouter,
-                self(),
-                (numTokensToSwap * autoLiquidityPercent) / masterTaxDivisor,
-                owner
-            );
+            swapUSDForTokens(buyBackPercent);
 
             // send to charity
-            IERC20(self()).transfer(
+            IERC20(address(this)).transfer(
                 charityWallet,
                 (numTokensToSwap * charityPercent) / masterTaxDivisor
             );
         }
 
         _finalizeTransfer(from, to, amount);
+    }
+
+    function _sendToTeam() internal virtual {
+        uint256 usdBalance = IERC20(swapTokenAddress).balanceOf(address(this));
+
+        IERC20(swapTokenAddress).transfer(
+            w1Address,
+            (usdBalance * w1AddressPercent) / masterTaxDivisor
+        );
+        IERC20(swapTokenAddress).transfer(
+            w2Address,
+            (usdBalance * w2AddressPercent) / masterTaxDivisor
+        );
+        IERC20(swapTokenAddress).transfer(
+            w3Address,
+            (usdBalance * w3AddressPercent) / masterTaxDivisor
+        );
+        IERC20(swapTokenAddress).transfer(
+            w4Address,
+            (usdBalance * w4AddressPercent) / masterTaxDivisor
+        );
+        IERC20(swapTokenAddress).transfer(
+            w5Address,
+            (usdBalance * w5AddressPercent) / masterTaxDivisor
+        );
     }
 
     function _finalizeTransfer(
@@ -236,7 +243,7 @@ contract MetaStock is ERC20 {
             amountReceived = amount - feeAmount;
 
             // and transfer fee to contract
-            super._transfer(from, self(), feeAmount);
+            super._transfer(from, address(this), feeAmount);
         }
 
         // finally send remaining tokens to recipient
@@ -271,6 +278,110 @@ contract MetaStock is ERC20 {
         }
 
         return feeAmount;
+    }
+
+    function swapUSDForTokens(uint256 usdAmount) private {
+        address[] memory path = new address[](3);
+        path[0] = swapTokenAddress;
+        path[1] = dexRouter.WETH();
+        path[2] = address(this);
+
+        // Do approve for router spend swap token amount
+        IERC20(swapTokenAddress).approve(address(dexRouter), type(uint256).max);
+        IERC20(dexRouter.WETH()).approve(address(dexRouter), type(uint256).max);
+
+        // swap and transfer to contract
+        dexRouter.swapExactTokensForTokensSupportingFeeOnTransferTokens(
+            usdAmount,
+            0,
+            path,
+            address(this),
+            block.timestamp + 1000
+        );
+    }
+
+    /// @notice return the route given the busd addresses and the token
+    function getPathForTokensToTokens(
+        address tokenAddressA,
+        address tokenAddressB
+    ) private pure returns (address[] memory) {
+        address[] memory path = new address[](2);
+        path[0] = tokenAddressA;
+        path[1] = tokenAddressB;
+        return path;
+    }
+
+    function swapTokensForUSD(uint256 tokenAmount) private {
+        address[] memory path = new address[](3);
+        path[0] = address(this);
+        path[1] = dexRouter.WETH();
+        path[2] = swapTokenAddress;
+
+        // Do approve for router spend swap token amount
+        IERC20(swapTokenAddress).approve(address(dexRouter), type(uint256).max);
+        IERC20(dexRouter.WETH()).approve(address(dexRouter), type(uint256).max);
+
+        // swap and transfer to contract
+        dexRouter.swapExactTokensForTokensSupportingFeeOnTransferTokens(
+            tokenAmount,
+            0,
+            path,
+            address(this),
+            block.timestamp + 1000
+        );
+    }
+
+    function swapTokensForBNB(uint256 tokenAmount) private {
+        // generate the uniswap pair path of token -> weth
+        address[] memory path = new address[](2);
+        path[0] = address(this);
+        path[1] = dexRouter.WETH();
+
+        _approve(address(this), address(dexRouter), tokenAmount);
+
+        // make the swap
+        dexRouter.swapExactTokensForETHSupportingFeeOnTransferTokens(
+            tokenAmount,
+            0, // accept any amount of ETH
+            path,
+            address(this),
+            block.timestamp + 1000
+        );
+    }
+
+    function autoLiquidity(uint256 tokenAmount) public {
+        // split the contract balance into halves
+        uint256 half = tokenAmount / 2;
+
+        // capture the contract's current ETH balance.
+        // this is so that we can capture exactly the amount of ETH that the
+        // swap creates, and not make the liquidity event include any ETH that
+        // has been manually sent to the contract
+        uint256 initialBalance = address(this).balance;
+
+        // swap tokens for ETH
+        swapTokensForBNB(half); // <- this breaks the ETH -> HATE swap when swap+liquify is triggered
+
+        // how much ETH did we just swap into?
+        uint256 newBalance = address(this).balance - initialBalance;
+
+        // add liquidity to uniswap
+        addLiquidity(half, newBalance);
+    }
+
+    function addLiquidity(uint256 tokenAmount, uint256 ethAmount) private {
+        // approve token transfer to cover all possible scenarios
+        _approve(address(this), address(dexRouter), type(uint256).max);
+
+        // add the liquidity
+        dexRouter.addLiquidityETH{value: ethAmount}(
+            address(this),
+            tokenAmount,
+            0, // slippage is unavoidable
+            0, // slippage is unavoidable
+            owner, // send lp tokens to owner
+            block.timestamp + 10000
+        );
     }
 
     function _beforeTransferCheck(
@@ -310,6 +421,10 @@ contract MetaStock is ERC20 {
                     amount + balanceOf(to) <= maxWalletAmount,
                     "Max wallet exceeded"
                 );
+
+                uint256 lastUserBuyTx = usersBuysCounter[from];
+                usersBuysCounter[from] += 1;
+                usersLastBuysTxs[lastUserBuyTx] = block.timestamp;
             }
             // SELL -> TO == LP ADDRESS
             else if (automatedMarketMakerPairs[to]) {
@@ -319,7 +434,18 @@ contract MetaStock is ERC20 {
                 );
 
                 // todo add sell max limit
-                usersLastSellsDates[from] = block.timestamp;
+                uint256 lastUserBuyTx = usersBuysCounter[from];
+                uint256 lastUserSellTx = usersSellCounter[from];
+                uint256 lastBuyTxDate = usersLastBuysTxs[lastUserBuyTx];
+                usersSellCounter[from] += 1;
+                usersLastSellsTxs[lastUserSellTx] = block.timestamp;
+
+                if (lastBuyTxDate - block.timestamp > 0) {
+                    usersSellCounter[from] += 1;
+                    usersLastSellsTxs[lastUserSellTx] = block.timestamp;
+                } else {
+                    revert("daily sell limix exceded");
+                }
             }
             // TRANSFER
             else {
@@ -337,7 +463,7 @@ contract MetaStock is ERC20 {
         virtual
         returns (bool)
     {
-        uint256 contractTokenBalance = balanceOf(self());
+        uint256 contractTokenBalance = balanceOf(address(this));
         return
             contractTokenBalance >= swapThreshold &&
             !inSwap &&
