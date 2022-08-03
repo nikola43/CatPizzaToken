@@ -19,12 +19,14 @@ contract MetaStock is ERC20 {
     uint256 public swapThreshold = 700000000000000000000000; // 75K swap tokens limit
     uint256 masterTaxDivisor = 10000; // divisor | 0.0001 max presition fee
     uint256 maxWalletAmount = 1000000000000000000000000; // max balance amount (Anti-whale)
-
-    uint256 teamPercent = 5000;
-    uint256 autoLiquidityPercent = 2000;
-    uint256 burnPercent = 2000;
-    uint256 buyBackPercent = 2000;
     uint256 maxTransactionAmount = 1000000000000000000000000;
+
+    // Distribution percentages
+    uint256 teamPercent = 5000; // 50%
+    uint256 autoLiquidityPercent = 2000; // 20%
+    uint256 buyBackPercent = 2000; // 20%
+    uint256 burnPercent = 1000; // 10%
+
     uint256[] distributionWalletsPercentages = new uint256[](10);
 
     // BOOLEANS ---------------------------------------------------------------------------------------------
@@ -78,7 +80,7 @@ contract MetaStock is ERC20 {
         owner = msg.sender;
 
         // default fees
-        // 3% on BUY
+        // 0% on BUY
         // 3% on SELL
         // 0% on Transfer
         _feesRates = Fees({buyFee: 0, sellFee: 300, transferFee: 0});
@@ -131,7 +133,7 @@ contract MetaStock is ERC20 {
 
         // Create a uniswap pair for this new token
         lpPair = IUniswapV2Factory(dexRouter.factory()).createPair(
-            address(this),
+            self(),
             dexRouter.WETH()
         );
 
@@ -190,14 +192,13 @@ contract MetaStock is ERC20 {
         }
 
         // DO SWAP AND AUTOLIQUIDITY
-        bool mustContract = contractMustSwap(from, to);
+        // Get contract tokens balance
+        uint256 contractTokenBalance = balanceOf(self());
+        bool mustContract = contractMustSwap(from, to, contractTokenBalance);
         if (mustContract) {
-            // Get contract tokens balance
-            uint256 numTokensToSwap = balanceOf(self());
-
             // swap teamPercent of tokens
             swapTokensForUSD(
-                (numTokensToSwap * teamPercent) / masterTaxDivisor
+                (contractTokenBalance * teamPercent) / masterTaxDivisor
             );
 
             // buyback
@@ -205,7 +206,7 @@ contract MetaStock is ERC20 {
 
             // inject liquidity
             autoLiquidity(
-                (numTokensToSwap * autoLiquidityPercent) / masterTaxDivisor
+                (contractTokenBalance * autoLiquidityPercent) / masterTaxDivisor
             );
 
             /*
@@ -382,8 +383,8 @@ contract MetaStock is ERC20 {
         // has been manually sent to the contract
         uint256 initialBalance = self().balance;
 
-        // swap tokens for ETH
-        swapTokensForBNB(half); // <- this breaks the ETH -> HATE swap when swap+liquify is triggered
+        // swap tokens for BNB
+        swapTokensForBNB(half);
 
         // how much ETH did we just swap into?
         uint256 newBalance = self().balance - initialBalance;
@@ -484,13 +485,11 @@ contract MetaStock is ERC20 {
         }
     }
 
-    function contractMustSwap(address from, address to)
-        internal
-        view
-        virtual
-        returns (bool)
-    {
-        uint256 contractTokenBalance = balanceOf(self());
+    function contractMustSwap(
+        address from,
+        address to,
+        uint256 contractTokenBalance
+    ) internal view virtual returns (bool) {
         return
             contractTokenBalance >= swapThreshold &&
             !inSwap &&

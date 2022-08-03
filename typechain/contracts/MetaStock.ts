@@ -496,9 +496,9 @@ export interface MetaStock extends BaseContract {
     ): Promise<ContractTransaction>;
 
     setTaxes(
-      buyFee: PromiseOrValue<BigNumberish>,
-      sellFee: PromiseOrValue<BigNumberish>,
-      transferFee: PromiseOrValue<BigNumberish>,
+      buyFeePercentage: PromiseOrValue<BigNumberish>,
+      sellFeePercentage: PromiseOrValue<BigNumberish>,
+      transferPercentage: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -648,9 +648,9 @@ export interface MetaStock extends BaseContract {
   ): Promise<ContractTransaction>;
 
   setTaxes(
-    buyFee: PromiseOrValue<BigNumberish>,
-    sellFee: PromiseOrValue<BigNumberish>,
-    transferFee: PromiseOrValue<BigNumberish>,
+    buyFeePercentage: PromiseOrValue<BigNumberish>,
+    sellFeePercentage: PromiseOrValue<BigNumberish>,
+    transferPercentage: PromiseOrValue<BigNumberish>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -798,9 +798,9 @@ export interface MetaStock extends BaseContract {
     ): Promise<void>;
 
     setTaxes(
-      buyFee: PromiseOrValue<BigNumberish>,
-      sellFee: PromiseOrValue<BigNumberish>,
-      transferFee: PromiseOrValue<BigNumberish>,
+      buyFeePercentage: PromiseOrValue<BigNumberish>,
+      sellFeePercentage: PromiseOrValue<BigNumberish>,
+      transferPercentage: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -985,9 +985,9 @@ export interface MetaStock extends BaseContract {
     ): Promise<BigNumber>;
 
     setTaxes(
-      buyFee: PromiseOrValue<BigNumberish>,
-      sellFee: PromiseOrValue<BigNumberish>,
-      transferFee: PromiseOrValue<BigNumberish>,
+      buyFeePercentage: PromiseOrValue<BigNumberish>,
+      sellFeePercentage: PromiseOrValue<BigNumberish>,
+      transferPercentage: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -1130,9 +1130,9 @@ export interface MetaStock extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     setTaxes(
-      buyFee: PromiseOrValue<BigNumberish>,
-      sellFee: PromiseOrValue<BigNumberish>,
-      transferFee: PromiseOrValue<BigNumberish>,
+      buyFeePercentage: PromiseOrValue<BigNumberish>,
+      sellFeePercentage: PromiseOrValue<BigNumberish>,
+      transferPercentage: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
