@@ -510,8 +510,8 @@
       ]
     },
     "E:\\Desktop\\CatPizzaToken\\contracts\\MetaStock.sol": {
-      "lastModificationDate": 1659507967030,
-      "contentHash": "c7dad5ad3f8d7766d391e003796a67a1",
+      "lastModificationDate": 1659508158860,
+      "contentHash": "4cf89ef7e3df4ff07f9cd599f842db3d",
       "sourceName": "contracts/MetaStock.sol",
       "solcConfig": {
         "version": "0.8.15",

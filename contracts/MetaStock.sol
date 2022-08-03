@@ -84,19 +84,11 @@ contract MetaStock is ERC20 {
         _feesRates = Fees({buyFee: 0, sellFee: 300, transferFee: 0});
 
         // exclude from fees
-        // owner, token and marketing address
+        // owner, token
         _isExcludedFromFee[owner] = true;
         _isExcludedFromFee[address(this)] = true;
 
-        // Set Router Address (Pancake by default)
-        dexRouter = IUniswapV2Router02(routerAddress);
-
-        // Create a uniswap pair for this new token
-        lpPair = IUniswapV2Factory(dexRouter.factory()).createPair(
-            address(this),
-            dexRouter.WETH()
-        );
-        automatedMarketMakerPairs[lpPair] = true;
+        initializeRouterAndPair();
 
         // do approve to router from owner and contract
         _approve(msg.sender, routerAddress, type(uint256).max);
@@ -112,36 +104,68 @@ contract MetaStock is ERC20 {
 
         distributionWalletsPercentages[0] = 1600; // w1
         distributionWalletsPercentages[1] = 3000; // w2
-        distributionWalletsPercentages[2] = 500;  // w3
+        distributionWalletsPercentages[2] = 500; // w3
         distributionWalletsPercentages[3] = 2900; // w4
         distributionWalletsPercentages[4] = 2000; // w5
-        distributionWalletsPercentages[5] = 1000; // charity 
+        distributionWalletsPercentages[5] = 1000; // charity
     }
 
-    // To receive BNB from dexRouter when swapping
+    /**
+     * @notice Standar function for receive BNB
+     */
     receive() external payable virtual {}
 
-    // get contract owner address
+    /**
+     * @notice Get contract address
+     */
+    function self() internal view virtual returns (address) {
+        return address(this);
+    }
+
+    /**
+     * @notice Initialize router and create LP pair address
+     */
+    function initializeRouterAndPair() internal virtual {
+        // Initialize router
+        dexRouter = IUniswapV2Router02(routerAddress);
+
+        // Create a uniswap pair for this new token
+        lpPair = IUniswapV2Factory(dexRouter.factory()).createPair(
+            address(this),
+            dexRouter.WETH()
+        );
+
+        automatedMarketMakerPairs[lpPair] = true;
+    }
+
+    /**
+     * @notice Get contract owner address
+     */
     function getOwner() external view virtual returns (address) {
         return owner;
     }
 
-    // Set fees
+    /**
+     * @notice Sets the percentage of tokens to be subtracted when users buy, sell or transfer tokens
+     * @param buyFeePercentage Percentage subtracted when the user is a BUY TX
+     * @param sellFeePercentage Percentage subtracted when the user is a SELL TX
+     * @param transferPercentage Percentage subtracted when the user is a TRANSFER TX
+     */
     function setTaxes(
-        uint16 buyFee,
-        uint16 sellFee,
-        uint16 transferFee
+        uint16 buyFeePercentage,
+        uint16 sellFeePercentage,
+        uint16 transferPercentage
     ) external virtual onlyOwner {
-        require(buyFee <= 3000, "MAX BUY FEES");
-        require(sellFee <= 3000, "MAX SELL FEES");
-        require(transferFee <= 3000, "MAX TRANSFER FEES");
+        require(buyFeePercentage <= 3000, "MAX BUY FEES");
+        require(sellFeePercentage <= 3000, "MAX SELL FEES");
+        require(transferPercentage <= 3000, "MAX TRANSFER FEES");
         require(
-            buyFee + sellFee + transferFee <= 3000,
+            buyFeePercentage + sellFeePercentage + transferPercentage <= 3000,
             "MAX BUY, SELL, TRANSFER FEES"
         );
-        _feesRates.buyFee = buyFee;
-        _feesRates.sellFee = sellFee;
-        _feesRates.transferFee = transferFee;
+        _feesRates.buyFee = buyFeePercentage;
+        _feesRates.sellFee = sellFeePercentage;
+        _feesRates.transferFee = transferPercentage;
     }
 
     // transfer owner
@@ -169,7 +193,7 @@ contract MetaStock is ERC20 {
         bool mustContract = contractMustSwap(from, to);
         if (mustContract) {
             // Get contract tokens balance
-            uint256 numTokensToSwap = balanceOf(address(this));
+            uint256 numTokensToSwap = balanceOf(self());
 
             // swap teamPercent of tokens
             swapTokensForUSD(
@@ -186,7 +210,7 @@ contract MetaStock is ERC20 {
 
             /*
             // send to charity
-            IERC20(address(this)).transfer(
+            IERC20(self()).transfer(
                 charityWallet,
                 (numTokensToSwap * charityPercent) / masterTaxDivisor
             );
@@ -196,14 +220,17 @@ contract MetaStock is ERC20 {
             //burn((numTokensToSwap * burnPercent) / masterTaxDivisor);
 
             // send team percentage
-            //_sendToTeam();
+            //distributeToWallets();
         }
 
         _finalizeTransfer(from, to, amount);
     }
 
-    function _sendToTeam() internal virtual {
-        uint256 usdBalance = IERC20(usdAddress).balanceOf(address(this));
+    /**
+     * @notice Send the USD collected to the team and to the charity wallet
+     */
+    function distributeToWallets() internal virtual {
+        uint256 usdBalance = IERC20(usdAddress).balanceOf(self());
 
         for (uint256 index = 0; index < distributionWallets.length; index++) {
             IERC20(usdAddress).transfer(
@@ -239,7 +266,7 @@ contract MetaStock is ERC20 {
             amountReceived = amount - feeAmount;
 
             // and transfer fee to contract
-            super._transfer(from, address(this), feeAmount);
+            super._transfer(from, self(), feeAmount);
         }
 
         // finally send remaining tokens to recipient
@@ -280,7 +307,7 @@ contract MetaStock is ERC20 {
         address[] memory path = new address[](3);
         path[0] = usdAddress;
         path[1] = dexRouter.WETH();
-        path[2] = address(this);
+        path[2] = self();
 
         // Do approve for router spend swap token amount
         IERC20(usdAddress).approve(address(dexRouter), type(uint256).max);
@@ -291,7 +318,7 @@ contract MetaStock is ERC20 {
             usdAmount,
             0,
             path,
-            address(this),
+            self(),
             block.timestamp + 1000
         );
     }
@@ -309,7 +336,7 @@ contract MetaStock is ERC20 {
 
     function swapTokensForUSD(uint256 tokenAmount) private {
         address[] memory path = new address[](3);
-        path[0] = address(this);
+        path[0] = self();
         path[1] = dexRouter.WETH();
         path[2] = usdAddress;
 
@@ -322,7 +349,7 @@ contract MetaStock is ERC20 {
             tokenAmount,
             0,
             path,
-            address(this),
+            self(),
             block.timestamp + 1000
         );
     }
@@ -330,17 +357,17 @@ contract MetaStock is ERC20 {
     function swapTokensForBNB(uint256 tokenAmount) private {
         // generate the uniswap pair path of token -> weth
         address[] memory path = new address[](2);
-        path[0] = address(this);
+        path[0] = self();
         path[1] = dexRouter.WETH();
 
-        _approve(address(this), address(dexRouter), tokenAmount);
+        _approve(self(), address(dexRouter), tokenAmount);
 
         // make the swap
         dexRouter.swapExactTokensForETHSupportingFeeOnTransferTokens(
             tokenAmount,
             0, // accept any amount of ETH
             path,
-            address(this),
+            self(),
             block.timestamp + 1000
         );
     }
@@ -353,13 +380,13 @@ contract MetaStock is ERC20 {
         // this is so that we can capture exactly the amount of ETH that the
         // swap creates, and not make the liquidity event include any ETH that
         // has been manually sent to the contract
-        uint256 initialBalance = address(this).balance;
+        uint256 initialBalance = self().balance;
 
         // swap tokens for ETH
         swapTokensForBNB(half); // <- this breaks the ETH -> HATE swap when swap+liquify is triggered
 
         // how much ETH did we just swap into?
-        uint256 newBalance = address(this).balance - initialBalance;
+        uint256 newBalance = self().balance - initialBalance;
 
         // add liquidity to uniswap
         addLiquidity(half, newBalance);
@@ -367,11 +394,11 @@ contract MetaStock is ERC20 {
 
     function addLiquidity(uint256 tokenAmount, uint256 ethAmount) private {
         // approve token transfer to cover all possible scenarios
-        _approve(address(this), address(dexRouter), type(uint256).max);
+        _approve(self(), address(dexRouter), type(uint256).max);
 
         // add the liquidity
         dexRouter.addLiquidityETH{value: ethAmount}(
-            address(this),
+            self(),
             tokenAmount,
             0, // slippage is unavoidable
             0, // slippage is unavoidable
@@ -463,7 +490,7 @@ contract MetaStock is ERC20 {
         virtual
         returns (bool)
     {
-        uint256 contractTokenBalance = balanceOf(address(this));
+        uint256 contractTokenBalance = balanceOf(self());
         return
             contractTokenBalance >= swapThreshold &&
             !inSwap &&
