@@ -153,7 +153,7 @@ describe("Token contract", async () => {
 
 
     it("9. Sell Bob 1", async () => {
-        await busdContract.connect(deployer).transfer(bob?.address, parseEther("1"))
+        await busdContract.connect(deployer).transfer(bob?.address, parseEther("100"))
 
         let bobTokenBalance = await tokenDeployed.balanceOf(bob?.address);
         let bobBUSDBalance = await busdContract.balanceOf(bob?.address);
@@ -163,8 +163,8 @@ describe("Token contract", async () => {
         console.log(`${colors.cyan('Contract token balance Before SELL Swap')}: ${colors.yellow(formatEther(contractTokenBalance))}`)
 
 
-        await tokenDeployed.connect(bob).approve(router.address, parseEther("1"))
-        await util.sellForBUSD(tokenDeployed, router, bob, "1"); // 100 tokens
+        await tokenDeployed.connect(bob).approve(router.address, parseEther("100"))
+        await util.sellForBUSD(tokenDeployed, router, bob, "100"); // 100 tokens
 
         bobTokenBalance = await tokenDeployed.balanceOf(bob?.address);
         bobBUSDBalance = await busdContract.balanceOf(bob?.address);
