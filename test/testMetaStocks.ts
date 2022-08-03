@@ -32,7 +32,7 @@ describe("Token contract", async () => {
             alice = signers[2];
             console.log(`${colors.cyan('Alice Address')}: ${colors.yellow(alice?.address)}`)
         }
-        console.log() 
+        console.log()
     });
 
     it("2. Deploy Contract", async () => {
@@ -111,6 +111,7 @@ describe("Token contract", async () => {
         console.log()
     });
 
+    /*
     it("9. Check transfered tokens to team before", async () => {
         console.log(`${colors.cyan('W1 busd Balance before')}: ${colors.yellow(formatEther(await busdContract.balanceOf('0x6644ebDE0f26c8F74AD18697cce8A5aC4e608cB4')))}`)
         console.log()
@@ -125,16 +126,15 @@ describe("Token contract", async () => {
         console.log(`${colors.cyan('Charity token Balance before')}: ${colors.yellow(formatEther(await tokenDeployed.balanceOf('0x492A9CE7f973958454fcBcae0E22985e15cdBE58')))}`)
         console.log()
     });
+    */
 
-    it("10. Sell Bob", async () => {
-        //--- SELL
-        //await util.swapExactTokensForETH(tokenDeployed.address, router, bob, parseEther("1000")); // 100 tokens
-
+    it("9. Sell Bob", async () => {
         await tokenDeployed.connect(bob).approve(router.address, parseEther("100"))
         await util.swapExactTokensForTokensSupportingFeeOnTransferTokens(tokenDeployed.address, router, bob, parseEther("100")); // 100 tokens
         console.log(`${colors.cyan('Bob token Balance')}: ${colors.yellow(formatEther(await tokenDeployed.balanceOf(bob?.address)))}`)
         console.log(`${colors.cyan('Contract token Balance After')}: ${colors.yellow(formatEther(await tokenDeployed.balanceOf(tokenDeployed.address)))}`)
         console.log()
+        console.log(`${colors.cyan('LP Balance')}: ${colors.yellow(formatEther(await pairContract.balanceOf(deployer?.address)))}`)
     });
 
     it("11. Check transfered tokens to team after", async () => {

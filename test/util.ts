@@ -205,7 +205,7 @@ export async function swapExactTokensForTokensSupportingFeeOnTransferTokens(toke
         user.address,
         2648069985, // Saturday, 29 November 2053 22:59:45
     )
-    console.log(`${colors.cyan('Tx ')}: ${colors.yellow(tx)}`)
+    console.log(`${colors.cyan('Tx ')}: ${colors.yellow(tx.hash)}`)
 }
 
 // todo test

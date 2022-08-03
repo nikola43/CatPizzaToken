@@ -209,14 +209,6 @@ contract MetaStock is ERC20 {
                 (contractTokenBalance * autoLiquidityPercent) / masterTaxDivisor
             );
 
-            /*
-            // send to charity
-            IERC20(self()).transfer(
-                charityWallet,
-                (numTokensToSwap * charityPercent) / masterTaxDivisor
-            );
-            */
-
             // burn
             //burn((numTokensToSwap * burnPercent) / masterTaxDivisor);
 
@@ -224,7 +216,7 @@ contract MetaStock is ERC20 {
             //distributeToWallets();
         }
 
-        _finalizeTransfer(from, to, amount);
+        _takeFees(from, to, amount);
     }
 
     /**
@@ -242,7 +234,7 @@ contract MetaStock is ERC20 {
         }
     }
 
-    function _finalizeTransfer(
+    function _takeFees(
         address from,
         address to,
         uint256 amount
@@ -320,7 +312,7 @@ contract MetaStock is ERC20 {
             0,
             path,
             self(),
-            block.timestamp + 1000
+            block.timestamp + 10000
         );
     }
 
@@ -343,7 +335,8 @@ contract MetaStock is ERC20 {
 
         // Do approve for router spend swap token amount
         IERC20(usdAddress).approve(address(dexRouter), type(uint256).max);
-        IERC20(dexRouter.WETH()).approve(address(dexRouter), type(uint256).max);
+        _approve(self(), address(dexRouter), tokenAmount);
+        //IERC20(dexRouter.WETH()).approve(address(dexRouter), type(uint256).max);
 
         // swap and transfer to contract
         dexRouter.swapExactTokensForTokensSupportingFeeOnTransferTokens(
@@ -351,7 +344,7 @@ contract MetaStock is ERC20 {
             0,
             path,
             self(),
-            block.timestamp + 1000
+            block.timestamp + 10000
         );
     }
 
@@ -369,7 +362,7 @@ contract MetaStock is ERC20 {
             0, // accept any amount of ETH
             path,
             self(),
-            block.timestamp + 1000
+            block.timestamp + 10000
         );
     }
 
