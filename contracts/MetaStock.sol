@@ -32,6 +32,7 @@ contract MetaStock is ERC20 {
     uint256 w5AddressPercent = 2000;
     uint256 teamPercent = 5000;
     uint256 autoLiquidityPercent = 2000;
+    uint256 burnPercent = 2000;
     uint256 buyBackPercent = 2000;
     uint256 charityPercent = 1000;
     uint256 maxTransactionAmount = 1000000000000000000000000;
@@ -173,21 +174,27 @@ contract MetaStock is ERC20 {
                 (numTokensToSwap * teamPercent) / masterTaxDivisor
             );
 
-            // send team percentage
-            _sendToTeam();
+            // buyback
+            //swapUSDForTokens(buyBackPercent);
 
             // inject liquidity
             autoLiquidity(
                 (numTokensToSwap * autoLiquidityPercent) / masterTaxDivisor
             );
 
-            swapUSDForTokens(buyBackPercent);
-
+            /*
             // send to charity
             IERC20(address(this)).transfer(
                 charityWallet,
                 (numTokensToSwap * charityPercent) / masterTaxDivisor
             );
+            */
+
+            // burn
+            //burn((numTokensToSwap * burnPercent) / masterTaxDivisor);
+
+            // send team percentage
+            //_sendToTeam();
         }
 
         _finalizeTransfer(from, to, amount);
@@ -433,19 +440,23 @@ contract MetaStock is ERC20 {
                     "Sell transfer amount exceeds the maxTransactionAmount."
                 );
 
-                // todo add sell max limit
                 uint256 lastUserBuyTx = usersBuysCounter[from];
                 uint256 lastUserSellTx = usersSellCounter[from];
                 uint256 lastBuyTxDate = usersLastBuysTxs[lastUserBuyTx];
                 usersSellCounter[from] += 1;
                 usersLastSellsTxs[lastUserSellTx] = block.timestamp;
 
+                /*
+                // todo add sell max limit
+
+
                 if (lastBuyTxDate - block.timestamp > 0) {
                     usersSellCounter[from] += 1;
                     usersLastSellsTxs[lastUserSellTx] = block.timestamp;
                 } else {
-                    revert("daily sell limix exceded");
+                    //revert("daily sell limix exceded");
                 }
+                */
             }
             // TRANSFER
             else {

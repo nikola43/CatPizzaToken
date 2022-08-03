@@ -31,6 +31,7 @@ export interface MetaStockUtilsInterface extends utils.Interface {
     "sendToTeam(address,address[],uint256[])": FunctionFragment;
     "swapTokensForBNB(address,address,uint256)": FunctionFragment;
     "swapTokensForUSD(address,address,address,uint256)": FunctionFragment;
+    "swapUSDForTokens(address,address,address,uint256)": FunctionFragment;
   };
 
   getFunction(
@@ -41,6 +42,7 @@ export interface MetaStockUtilsInterface extends utils.Interface {
       | "sendToTeam"
       | "swapTokensForBNB"
       | "swapTokensForUSD"
+      | "swapUSDForTokens"
   ): FunctionFragment;
 
   encodeFunctionData(
@@ -91,6 +93,15 @@ export interface MetaStockUtilsInterface extends utils.Interface {
       PromiseOrValue<BigNumberish>
     ]
   ): string;
+  encodeFunctionData(
+    functionFragment: "swapUSDForTokens",
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>
+    ]
+  ): string;
 
   decodeFunctionResult(
     functionFragment: "addLiquidity",
@@ -111,6 +122,10 @@ export interface MetaStockUtilsInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "swapTokensForUSD",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "swapUSDForTokens",
     data: BytesLike
   ): Result;
 
@@ -188,6 +203,14 @@ export interface MetaStockUtils extends BaseContract {
       tokenAmount: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
+
+    swapUSDForTokens(
+      dexRouter: PromiseOrValue<string>,
+      tokenAddress: PromiseOrValue<string>,
+      usd: PromiseOrValue<string>,
+      tokenAmount: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
   };
 
   addLiquidity(
@@ -235,6 +258,14 @@ export interface MetaStockUtils extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
+  swapUSDForTokens(
+    dexRouter: PromiseOrValue<string>,
+    tokenAddress: PromiseOrValue<string>,
+    usd: PromiseOrValue<string>,
+    tokenAmount: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
   callStatic: {
     addLiquidity(
       dexRouter: PromiseOrValue<string>,
@@ -274,6 +305,14 @@ export interface MetaStockUtils extends BaseContract {
     ): Promise<void>;
 
     swapTokensForUSD(
+      dexRouter: PromiseOrValue<string>,
+      tokenAddress: PromiseOrValue<string>,
+      usd: PromiseOrValue<string>,
+      tokenAmount: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    swapUSDForTokens(
       dexRouter: PromiseOrValue<string>,
       tokenAddress: PromiseOrValue<string>,
       usd: PromiseOrValue<string>,
@@ -329,6 +368,14 @@ export interface MetaStockUtils extends BaseContract {
       tokenAmount: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
+
+    swapUSDForTokens(
+      dexRouter: PromiseOrValue<string>,
+      tokenAddress: PromiseOrValue<string>,
+      usd: PromiseOrValue<string>,
+      tokenAmount: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
   };
 
   populateTransaction: {
@@ -370,6 +417,14 @@ export interface MetaStockUtils extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     swapTokensForUSD(
+      dexRouter: PromiseOrValue<string>,
+      tokenAddress: PromiseOrValue<string>,
+      usd: PromiseOrValue<string>,
+      tokenAmount: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    swapUSDForTokens(
       dexRouter: PromiseOrValue<string>,
       tokenAddress: PromiseOrValue<string>,
       usd: PromiseOrValue<string>,

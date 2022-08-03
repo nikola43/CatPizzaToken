@@ -470,8 +470,8 @@
       ]
     },
     "E:\\Desktop\\CatPizzaToken\\contracts\\MetaStockUtils.sol": {
-      "lastModificationDate": 1659500482352,
-      "contentHash": "251549d9bd8a55437f8830f0527c2adf",
+      "lastModificationDate": 1659500953231,
+      "contentHash": "a78d832a6408ffc3dd5f7d1424b4f32c",
       "sourceName": "contracts/MetaStockUtils.sol",
       "solcConfig": {
         "version": "0.8.15",
@@ -510,8 +510,8 @@
       ]
     },
     "E:\\Desktop\\CatPizzaToken\\contracts\\MetaStock.sol": {
-      "lastModificationDate": 1659500753907,
-      "contentHash": "af8d47a1e63dfae6e36d03b03e28a519",
+      "lastModificationDate": 1659503296097,
+      "contentHash": "03f638705838d1447f4da93d7205a411",
       "sourceName": "contracts/MetaStock.sol",
       "solcConfig": {
         "version": "0.8.15",

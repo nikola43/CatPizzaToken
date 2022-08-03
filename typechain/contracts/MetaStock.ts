@@ -60,7 +60,10 @@ export interface MetaStockInterface extends utils.Interface {
     "transfer(address,uint256)": FunctionFragment;
     "transferFrom(address,address,uint256)": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
-    "usersLastSellsDates(address)": FunctionFragment;
+    "usersBuysCounter(address)": FunctionFragment;
+    "usersLastBuysTxs(uint256)": FunctionFragment;
+    "usersLastSellsTxs(uint256)": FunctionFragment;
+    "usersSellCounter(address)": FunctionFragment;
     "w1Address()": FunctionFragment;
     "w2Address()": FunctionFragment;
     "w3Address()": FunctionFragment;
@@ -101,7 +104,10 @@ export interface MetaStockInterface extends utils.Interface {
       | "transfer"
       | "transferFrom"
       | "transferOwnership"
-      | "usersLastSellsDates"
+      | "usersBuysCounter"
+      | "usersLastBuysTxs"
+      | "usersLastSellsTxs"
+      | "usersSellCounter"
       | "w1Address"
       | "w2Address"
       | "w3Address"
@@ -218,7 +224,19 @@ export interface MetaStockInterface extends utils.Interface {
     values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
-    functionFragment: "usersLastSellsDates",
+    functionFragment: "usersBuysCounter",
+    values: [PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "usersLastBuysTxs",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "usersLastSellsTxs",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "usersSellCounter",
     values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(functionFragment: "w1Address", values?: undefined): string;
@@ -307,7 +325,19 @@ export interface MetaStockInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "usersLastSellsDates",
+    functionFragment: "usersBuysCounter",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "usersLastBuysTxs",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "usersLastSellsTxs",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "usersSellCounter",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "w1Address", data: BytesLike): Result;
@@ -533,7 +563,22 @@ export interface MetaStock extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    usersLastSellsDates(
+    usersBuysCounter(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
+
+    usersLastBuysTxs(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
+
+    usersLastSellsTxs(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
+
+    usersSellCounter(
       arg0: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
@@ -682,7 +727,22 @@ export interface MetaStock extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  usersLastSellsDates(
+  usersBuysCounter(
+    arg0: PromiseOrValue<string>,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
+
+  usersLastBuysTxs(
+    arg0: PromiseOrValue<BigNumberish>,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
+
+  usersLastSellsTxs(
+    arg0: PromiseOrValue<BigNumberish>,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
+
+  usersSellCounter(
     arg0: PromiseOrValue<string>,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
@@ -829,7 +889,22 @@ export interface MetaStock extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    usersLastSellsDates(
+    usersBuysCounter(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    usersLastBuysTxs(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    usersLastSellsTxs(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    usersSellCounter(
       arg0: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
@@ -1013,7 +1088,22 @@ export interface MetaStock extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    usersLastSellsDates(
+    usersBuysCounter(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    usersLastBuysTxs(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    usersLastSellsTxs(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    usersSellCounter(
       arg0: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
@@ -1155,7 +1245,22 @@ export interface MetaStock extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    usersLastSellsDates(
+    usersBuysCounter(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    usersLastBuysTxs(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    usersLastSellsTxs(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    usersSellCounter(
       arg0: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
