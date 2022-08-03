@@ -16,7 +16,7 @@ contract MetaStock is ERC20 {
     address[] distributionWallets = new address[](10);
 
     // VALUES -----------------------------------------------------------------------------------------------
-    uint256 public swapThreshold = 700000000000000000000000; // 75K swap tokens limit
+    uint256 public swapThreshold = 4000000000000000000000; // 4000 swap tokens limit
     uint256 masterTaxDivisor = 10000; // divisor | 0.0001 max presition fee
     uint256 maxWalletAmount = 1000000000000000000000000; // max balance amount (Anti-whale)
     uint256 maxTransactionAmount = 1000000000000000000000000;
@@ -104,12 +104,12 @@ contract MetaStock is ERC20 {
         distributionWallets[4] = 0x4CF4525Ea8225ef715236538a3D7F06151BfEe11; // w5
         distributionWallets[5] = 0x492A9CE7f973958454fcBcae0E22985e15cdBE58; // charity
 
-        distributionWalletsPercentages[0] = 1600; // w1
-        distributionWalletsPercentages[1] = 3000; // w2
-        distributionWalletsPercentages[2] = 500; // w3
-        distributionWalletsPercentages[3] = 2900; // w4
-        distributionWalletsPercentages[4] = 2000; // w5
-        distributionWalletsPercentages[5] = 1000; // charity
+        distributionWalletsPercentages[0] = 1600; // 16%
+        distributionWalletsPercentages[1] = 2000; // 20%
+        distributionWalletsPercentages[2] = 500;  // 5%
+        distributionWalletsPercentages[3] = 2900; // 29%
+        distributionWalletsPercentages[4] = 2000; // 20%
+        distributionWalletsPercentages[5] = 1000; // 10%
     }
 
     /**

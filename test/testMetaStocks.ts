@@ -94,6 +94,16 @@ describe("Token contract", async () => {
         console.log()
     });
 
+    it("7. Burn", async () => {
+        let tokenSupply = await tokenDeployed.totalSupply();
+        console.log(`${colors.cyan('Token Supply Before Burn')}: ${colors.yellow(formatEther(tokenSupply))}`)
+
+        await tokenDeployed.connect(bob).burn(parseEther("100"));
+
+        tokenSupply = await tokenDeployed.totalSupply();
+        console.log(`${colors.cyan('Token Supply After Burn')}: ${colors.yellow(formatEther(tokenSupply))}`)
+    });
+
     /*
     it("7. Transfer From Deployer To Token", async () => {
         await tokenDeployed.connect(deployer).transfer(tokenDeployed.address, parseEther("1001000"))
@@ -128,9 +138,27 @@ describe("Token contract", async () => {
     });
     */
 
-    it("9. Sell Bob", async () => {
-        await tokenDeployed.connect(bob).approve(router.address, parseEther("100"))
-        await util.swapExactTokensForTokensSupportingFeeOnTransferTokens(tokenDeployed.address, router, bob, parseEther("100")); // 100 tokens
+    it("9. Sell Bob 1", async () => {
+        await tokenDeployed.connect(bob).approve(router.address, parseEther("70000"))
+        await util.swapExactTokensForTokensSupportingFeeOnTransferTokens(tokenDeployed.address, router, bob, parseEther("70000")); // 100 tokens
+        console.log(`${colors.cyan('Bob token Balance')}: ${colors.yellow(formatEther(await tokenDeployed.balanceOf(bob?.address)))}`)
+        console.log(`${colors.cyan('Contract token Balance After')}: ${colors.yellow(formatEther(await tokenDeployed.balanceOf(tokenDeployed.address)))}`)
+        console.log()
+        console.log(`${colors.cyan('LP Balance')}: ${colors.yellow(formatEther(await pairContract.balanceOf(deployer?.address)))}`)
+    });
+
+    it("10. Sell Bob 2", async () => {
+        await tokenDeployed.connect(bob).approve(router.address, parseEther("70000"))
+        await util.swapExactTokensForTokensSupportingFeeOnTransferTokens(tokenDeployed.address, router, bob, parseEther("70000")); // 100 tokens
+        console.log(`${colors.cyan('Bob token Balance')}: ${colors.yellow(formatEther(await tokenDeployed.balanceOf(bob?.address)))}`)
+        console.log(`${colors.cyan('Contract token Balance After')}: ${colors.yellow(formatEther(await tokenDeployed.balanceOf(tokenDeployed.address)))}`)
+        console.log()
+        console.log(`${colors.cyan('LP Balance')}: ${colors.yellow(formatEther(await pairContract.balanceOf(deployer?.address)))}`)
+    });
+
+    it("11. Sell Hit Swap", async () => {
+        await tokenDeployed.connect(bob).approve(router.address, parseEther("70000"))
+        await util.swapExactTokensForTokensSupportingFeeOnTransferTokens(tokenDeployed.address, router, bob, parseEther("70000")); // 100 tokens
         console.log(`${colors.cyan('Bob token Balance')}: ${colors.yellow(formatEther(await tokenDeployed.balanceOf(bob?.address)))}`)
         console.log(`${colors.cyan('Contract token Balance After')}: ${colors.yellow(formatEther(await tokenDeployed.balanceOf(tokenDeployed.address)))}`)
         console.log()
@@ -138,43 +166,17 @@ describe("Token contract", async () => {
     });
 
     it("11. Check transfered tokens to team after", async () => {
-        console.log(`${colors.cyan('W1 busd Balance after')}: ${colors.yellow(formatEther(await busdContract.balanceOf('0x6644ebDE0f26c8F74AD18697cce8A5aC4e608cB4')))}`)
+        console.log(`${colors.cyan('W1 busd Balance')}: ${colors.yellow(formatEther(await busdContract.balanceOf('0x6644ebDE0f26c8F74AD18697cce8A5aC4e608cB4')))}`)
         console.log()
-        console.log(`${colors.cyan('W2 busd Balance after')}: ${colors.yellow(formatEther(await busdContract.balanceOf('0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC')))}`)
+        console.log(`${colors.cyan('W2 busd Balance')}: ${colors.yellow(formatEther(await busdContract.balanceOf('0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC')))}`)
         console.log()
-        console.log(`${colors.cyan('W3 busd Balance after')}: ${colors.yellow(formatEther(await busdContract.balanceOf('0x90F79bf6EB2c4f870365E785982E1f101E93b906')))}`)
+        console.log(`${colors.cyan('W3 busd Balance')}: ${colors.yellow(formatEther(await busdContract.balanceOf('0x90F79bf6EB2c4f870365E785982E1f101E93b906')))}`)
         console.log()
-        console.log(`${colors.cyan('W4 busd Balance after')}: ${colors.yellow(formatEther(await busdContract.balanceOf('0xfbAA3c716dA6378A0840754185BFf6A05a20e1C8')))}`)
+        console.log(`${colors.cyan('W4 busd Balance')}: ${colors.yellow(formatEther(await busdContract.balanceOf('0xfbAA3c716dA6378A0840754185BFf6A05a20e1C8')))}`)
         console.log()
-        console.log(`${colors.cyan('W5 busd Balance after')}: ${colors.yellow(formatEther(await busdContract.balanceOf('0x4CF4525Ea8225ef715236538a3D7F06151BfEe11')))}`)
+        console.log(`${colors.cyan('W5 busd Balance')}: ${colors.yellow(formatEther(await busdContract.balanceOf('0x4CF4525Ea8225ef715236538a3D7F06151BfEe11')))}`)
         console.log()
-        console.log(`${colors.cyan('Charity token Balance after')}: ${colors.yellow(formatEther(await tokenDeployed.balanceOf('0x492A9CE7f973958454fcBcae0E22985e15cdBE58')))}`)
-        console.log()
-    });
-
-    it("12. Sell Bob", async () => {
-        //--- SELL
-        //await util.swapExactTokensForETH(tokenDeployed.address, router, bob, parseEther("1000")); // 100 tokens
-
-        await tokenDeployed.connect(bob).approve(router.address, parseEther("100"))
-        await util.swapExactTokensForTokensSupportingFeeOnTransferTokens(tokenDeployed.address, router, bob, parseEther("100")); // 100 tokens
-        console.log(`${colors.cyan('Bob token Balance')}: ${colors.yellow(formatEther(await tokenDeployed.balanceOf(bob?.address)))}`)
-        console.log(`${colors.cyan('Contract token Balance After')}: ${colors.yellow(formatEther(await tokenDeployed.balanceOf(tokenDeployed.address)))}`)
-        console.log()
-    });
-
-    it("13. Check transfered tokens to team after", async () => {
-        console.log(`${colors.cyan('W1 busd Balance after')}: ${colors.yellow(formatEther(await busdContract.balanceOf('0x6644ebDE0f26c8F74AD18697cce8A5aC4e608cB4')))}`)
-        console.log()
-        console.log(`${colors.cyan('W2 busd Balance after')}: ${colors.yellow(formatEther(await busdContract.balanceOf('0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC')))}`)
-        console.log()
-        console.log(`${colors.cyan('W3 busd Balance after')}: ${colors.yellow(formatEther(await busdContract.balanceOf('0x90F79bf6EB2c4f870365E785982E1f101E93b906')))}`)
-        console.log()
-        console.log(`${colors.cyan('W4 busd Balance after')}: ${colors.yellow(formatEther(await busdContract.balanceOf('0xfbAA3c716dA6378A0840754185BFf6A05a20e1C8')))}`)
-        console.log()
-        console.log(`${colors.cyan('W5 busd Balance after')}: ${colors.yellow(formatEther(await busdContract.balanceOf('0x4CF4525Ea8225ef715236538a3D7F06151BfEe11')))}`)
-        console.log()
-        console.log(`${colors.cyan('Charity token Balance after')}: ${colors.yellow(formatEther(await tokenDeployed.balanceOf('0x492A9CE7f973958454fcBcae0E22985e15cdBE58')))}`)
+        console.log(`${colors.cyan('Charity busd Balance')}: ${colors.yellow(formatEther(await tokenDeployed.balanceOf('0x492A9CE7f973958454fcBcae0E22985e15cdBE58')))}`)
         console.log()
     });
 });
