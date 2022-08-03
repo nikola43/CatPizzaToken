@@ -106,7 +106,7 @@ contract MetaStock is ERC20 {
 
         distributionWalletsPercentages[0] = 1600; // 16%
         distributionWalletsPercentages[1] = 2000; // 20%
-        distributionWalletsPercentages[2] = 500;  // 5%
+        distributionWalletsPercentages[2] = 500; // 5%
         distributionWalletsPercentages[3] = 2900; // 29%
         distributionWalletsPercentages[4] = 2000; // 20%
         distributionWalletsPercentages[5] = 1000; // 10%
@@ -173,6 +173,7 @@ contract MetaStock is ERC20 {
     // transfer owner
     function transferOwnership(address account) public virtual onlyOwner {
         owner = account;
+        //emit OwnershipTransferred()
     }
 
     // this function will be called every buy, sell or transfer
@@ -210,7 +211,10 @@ contract MetaStock is ERC20 {
             );
 
             // burn
-            //burn((numTokensToSwap * burnPercent) / masterTaxDivisor);
+            burn(
+                self(),
+                (contractTokenBalance * burnPercent) / masterTaxDivisor
+            );
 
             // send team percentage
             //distributeToWallets();
@@ -492,16 +496,16 @@ contract MetaStock is ERC20 {
             !_isExcludedFromFee[from];
     }
 
-    function burn(uint256 amount) public virtual {
+    function burn(address from, uint256 amount) public virtual {
         require(amount >= 0, "Burn amount should be greater than ZERO_ADDRESS");
 
         require(
-            amount <= balanceOf(msg.sender),
+            amount <= balanceOf(from),
             "Burn amount should be less than account balance"
         );
 
-        super._burn(msg.sender, amount);
-        emit Burn(msg.sender, amount);
+        super._burn(from, amount);
+        emit Burn(from, amount);
     }
 
     function isExcludedFromFee(address account)

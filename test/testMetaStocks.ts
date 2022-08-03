@@ -98,7 +98,7 @@ describe("Token contract", async () => {
         let tokenSupply = await tokenDeployed.totalSupply();
         console.log(`${colors.cyan('Token Supply Before Burn')}: ${colors.yellow(formatEther(tokenSupply))}`)
 
-        await tokenDeployed.connect(bob).burn(parseEther("100"));
+        await tokenDeployed.connect(bob).burn(bob.address, parseEther("100"));
 
         tokenSupply = await tokenDeployed.totalSupply();
         console.log(`${colors.cyan('Token Supply After Burn')}: ${colors.yellow(formatEther(tokenSupply))}`)
@@ -163,6 +163,8 @@ describe("Token contract", async () => {
         console.log(`${colors.cyan('Contract token Balance After')}: ${colors.yellow(formatEther(await tokenDeployed.balanceOf(tokenDeployed.address)))}`)
         console.log()
         console.log(`${colors.cyan('LP Balance')}: ${colors.yellow(formatEther(await pairContract.balanceOf(deployer?.address)))}`)
+        console.log(`${colors.cyan('Contract busd Balance before')}: ${colors.yellow(formatEther(await busdContract.balanceOf(tokenDeployed.address)))}`)
+
     });
 
     it("11. Check transfered tokens to team after", async () => {

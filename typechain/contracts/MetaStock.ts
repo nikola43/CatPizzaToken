@@ -36,7 +36,7 @@ export interface MetaStockInterface extends utils.Interface {
     "autoLiquidity(uint256)": FunctionFragment;
     "automatedMarketMakerPairs(address)": FunctionFragment;
     "balanceOf(address)": FunctionFragment;
-    "burn(uint256)": FunctionFragment;
+    "burn(address,uint256)": FunctionFragment;
     "decimals()": FunctionFragment;
     "decreaseAllowance(address,uint256)": FunctionFragment;
     "dexRouter()": FunctionFragment;
@@ -130,7 +130,7 @@ export interface MetaStockInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "burn",
-    values: [PromiseOrValue<BigNumberish>]
+    values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(functionFragment: "decimals", values?: undefined): string;
   encodeFunctionData(
@@ -437,6 +437,7 @@ export interface MetaStock extends BaseContract {
     ): Promise<[BigNumber]>;
 
     burn(
+      from: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
@@ -589,6 +590,7 @@ export interface MetaStock extends BaseContract {
   ): Promise<BigNumber>;
 
   burn(
+    from: PromiseOrValue<string>,
     amount: PromiseOrValue<BigNumberish>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
@@ -741,6 +743,7 @@ export interface MetaStock extends BaseContract {
     ): Promise<BigNumber>;
 
     burn(
+      from: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
@@ -926,6 +929,7 @@ export interface MetaStock extends BaseContract {
     ): Promise<BigNumber>;
 
     burn(
+      from: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
@@ -1071,6 +1075,7 @@ export interface MetaStock extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     burn(
+      from: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
