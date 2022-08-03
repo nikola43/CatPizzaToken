@@ -3,7 +3,7 @@ import { SignerWithAddress } from '@nomiclabs/hardhat-ethers/signers'
 import { randomBytes } from 'crypto'
 import fs from "fs";
 import { artifacts, network } from "hardhat";
-
+import { ExecException } from 'child_process'
 const { ethers, upgrades } = require('hardhat')
 const { parseEther, formatEther } = ethers.utils
 const { getImplementationAddress } = require('@openzeppelin/upgrades-core')
@@ -33,6 +33,7 @@ export const chains: Record<string, Record<string, any>> = {
         whaleBUSD: "0x352a7a5277ec7619500b06fa051974621c1acd12",
         methods: {
             addLiquidity: 'addLiquidity',
+            addLiquidityETH: 'addLiquidityETH',
         }
     }
 }
@@ -52,6 +53,24 @@ export function getFactoryName(dex: string) {
 export async function getProxyImplementation(proxyAddress: string): Promise<string> {
     return await getImplementationAddress(provider, proxyAddress)
 }
+
+export async function verifyWithotDeploy(
+    contractName: string,
+    contractAddress: string,
+    args: any = []
+) {
+    const tokenImplementationAddress = await getImplementationAddress(
+        ethers.provider,
+        contractAddress
+    )
+
+    await updateABI(contractName)
+
+    console.log('\nVerifing... ' + tokenImplementationAddress + "\n")
+    await verify(tokenImplementationAddress, args)
+}
+
+
 
 export async function connectRouter(): Promise<Contract> {
     return await ethers.getContractAt(
@@ -115,7 +134,6 @@ export const updateABI = async (contractName: string) => {
     )
 }
 
-
 export const deployProxyInitialize = async (contractName: string, autoVerify: boolean = true, args: any = []): Promise<Contract> => {
     /*
     const Token = await ethers.getContractFactory("TokenV1");
@@ -145,26 +163,61 @@ export const deployProxyInitialize = async (contractName: string, autoVerify: bo
     return token
 }
 
-export const verify = async (contractAddress: string, args = []) => {
+export const verify = async (contractAddress: string, contractName: string, args: any[] = []) => {
     // @ts-ignore
     if (network == 'localhost' || network == 'hardhat') return
     try {
+        await updateABI(contractName)
         await hre.run("verify:verify", {
             address: contractAddress,
             constructorArguments: args,
         });
     } catch (ex) {
+        console.log(ex);
+
     }
 }
 
-export const deployProxy = async (contractName: string, args = []): Promise<Contract> => {
+export const deployProxy = async (contractName: string, args: any[] = []): Promise<Contract> => {
     const factory = await ethers.getContractFactory(contractName)
     const contract = await upgrades.deployProxy(factory, args)
     const token = await contract.deployed()
     const implAddress = await getImplementationAddress(ethers.provider, token.address);
     await updateABI(contractName)
-    await verify(implAddress, args)
+    await verify(implAddress, contractName, args)
     console.log(contractName, token.address, implAddress)
+    return token
+}
+
+const deployProxyV2 = async (
+    contractName: string,
+    autoVerify = true,
+    args: any = []
+): Promise<Contract> => {
+    let token: Contract;
+    const factory = await ethers.getContractFactory(contractName)
+
+    if (args) {
+        const contract =
+            args.length >= 1
+                ? await upgrades.deployProxy(factory, args)
+                : await upgrades.deployProxy(factory)
+        token = await contract.deployed()
+    } else {
+        const contract = await upgrades.deployProxy(factory)
+        token = await contract.deployed()
+    }
+
+    const implAddress = await getImplementationAddress(
+        ethers.provider,
+        token.address
+    )
+    await updateABI(contractName)
+
+    if (autoVerify) {
+        console.log('\nVerifing')
+        await verify(implAddress, args)
+    }
     return token
 }
 
@@ -205,7 +258,7 @@ export async function swapExactTokensForTokensSupportingFeeOnTransferTokens(toke
         user.address,
         2648069985, // Saturday, 29 November 2053 22:59:45
     )
-    console.log(`${colors.cyan('Tx ')}: ${colors.yellow(tx.hash)}`)
+    console.log(`${colors.cyan('Tx ')}: ${colors.yellow(tx)}`)
 }
 
 // todo test
@@ -448,3 +501,51 @@ const avalancheFujiTestnet = {
 //         {value: BNBamount}
 //     )
 // }
+
+/**
+ * Executes a shell command and return it as a Promise.
+ * @param cmd {string}
+ * @return {Promise<string>}
+ */
+function execShellCommand(cmd: string) {
+    const exec = require('child_process').exec
+    return new Promise((resolve) => {
+        exec(cmd, (error: ExecException, stdout: string, stderr: string) => {
+            if (error) {
+                console.warn(error)
+            }
+            resolve(stdout ? stdout : stderr)
+        })
+    })
+}
+
+export const sleep = async (seconds: string) => {
+    console.log(`Sleeping for ${seconds} seconds`)
+    await execShellCommand("sleep " + seconds);
+    console.log("END")
+}
+
+
+
+export default module.exports = {
+    connectRouter,
+    connectPair,
+    connectFactory,
+    deployProxy,
+    getProxyImplementation,
+    generateRandomAddresses,
+    deployProxyInitialize,
+    connectWAVAX: connectWAVAX,
+    generateRandomAmount,
+    swapExactTokensForAVAXSupportingFeeOnTransferTokens,
+    chains,
+    swapExactETHForTokens,
+    swapExactTokensForETH,
+    swapExactTokensForTokensSupportingFeeOnTransferTokens,
+    verifyWithotDeploy,
+    updateABI,
+    deployProxyV2,
+    verify,
+    sleep,
+    connectBUSD
+}

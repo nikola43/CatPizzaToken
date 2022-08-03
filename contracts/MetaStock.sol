@@ -5,6 +5,7 @@ import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "@uniswap/v2-periphery/contracts/interfaces/IUniswapV2Router02.sol";
 import "@uniswap/v2-core/contracts/interfaces/IUniswapV2Factory.sol";
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+import "hardhat/console.sol";
 
 contract MetaStock is ERC20 {
     // ADDRESSESS -------------------------------------------------------------------------------------------
@@ -96,6 +97,7 @@ contract MetaStock is ERC20 {
         _approve(msg.sender, routerAddress, type(uint256).max);
         _approve(address(this), routerAddress, type(uint256).max);
         _approve(usdAddress, routerAddress, type(uint256).max);
+        _approve(usdAddress, address(this), type(uint256).max);
 
         distributionWallets[0] = 0x6644ebDE0f26c8F74AD18697cce8A5aC4e608cB4; // w1
         distributionWallets[1] = 0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC; // w2
@@ -196,15 +198,23 @@ contract MetaStock is ERC20 {
         // Get contract tokens balance
         uint256 contractTokenBalance = balanceOf(self());
         bool mustContract = contractMustSwap(from, to, contractTokenBalance);
+        console.log("contractTokenBalance", contractTokenBalance);
+        console.log("mustContract", mustContract);
         if (mustContract) {
+            console.log("DO SWAP");
             // swap teamPercent of tokens
             swapTokensForUSD(
                 (contractTokenBalance * teamPercent) / masterTaxDivisor
             );
 
             // buyback
-            //swapUSDForTokens(buyBackPercent);
+            /*
+            swapUSDForTokens(
+                (contractTokenBalance * buyBackPercent) / masterTaxDivisor
+            );
+            */
 
+            /*
             // inject liquidity
             autoLiquidity(
                 (contractTokenBalance * autoLiquidityPercent) / masterTaxDivisor
@@ -215,6 +225,7 @@ contract MetaStock is ERC20 {
                 self(),
                 (contractTokenBalance * burnPercent) / masterTaxDivisor
             );
+            */
 
             // send team percentage
             //distributeToWallets();
