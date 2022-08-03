@@ -56,7 +56,17 @@ describe("Token contract", async () => {
         console.log(`${colors.cyan('Busd Address')}: ${colors.yellow(busdContract?.address)}`)
     });
 
-    it("3. Add Liquidity", async () => {
+    it("3. Swap BNB FOR USD", async () => {
+        const ownerBUSDBalance = await busdContract.balanceOf(deployer);
+        console.log(`${colors.cyan('BUSD Balance Before SWAP')}: ${colors.yellow(formatEther(ownerBUSDBalance))}`);
+        await util.swapBNBtoBUSD(busdContract, router, deployer, parseEther('50'));
+
+        const ownerBUSDBalanceAfter = await busdContract.balanceOf(deployer);
+        console.log(`${colors.cyan('BUSD Balance After SWAP')}: ${colors.yellow(formatEther(ownerBUSDBalanceAfter))}`);
+    });
+
+
+    it("4. Add Liquidity", async () => {
         await tokenDeployed.approve(util.chains.bsc.router, ethers.constants.MaxUint256, { from: deployer?.address })
         await router.connect(deployer).addLiquidityETH(
             tokenDeployed.address,
@@ -202,10 +212,6 @@ describe("Token contract", async () => {
         console.log()
     });
 
-    /*
-
-
-
     it("11. Check transfered tokens to team after", async () => {
         console.log(`${colors.cyan('W1 busd Balance')}: ${colors.yellow(formatEther(await busdContract.balanceOf('0x6644ebDE0f26c8F74AD18697cce8A5aC4e608cB4')))}`)
         console.log()
@@ -220,5 +226,4 @@ describe("Token contract", async () => {
         console.log(`${colors.cyan('Charity busd Balance')}: ${colors.yellow(formatEther(await tokenDeployed.balanceOf('0x492A9CE7f973958454fcBcae0E22985e15cdBE58')))}`)
         console.log()
     });
-    */
 });

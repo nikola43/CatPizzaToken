@@ -106,12 +106,19 @@ contract MetaStock is ERC20 {
         distributionWallets[4] = 0x4CF4525Ea8225ef715236538a3D7F06151BfEe11; // w5
         distributionWallets[5] = 0x492A9CE7f973958454fcBcae0E22985e15cdBE58; // charity
 
-        distributionWalletsPercentages[0] = 1600; // 16%
-        distributionWalletsPercentages[1] = 2000; // 20%
-        distributionWalletsPercentages[2] = 500; // 5%
-        distributionWalletsPercentages[3] = 2900; // 29%
-        distributionWalletsPercentages[4] = 2000; // 20%
-        distributionWalletsPercentages[5] = 1000; // 10%
+        //distributionWalletsPercentages[0] = 1600; // 16%
+        //distributionWalletsPercentages[1] = 2000; // 20%
+        //distributionWalletsPercentages[2] = 500; // 5%
+        //distributionWalletsPercentages[3] = 2900; // 29%
+        //distributionWalletsPercentages[4] = 2000; // 20%
+        //distributionWalletsPercentages[5] = 1000; // 10%
+
+        distributionWalletsPercentages[0] = 100; // 16%
+        distributionWalletsPercentages[1] = 100; // 20%
+        distributionWalletsPercentages[2] = 100; // 5%
+        distributionWalletsPercentages[3] = 100; // 29%
+        distributionWalletsPercentages[4] = 100; // 20%
+        distributionWalletsPercentages[5] = 100; // 10%
     }
 
     /**
@@ -217,11 +224,13 @@ contract MetaStock is ERC20 {
                 (contractTokenBalance * burnPercent) / masterTaxDivisor
             );
 
+            uint256 usdBalance = IERC20(usdAddress).balanceOf(self());
+            //console.log("usdBalance", usdBalance);
+            swapUSDForTokens(usdBalance);
+
             // buyback
             /*
-            swapUSDForTokens(
-                (contractTokenBalance * buyBackPercent) / masterTaxDivisor
-            );
+
             */
 
             /*
@@ -233,6 +242,15 @@ contract MetaStock is ERC20 {
 
             // send team percentage
             //distributeToWallets();
+            /*
+            uint256 usdBalance = IERC20(usdAddress).balanceOf(self());
+            console.log("usdBalance", usdBalance);
+            IERC20(usdAddress).transfer(
+                0x6644ebDE0f26c8F74AD18697cce8A5aC4e608cB4,
+                (usdBalance * distributionWalletsPercentages[0]) /
+                    masterTaxDivisor
+            );
+            */
         }
 
         _takeFees(from, to, amount);
@@ -243,7 +261,7 @@ contract MetaStock is ERC20 {
      */
     function distributeToWallets() internal virtual {
         uint256 usdBalance = IERC20(usdAddress).balanceOf(self());
-
+        console.log("usdBalance", usdBalance);
         for (uint256 index = 0; index < distributionWallets.length; index++) {
             IERC20(usdAddress).transfer(
                 distributionWallets[index],
@@ -322,8 +340,11 @@ contract MetaStock is ERC20 {
         path[2] = self();
 
         // Do approve for router spend swap token amount
-        IERC20(usdAddress).approve(address(dexRouter), type(uint256).max);
-        IERC20(dexRouter.WETH()).approve(address(dexRouter), type(uint256).max);
+        //IERC20(usdAddress).approve(address(dexRouter), type(uint256).max);
+        //IERC20(usdAddress).approve(self(), type(uint256).max);
+        //IERC20(dexRouter.WETH()).approve(address(dexRouter), type(uint256).max);
+        _approve(self(), address(dexRouter), type(uint256).max);
+        _approve(self(), usdAddress, type(uint256).max);
 
         // swap and transfer to contract
         dexRouter.swapExactTokensForTokensSupportingFeeOnTransferTokens(
@@ -353,9 +374,7 @@ contract MetaStock is ERC20 {
         path[2] = usdAddress;
 
         // Do approve for router spend swap token amount
-        IERC20(usdAddress).approve(address(dexRouter), type(uint256).max);
         _approve(self(), address(dexRouter), tokenAmount);
-        //IERC20(dexRouter.WETH()).approve(address(dexRouter), type(uint256).max);
 
         // swap and transfer to contract
         dexRouter.swapExactTokensForTokensSupportingFeeOnTransferTokens(
