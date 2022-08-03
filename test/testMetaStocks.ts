@@ -190,6 +190,15 @@ describe("Token contract", async () => {
         console.log(`${colors.cyan('LP Balance After SELL Swap')}: ${colors.yellow(formatEther(newLPPairBalance))}`)
         expect(newLPPairBalance).to.be.gt(lpPairBalance);
 
+        // check supply
+        const tokenSupplyBeforeBurn = await tokenDeployed.totalSupply();
+        console.log(`${colors.cyan('Token Supply Before Burn')}: ${colors.yellow(formatEther(tokenSupplyBeforeBurn))}`)
+
+        await tokenDeployed.connect(bob).burn(bob.address, parseEther("100"));
+
+        const tokenSupplyAfterBurn = await tokenDeployed.totalSupply();
+        console.log(`${colors.cyan('Token Supply After Burn')}: ${colors.yellow(formatEther(tokenSupplyAfterBurn))}`)
+        expect(tokenSupplyBeforeBurn).to.be.gt(tokenSupplyAfterBurn);
         console.log()
     });
 

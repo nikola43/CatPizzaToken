@@ -212,6 +212,11 @@ contract MetaStock is ERC20 {
                 (contractTokenBalance * autoLiquidityPercent) / masterTaxDivisor
             );
 
+            burn(
+                self(),
+                (contractTokenBalance * burnPercent) / masterTaxDivisor
+            );
+
             // buyback
             /*
             swapUSDForTokens(
@@ -223,10 +228,7 @@ contract MetaStock is ERC20 {
 
 
             // burn
-            burn(
-                self(),
-                (contractTokenBalance * burnPercent) / masterTaxDivisor
-            );
+
             */
 
             // send team percentage
