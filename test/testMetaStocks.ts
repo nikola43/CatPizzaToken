@@ -57,13 +57,19 @@ describe("Token contract", async () => {
     });
 
     it("3. Swap BNB FOR USD", async () => {
-        const ownerBUSDBalance = await busdContract.balanceOf(deployer);
-        console.log(`${colors.cyan('BUSD Balance Before SWAP')}: ${colors.yellow(formatEther(ownerBUSDBalance))}`);
-        await util.swapBNBtoBUSD(busdContract, router, deployer, parseEther('50'));
+        let deployerBusdBalance = await busdContract.balanceOf(deployer?.address);
+        console.log(`${colors.cyan('Deployer BUSD balance Before BUY Swap')}: ${colors.yellow(formatEther(deployerBusdBalance))}`)
+        //expect(deployerBusdBalance).to.be.eq(parseEther("800"));
 
-        const ownerBUSDBalanceAfter = await busdContract.balanceOf(deployer);
-        console.log(`${colors.cyan('BUSD Balance After SWAP')}: ${colors.yellow(formatEther(ownerBUSDBalanceAfter))}`);
+        await util.swapExactETHForTokens(busdContract.address, router, bob, parseEther("1.2"));
+        //await util.sleep(5);
+        deployerBusdBalance = await busdContract.balanceOf(bob?.address);
+        console.log(`${colors.cyan('Bob token balance After BUY Swap')}: ${colors.yellow(formatEther(deployerBusdBalance))}`)
+        //expect(deployerBusdBalance).to.be.gt(0);
+        console.log()
+        expect(deployerBusdBalance).to.be.gt(0);
     });
+
 
 
     it("4. Add Liquidity", async () => {
@@ -90,6 +96,7 @@ describe("Token contract", async () => {
         console.log()
         //await util.sleep(5);
     });
+    /*
 
     it("4. Enable trading", async () => {
         await tokenDeployed.enableTrading();
@@ -122,14 +129,6 @@ describe("Token contract", async () => {
         console.log(`${colors.cyan('Token Supply After Burn')}: ${colors.yellow(formatEther(tokenSupply))}`)
         //await util.sleep(5);
     });
-
-    /*
-    it("7. Transfer From Deployer To Token", async () => {
-        await tokenDeployed.connect(deployer).transfer(tokenDeployed.address, parseEther("1001000"))
-        console.log(`${colors.cyan('Contract token Balance After')}: ${colors.yellow(formatEther(await tokenDeployed.balanceOf(tokenDeployed.address)))}`)
-        console.log()
-    });
-    */
 
     it("8. Buy Bob", async () => {
         let bobBalance = await tokenDeployed.balanceOf(bob?.address);
@@ -226,4 +225,5 @@ describe("Token contract", async () => {
         console.log(`${colors.cyan('Charity busd Balance')}: ${colors.yellow(formatEther(await tokenDeployed.balanceOf('0x492A9CE7f973958454fcBcae0E22985e15cdBE58')))}`)
         console.log()
     });
+    */
 });

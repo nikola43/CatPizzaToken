@@ -425,22 +425,6 @@ export async function sellLFG(token: Contract, router: Contract, user: SignerWit
     )
 }
 
-export const swapBNBtoBUSD = async (tokenBUSD: Contract, router: Contract, user: SignerWithAddress, _value: any) => {
-
-
-    await router.connect(user).swapExactETHForTokens(
-        0, //amountOutMin
-        [chains?.bsc?.wChainCoin, chains?.bsc?.BUSD], //path
-        user.address,
-        2648069985, // Saturday, 29 November 2053 22:59:45
-        { value: _value }
-    )
-    const busdBalance = await tokenBUSD.balanceOf(user.address)
-    //console.log('busdBalance', formatEther(busdBalance))
-    await tokenBUSD.connect(user).approve(router.address, busdBalance);
-    await tokenBUSD.connect(user).approve(tokenBUSD.address, busdBalance);
-}
-
 export const percentage = (val_one: number, val_two: number) => {
     return 100 - Math.floor(val_one * 100 / val_two)
 }
@@ -563,6 +547,5 @@ export default module.exports = {
     deployProxyV2,
     verify,
     sleep,
-    connectBUSD,
-    swapBNBtoBUSD
+    connectBUSD
 }
