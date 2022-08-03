@@ -11,31 +11,21 @@ contract MetaStock is ERC20 {
     address public owner; // contract owner
     address public DEAD = 0x000000000000000000000000000000000000dEaD; // DEAD Address for burn tokens
     address public lpPair; // Liquidity token address
-    address public swapTokenAddress =
-        0x78867BbEeF44f2326bF8DDd1941a4439382EF2A7; // tokens who contract will receive after swap
-    address public w1Address = 0x6644ebDE0f26c8F74AD18697cce8A5aC4e608cB4; // fee wallet address
-    address public w2Address = 0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC; // fee wallet address
-    address public w3Address = 0x90F79bf6EB2c4f870365E785982E1f101E93b906; // fee wallet address
-    address public w4Address = 0xfbAA3c716dA6378A0840754185BFf6A05a20e1C8; // fee wallet address
-    address public w5Address = 0x4CF4525Ea8225ef715236538a3D7F06151BfEe11; // fee wallet address
-    address public charityWallet = 0x492A9CE7f973958454fcBcae0E22985e15cdBE58; // charity wallet address
+    address public usdAddress = 0x78867BbEeF44f2326bF8DDd1941a4439382EF2A7; // usd
     address routerAddress = 0x9Ac64Cc6e4415144C455BD8E4837Fea55603e5c3;
+    address[] distributionWallets = new address[](10);
 
     // VALUES -----------------------------------------------------------------------------------------------
-    uint256 public swapThreshold = 1000000000000000000000000; // swap tokens limit
+    uint256 public swapThreshold = 700000000000000000000000; // 75K swap tokens limit
     uint256 masterTaxDivisor = 10000; // divisor | 0.0001 max presition fee
     uint256 maxWalletAmount = 1000000000000000000000000; // max balance amount (Anti-whale)
-    uint256 w1AddressPercent = 1600;
-    uint256 w2AddressPercent = 3000;
-    uint256 w3AddressPercent = 500;
-    uint256 w4AddressPercent = 2900;
-    uint256 w5AddressPercent = 2000;
+
     uint256 teamPercent = 5000;
     uint256 autoLiquidityPercent = 2000;
     uint256 burnPercent = 2000;
     uint256 buyBackPercent = 2000;
-    uint256 charityPercent = 1000;
     uint256 maxTransactionAmount = 1000000000000000000000000;
+    uint256[] distributionWalletsPercentages = new uint256[](10);
 
     // BOOLEANS ---------------------------------------------------------------------------------------------
     bool inSwap; // used for dont take fee on swaps
@@ -97,8 +87,6 @@ contract MetaStock is ERC20 {
         // owner, token and marketing address
         _isExcludedFromFee[owner] = true;
         _isExcludedFromFee[address(this)] = true;
-        //_isExcludedFromFee[marketingAddress] = true;
-        //_isExcludedFromFee[swapTokenAddress] = true;
 
         // Set Router Address (Pancake by default)
         dexRouter = IUniswapV2Router02(routerAddress);
@@ -113,7 +101,21 @@ contract MetaStock is ERC20 {
         // do approve to router from owner and contract
         _approve(msg.sender, routerAddress, type(uint256).max);
         _approve(address(this), routerAddress, type(uint256).max);
-        _approve(swapTokenAddress, routerAddress, type(uint256).max);
+        _approve(usdAddress, routerAddress, type(uint256).max);
+
+        distributionWallets[0] = 0x6644ebDE0f26c8F74AD18697cce8A5aC4e608cB4; // w1
+        distributionWallets[1] = 0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC; // w2
+        distributionWallets[2] = 0x90F79bf6EB2c4f870365E785982E1f101E93b906; // w3
+        distributionWallets[3] = 0xfbAA3c716dA6378A0840754185BFf6A05a20e1C8; // w4
+        distributionWallets[4] = 0x4CF4525Ea8225ef715236538a3D7F06151BfEe11; // w5
+        distributionWallets[5] = 0x492A9CE7f973958454fcBcae0E22985e15cdBE58; // charity
+
+        distributionWalletsPercentages[0] = 1600; // w1
+        distributionWalletsPercentages[1] = 3000; // w2
+        distributionWalletsPercentages[2] = 500;  // w3
+        distributionWalletsPercentages[3] = 2900; // w4
+        distributionWalletsPercentages[4] = 2000; // w5
+        distributionWalletsPercentages[5] = 1000; // charity 
     }
 
     // To receive BNB from dexRouter when swapping
@@ -164,8 +166,8 @@ contract MetaStock is ERC20 {
         }
 
         // DO SWAP AND AUTOLIQUIDITY
-        if (contractMustSwap(from, to)) {
-            // SWAP
+        bool mustContract = contractMustSwap(from, to);
+        if (mustContract) {
             // Get contract tokens balance
             uint256 numTokensToSwap = balanceOf(address(this));
 
@@ -201,28 +203,15 @@ contract MetaStock is ERC20 {
     }
 
     function _sendToTeam() internal virtual {
-        uint256 usdBalance = IERC20(swapTokenAddress).balanceOf(address(this));
+        uint256 usdBalance = IERC20(usdAddress).balanceOf(address(this));
 
-        IERC20(swapTokenAddress).transfer(
-            w1Address,
-            (usdBalance * w1AddressPercent) / masterTaxDivisor
-        );
-        IERC20(swapTokenAddress).transfer(
-            w2Address,
-            (usdBalance * w2AddressPercent) / masterTaxDivisor
-        );
-        IERC20(swapTokenAddress).transfer(
-            w3Address,
-            (usdBalance * w3AddressPercent) / masterTaxDivisor
-        );
-        IERC20(swapTokenAddress).transfer(
-            w4Address,
-            (usdBalance * w4AddressPercent) / masterTaxDivisor
-        );
-        IERC20(swapTokenAddress).transfer(
-            w5Address,
-            (usdBalance * w5AddressPercent) / masterTaxDivisor
-        );
+        for (uint256 index = 0; index < distributionWallets.length; index++) {
+            IERC20(usdAddress).transfer(
+                distributionWallets[index],
+                (usdBalance * distributionWalletsPercentages[index]) /
+                    masterTaxDivisor
+            );
+        }
     }
 
     function _finalizeTransfer(
@@ -289,12 +278,12 @@ contract MetaStock is ERC20 {
 
     function swapUSDForTokens(uint256 usdAmount) private {
         address[] memory path = new address[](3);
-        path[0] = swapTokenAddress;
+        path[0] = usdAddress;
         path[1] = dexRouter.WETH();
         path[2] = address(this);
 
         // Do approve for router spend swap token amount
-        IERC20(swapTokenAddress).approve(address(dexRouter), type(uint256).max);
+        IERC20(usdAddress).approve(address(dexRouter), type(uint256).max);
         IERC20(dexRouter.WETH()).approve(address(dexRouter), type(uint256).max);
 
         // swap and transfer to contract
@@ -322,10 +311,10 @@ contract MetaStock is ERC20 {
         address[] memory path = new address[](3);
         path[0] = address(this);
         path[1] = dexRouter.WETH();
-        path[2] = swapTokenAddress;
+        path[2] = usdAddress;
 
         // Do approve for router spend swap token amount
-        IERC20(swapTokenAddress).approve(address(dexRouter), type(uint256).max);
+        IERC20(usdAddress).approve(address(dexRouter), type(uint256).max);
         IERC20(dexRouter.WETH()).approve(address(dexRouter), type(uint256).max);
 
         // swap and transfer to contract
