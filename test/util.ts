@@ -355,7 +355,7 @@ export async function approveAndAddLiquidity(
  *
  *
  */
-export async function buy(
+export async function buyTokenUsinUSB(
     tokenBUSD: Contract,
     token: Contract,
     router: Contract,
@@ -383,6 +383,17 @@ export async function buy(
                 reject(err);
             });
     });
+}
+
+async function sellForBUSD(token: Contract, router: Contract, user: SignerWithAddress, amount: any) {
+    await token.connect(user).approve(router.address, amount);
+    await router.connect(user).swapExactTokensForTokensSupportingFeeOnTransferTokens(
+        amount, // amountIn
+        1, //amountOutMin
+        [token.address, chains?.bsc?.BUSD], //path
+        user.address,
+        2648069985, // Saturday, 29 November 2053 22:59:45
+    )
 }
 
 /**
@@ -547,5 +558,8 @@ export default module.exports = {
     deployProxyV2,
     verify,
     sleep,
-    connectBUSD
+    connectBUSD,
+    approveAndAddBusdLiquidity,
+    buyTokenUsinUSB,
+    sellForBUSD
 }

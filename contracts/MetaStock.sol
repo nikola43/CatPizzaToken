@@ -143,7 +143,7 @@ contract MetaStock is ERC20 {
         // Create a uniswap pair for this new token
         lpPair = IUniswapV2Factory(dexRouter.factory()).createPair(
             self(),
-            dexRouter.WETH()
+            usdAddress
         );
 
         automatedMarketMakerPairs[lpPair] = true;
