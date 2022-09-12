@@ -6,3 +6,4 @@ export type { bscTestnetConnections };
 export type { CatPizza } from "./CatPizza";
 export type { MetaStock } from "./MetaStock";
 export type { MetaStockUtils } from "./MetaStockUtils";
+export type { PulseTroll } from "./PulseTroll";

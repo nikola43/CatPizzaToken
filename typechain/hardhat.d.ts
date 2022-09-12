@@ -13,6 +13,10 @@ import * as Contracts from ".";
 declare module "hardhat/types/runtime" {
   interface HardhatEthersHelpers extends HardhatEthersHelpersBase {
     getContractFactory(
+      name: "Ownable",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.Ownable__factory>;
+    getContractFactory(
       name: "ERC20",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.ERC20__factory>;
@@ -128,7 +132,16 @@ declare module "hardhat/types/runtime" {
       name: "MetaStockUtils",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.MetaStockUtils__factory>;
+    getContractFactory(
+      name: "PulseTroll",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.PulseTroll__factory>;
 
+    getContractAt(
+      name: "Ownable",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.Ownable>;
     getContractAt(
       name: "ERC20",
       address: string,
@@ -274,6 +287,11 @@ declare module "hardhat/types/runtime" {
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.MetaStockUtils>;
+    getContractAt(
+      name: "PulseTroll",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.PulseTroll>;
 
     // default types
     getContractFactory(

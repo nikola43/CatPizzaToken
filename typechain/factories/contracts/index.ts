@@ -5,3 +5,4 @@ export * as bscTestnetConnections from "./BSC Testnet Connections";
 export { CatPizza__factory } from "./CatPizza__factory";
 export { MetaStock__factory } from "./MetaStock__factory";
 export { MetaStockUtils__factory } from "./MetaStockUtils__factory";
+export { PulseTroll__factory } from "./PulseTroll__factory";

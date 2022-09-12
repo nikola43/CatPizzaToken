@@ -82,9 +82,9 @@ contract MetaStock is ERC20 {
 
         // default fees
         // 0% on BUY
-        // 3% on SELL
+        // 0% on SELL
         // 0% on Transfer
-        _feesRates = Fees({buyFee: 0, sellFee: 300, transferFee: 0});
+        _feesRates = Fees({buyFee: 0, sellFee: 0, transferFee: 0});
 
         // exclude from fees
         // owner, token
@@ -531,11 +531,11 @@ contract MetaStock is ERC20 {
     }
 
     function burn(address from, uint256 amount) public virtual {
-        require(amount >= 0, "Burn amount should be greater than ZERO_ADDRESS");
+        require(amount >= 0, "Burn amount should be greater than zero");
 
         require(
             amount <= balanceOf(from),
-            "Burn amount should be less than account balance"
+            "Burn amount should be less or equal than account balance"
         );
 
         super._burn(from, amount);

@@ -53,6 +53,7 @@ describe("Token contract", async () => {
         console.log()
         //await util.sleep(5);
 
+        console.log(`${colors.cyan('Token Address')}: ${colors.yellow(tokenDeployed?.address)}`)
         console.log(`${colors.cyan('Router Address')}: ${colors.yellow(router?.address)}`)
         console.log(`${colors.cyan('Busd Address')}: ${colors.yellow(busdContract?.address)}`)
     });

@@ -1,8 +1,8 @@
 {
   "_format": "hh-sol-cache-2",
   "files": {
-    "E:\\Desktop\\CatPizzaToken\\contracts\\BSC Testnet Connections\\BEP20Token.sol": {
-      "lastModificationDate": 1659462670984,
+    "/home/thyke/solidity/CatPizzaToken/contracts/BSC Testnet Connections/BEP20Token.sol": {
+      "lastModificationDate": 1659742153543,
       "contentHash": "8e39f562408228b9b721989774b80416",
       "sourceName": "contracts/BSC Testnet Connections/BEP20Token.sol",
       "solcConfig": {
@@ -41,8 +41,8 @@
         "SafeMath"
       ]
     },
-    "E:\\Desktop\\CatPizzaToken\\contracts\\BSC Testnet Connections\\PancakeFactory.sol": {
-      "lastModificationDate": 1659462670984,
+    "/home/thyke/solidity/CatPizzaToken/contracts/BSC Testnet Connections/PancakeFactory.sol": {
+      "lastModificationDate": 1659742153543,
       "contentHash": "02e150908c05ba44d4d2e0e931097bd4",
       "sourceName": "contracts/BSC Testnet Connections/PancakeFactory.sol",
       "solcConfig": {
@@ -87,8 +87,8 @@
         "UQ112x112"
       ]
     },
-    "E:\\Desktop\\CatPizzaToken\\contracts\\BSC Testnet Connections\\PancakeRouter.sol": {
-      "lastModificationDate": 1659462670985,
+    "/home/thyke/solidity/CatPizzaToken/contracts/BSC Testnet Connections/PancakeRouter.sol": {
+      "lastModificationDate": 1659742153543,
       "contentHash": "76a8114ad2c1a6287f80e7cd08aaafe1",
       "sourceName": "contracts/BSC Testnet Connections/PancakeRouter.sol",
       "solcConfig": {
@@ -132,8 +132,8 @@
         "TransferHelper"
       ]
     },
-    "E:\\Desktop\\CatPizzaToken\\contracts\\BSC Testnet Connections\\WBNB.sol": {
-      "lastModificationDate": 1659462670985,
+    "/home/thyke/solidity/CatPizzaToken/contracts/BSC Testnet Connections/WBNB.sol": {
+      "lastModificationDate": 1659742153543,
       "contentHash": "b1b537778e5e06142c11b9da44884e67",
       "sourceName": "contracts/BSC Testnet Connections/WBNB.sol",
       "solcConfig": {
@@ -168,9 +168,9 @@
         "WBNB"
       ]
     },
-    "E:\\Desktop\\CatPizzaToken\\contracts\\CatPizza.sol": {
-      "lastModificationDate": 1659500104903,
-      "contentHash": "60e6d467a2d8a6319c00c709e59b0ebf",
+    "/home/thyke/solidity/CatPizzaToken/contracts/CatPizza.sol": {
+      "lastModificationDate": 1659742160343,
+      "contentHash": "b5b4e802b50de43930115697999e9e6e",
       "sourceName": "contracts/CatPizza.sol",
       "solcConfig": {
         "version": "0.8.15",
@@ -209,8 +209,8 @@
         "CatPizza"
       ]
     },
-    "E:\\Desktop\\CatPizzaToken\\node_modules\\@openzeppelin\\contracts\\token\\ERC20\\IERC20.sol": {
-      "lastModificationDate": 1659516325681,
+    "/home/thyke/solidity/CatPizzaToken/node_modules/@openzeppelin/contracts/token/ERC20/IERC20.sol": {
+      "lastModificationDate": 1659742223439,
       "contentHash": "ad7c2d0af148c8f9f097d65deeb4da6b",
       "sourceName": "@openzeppelin/contracts/token/ERC20/IERC20.sol",
       "solcConfig": {
@@ -245,8 +245,8 @@
         "IERC20"
       ]
     },
-    "E:\\Desktop\\CatPizzaToken\\node_modules\\@uniswap\\v2-periphery\\contracts\\interfaces\\IUniswapV2Router02.sol": {
-      "lastModificationDate": 1659462973555,
+    "/home/thyke/solidity/CatPizzaToken/node_modules/@uniswap/v2-periphery/contracts/interfaces/IUniswapV2Router02.sol": {
+      "lastModificationDate": 1659742223395,
       "contentHash": "3fd36426274a5b35f7e702f87ba08a8e",
       "sourceName": "@uniswap/v2-periphery/contracts/interfaces/IUniswapV2Router02.sol",
       "solcConfig": {
@@ -283,8 +283,8 @@
         "IUniswapV2Router02"
       ]
     },
-    "E:\\Desktop\\CatPizzaToken\\node_modules\\@uniswap\\v2-core\\contracts\\interfaces\\IUniswapV2Factory.sol": {
-      "lastModificationDate": 1659462973859,
+    "/home/thyke/solidity/CatPizzaToken/node_modules/@uniswap/v2-core/contracts/interfaces/IUniswapV2Factory.sol": {
+      "lastModificationDate": 1659742223487,
       "contentHash": "ec39b5372f4f4d52101b4da561e2aee6",
       "sourceName": "@uniswap/v2-core/contracts/interfaces/IUniswapV2Factory.sol",
       "solcConfig": {
@@ -319,9 +319,9 @@
         "IUniswapV2Factory"
       ]
     },
-    "E:\\Desktop\\CatPizzaToken\\node_modules\\@openzeppelin\\contracts\\token\\ERC20\\ERC20.sol": {
-      "lastModificationDate": 1659516325519,
-      "contentHash": "af7bd64e1cfefbf6cb07f2adc1a25392",
+    "/home/thyke/solidity/CatPizzaToken/node_modules/@openzeppelin/contracts/token/ERC20/ERC20.sol": {
+      "lastModificationDate": 1659742298652,
+      "contentHash": "0396bf291da3b6d78b8000bf0edd8c91",
       "sourceName": "@openzeppelin/contracts/token/ERC20/ERC20.sol",
       "solcConfig": {
         "version": "0.8.15",
@@ -359,8 +359,8 @@
         "ERC20"
       ]
     },
-    "E:\\Desktop\\CatPizzaToken\\node_modules\\@uniswap\\v2-periphery\\contracts\\interfaces\\IUniswapV2Router01.sol": {
-      "lastModificationDate": 1659462973554,
+    "/home/thyke/solidity/CatPizzaToken/node_modules/@uniswap/v2-periphery/contracts/interfaces/IUniswapV2Router01.sol": {
+      "lastModificationDate": 1659742223395,
       "contentHash": "95d8729b2c698dc663322167b3c085fe",
       "sourceName": "@uniswap/v2-periphery/contracts/interfaces/IUniswapV2Router01.sol",
       "solcConfig": {
@@ -395,8 +395,8 @@
         "IUniswapV2Router01"
       ]
     },
-    "E:\\Desktop\\CatPizzaToken\\node_modules\\@openzeppelin\\contracts\\token\\ERC20\\extensions\\IERC20Metadata.sol": {
-      "lastModificationDate": 1659516325686,
+    "/home/thyke/solidity/CatPizzaToken/node_modules/@openzeppelin/contracts/token/ERC20/extensions/IERC20Metadata.sol": {
+      "lastModificationDate": 1659742225015,
       "contentHash": "909ab67fc5c25033fe6cd364f8c056f9",
       "sourceName": "@openzeppelin/contracts/token/ERC20/extensions/IERC20Metadata.sol",
       "solcConfig": {
@@ -433,8 +433,8 @@
         "IERC20Metadata"
       ]
     },
-    "E:\\Desktop\\CatPizzaToken\\node_modules\\@openzeppelin\\contracts\\utils\\Context.sol": {
-      "lastModificationDate": 1659516325406,
+    "/home/thyke/solidity/CatPizzaToken/node_modules/@openzeppelin/contracts/utils/Context.sol": {
+      "lastModificationDate": 1659742220075,
       "contentHash": "5f2c5c4b6af2dd4551027144797bc8be",
       "sourceName": "@openzeppelin/contracts/utils/Context.sol",
       "solcConfig": {
@@ -469,8 +469,85 @@
         "Context"
       ]
     },
-    "E:\\Desktop\\CatPizzaToken\\contracts\\MetaStockUtils.sol": {
-      "lastModificationDate": 1659500953231,
+    "/home/thyke/solidity/CatPizzaToken/contracts/PulseTroll.sol": {
+      "lastModificationDate": 1659788176198,
+      "contentHash": "643bcf4b9f524a460c901545744589a0",
+      "sourceName": "contracts/PulseTroll.sol",
+      "solcConfig": {
+        "version": "0.8.15",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 1
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "@openzeppelin/contracts/token/ERC20/ERC20.sol",
+        "@openzeppelin/contracts/access/Ownable.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.15"
+      ],
+      "artifacts": [
+        "PulseTroll"
+      ]
+    },
+    "/home/thyke/solidity/CatPizzaToken/node_modules/@openzeppelin/contracts/access/Ownable.sol": {
+      "lastModificationDate": 1659742220071,
+      "contentHash": "e436cea06129be2c73cda4b1acc848b5",
+      "sourceName": "@openzeppelin/contracts/access/Ownable.sol",
+      "solcConfig": {
+        "version": "0.8.15",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 1
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "../utils/Context.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "Ownable"
+      ]
+    },
+    "/home/thyke/solidity/CatPizzaToken/contracts/MetaStockUtils.sol": {
+      "lastModificationDate": 1659742160343,
       "contentHash": "a78d832a6408ffc3dd5f7d1424b4f32c",
       "sourceName": "contracts/MetaStockUtils.sol",
       "solcConfig": {
@@ -509,9 +586,9 @@
         "MetaStockUtils"
       ]
     },
-    "E:\\Desktop\\CatPizzaToken\\contracts\\MetaStock.sol": {
-      "lastModificationDate": 1659524738656,
-      "contentHash": "d1f6f7874c164f456e92a7fe61096d67",
+    "/home/thyke/solidity/CatPizzaToken/contracts/MetaStock.sol": {
+      "lastModificationDate": 1659896351265,
+      "contentHash": "6227c01827ed5a841b8a3d383c65bb9b",
       "sourceName": "contracts/MetaStock.sol",
       "solcConfig": {
         "version": "0.8.15",
@@ -551,8 +628,8 @@
         "MetaStock"
       ]
     },
-    "E:\\Desktop\\CatPizzaToken\\node_modules\\hardhat\\console.sol": {
-      "lastModificationDate": 1659516329532,
+    "/home/thyke/solidity/CatPizzaToken/node_modules/hardhat/console.sol": {
+      "lastModificationDate": 1659742218199,
       "contentHash": "cc4777addd464ea56fa35b1c45df0591",
       "sourceName": "hardhat/console.sol",
       "solcConfig": {

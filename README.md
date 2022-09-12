@@ -3,7 +3,7 @@
 Create and test smart contracts using Hardhat with Typescript.
 
 
-npx hardhat node --fork https://data-seed-prebsc-2-s3.binance.org:8545
+npx hardhat node --fork https://rpc.ankr.com/bsc_testnet_chapel
 npx hardhat test  --network localhost
 
 Uses
